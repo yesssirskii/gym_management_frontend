@@ -10,7 +10,6 @@ import { TrainersComponent } from './app/components/trainers/trainers/trainers.c
 import { TrainerDetailComponent } from './app/components/trainers/trainer-detail/trainer-detail.component';
 import { SubscriptionsComponent } from './app/components/subscriptions/subscriptions.component';
 
-import { AuthGuard } from './app/guards/auth.guard';
 import { RoleGuard } from './app/guards/role.guard';
 
 const routes: Routes = [
