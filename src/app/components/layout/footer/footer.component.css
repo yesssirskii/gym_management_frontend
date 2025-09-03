@@ -1,0 +1,12 @@
+.footer {
+    background: var(--surface-card);
+    border-top: 1px solid var(--surface-border);
+    padding: 1rem 2rem;
+    text-align: center;
+    color: var(--text-color-secondary);
+    bottom: 0;
+}
+
+.footer p {
+    margin: 0;
+}

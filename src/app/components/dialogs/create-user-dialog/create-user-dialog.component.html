@@ -1,0 +1,227 @@
+<p-dialog 
+    [header]="'USERS.CREATE_' + userType.toUpperCase() | translate" 
+    [(visible)]="visible" 
+    [modal]="true" 
+    [style]="{width: '600px'}"
+    [closable]="true"
+    (onHide)="onDialogHide()">
+    
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <!-- User Type Selection -->
+    <div class="field">
+        <label for="userType">{{ 'USERS.USER_TYPE' | translate }}</label>
+        <p-dropdown
+            id="userType"
+            [options]="userTypeOptions"
+            formControlName="userType"
+            optionLabel="label"
+            optionValue="value"
+            [placeholder]="'USERS.SELECT_USER_TYPE' | translate"
+            class="w-full"
+            (onChange)="onUserTypeChange()">
+        </p-dropdown>
+    </div>
+
+    <!-- Basic Information -->
+    <div class="field-group">
+        <h4>{{ 'USERS.BASIC_INFO' | translate }}</h4>
+        
+        <div class="field">
+            <label for="username">{{ 'USERS.USERNAME' | translate }}</label>
+            <input type="text" id="username" pInputText formControlName="username" class="w-full" />
+        </div>
+        
+        <div class="field">
+        <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
+        <input type="email" id="email" pInputText formControlName="email" class="w-full" />
+        </div>
+        
+        <div class="field">
+        <label for="password">{{ 'USERS.PASSWORD' | translate }}</label>
+        <p-password id="password" formControlName="password" styleClass="w-full" [feedback]="false"></p-password>
+        </div>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
+            <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+        </div>
+        
+        <div class="field">
+            <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
+            <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+        </div>
+        </div>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
+            <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+        </div>
+        
+        <div class="field">
+            <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
+            <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full"></p-calendar>
+        </div>
+        </div>
+    </div>
+
+    <!-- Member-specific fields -->
+    <div class="field-group" *ngIf="selectedUserType === 'Member'">
+        <h4>{{ 'MEMBERS.MEMBER_INFO' | translate }}</h4>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="emergencyContactName">{{ 'MEMBERS.EMERGENCY_CONTACT' | translate }}</label>
+            <input type="text" id="emergencyContactName" pInputText formControlName="emergencyContactName" class="w-full" />
+        </div>
+        
+        <div class="field">
+            <label for="emergencyContactPhone">{{ 'MEMBERS.EMERGENCY_PHONE' | translate }}</label>
+            <input type="tel" id="emergencyContactPhone" pInputText formControlName="emergencyContactPhone" class="w-full" />
+        </div>
+        </div>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="height">{{ 'MEMBERS.HEIGHT' | translate }} (cm)</label>
+            <p-inputNumber id="height" formControlName="height" class="w-full"></p-inputNumber>
+        </div>
+        
+        <div class="field">
+            <label for="weight">{{ 'MEMBERS.WEIGHT' | translate }} (kg)</label>
+            <p-inputNumber id="weight" formControlName="weight" class="w-full"></p-inputNumber>
+        </div>
+        </div>
+        
+        <div class="field">
+        <label for="medicalNotes">{{ 'MEMBERS.MEDICAL_NOTES' | translate }}</label>
+        <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="3" class="w-full"></textarea>
+        </div>
+        
+        <div class="field">
+        <label for="fitnessGoals">{{ 'MEMBERS.FITNESS_GOALS' | translate }}</label>
+        <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="3" class="w-full"></textarea>
+        </div>
+
+        <!-- Subscription fields -->
+        <div class="subscription-section">
+        <h5>{{ 'SUBSCRIPTIONS.INITIAL_SUBSCRIPTION' | translate }}</h5>
+        
+        <div class="field">
+            <label for="subscriptionType">{{ 'SUBSCRIPTIONS.TYPE' | translate }}</label>
+            <p-dropdown
+                id="subscriptionType"
+                [options]="subscriptionTypeOptions"
+                formControlName="subscriptionType"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.SELECT_TYPE' | translate"
+                class="w-full">
+            </p-dropdown>
+        </div>
+        
+        <div class="field">
+            <label for="subscriptionStartDate">{{ 'SUBSCRIPTIONS.START_DATE' | translate }}</label>
+            <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full"></p-calendar>
+        </div>
+        
+        <div class="field">
+            <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
+            <label for="autoRenewal" class="ml-2">{{ 'SUBSCRIPTIONS.AUTO_RENEWAL' | translate }}</label>
+        </div>
+        </div>
+    </div>
+
+    <!-- Trainer-specific fields -->
+    <div class="field-group" *ngIf="selectedUserType === 'Trainer'">
+        <h4>{{ 'TRAINERS.TRAINER_INFO' | translate }}</h4>
+        
+        <div class="field">
+        <label for="specialization">{{ 'TRAINERS.SPECIALIZATION' | translate }}</label>
+        <p-dropdown
+            id="specialization"
+            [options]="specializationOptions"
+            formControlName="specialization"
+            optionLabel="label"
+            optionValue="value"
+            [placeholder]="'TRAINERS.SELECT_SPECIALIZATION' | translate"
+            class="w-full">
+        </p-dropdown>
+        </div>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="yearsOfExperience">{{ 'TRAINERS.EXPERIENCE' | translate }}</label>
+            <p-inputNumber id="yearsOfExperience" formControlName="yearsOfExperience" class="w-full"></p-inputNumber>
+        </div>
+        
+        <div class="field">
+            <label for="hourlyRate">{{ 'TRAINERS.HOURLY_RATE' | translate }}</label>
+            <p-inputNumber id="hourlyRate" formControlName="hourlyRate" mode="currency" currency="USD" class="w-full"></p-inputNumber>
+        </div>
+        </div>
+        
+        <div class="field">
+        <label for="certifications">{{ 'TRAINERS.CERTIFICATIONS' | translate }}</label>
+        <textarea id="certifications" pInputTextarea formControlName="certifications" rows="3" class="w-full"></textarea>
+        </div>
+        
+        <div class="field">
+        <label for="bio">{{ 'TRAINERS.BIO' | translate }}</label>
+        <textarea id="bio" pInputTextarea formControlName="bio" rows="3" class="w-full"></textarea>
+        </div>
+    </div>
+
+    <!-- Personnel-specific fields -->
+    <div class="field-group" *ngIf="selectedUserType === 'Personnel'">
+        <h4>{{ 'PERSONNEL.PERSONNEL_INFO' | translate }}</h4>
+        
+        <div class="field-row">
+        <div class="field">
+            <label for="role">{{ 'PERSONNEL.ROLE' | translate }}</label>
+            <p-dropdown
+                id="role"
+                [options]="personnelRoleOptions"
+                formControlName="role"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'PERSONNEL.SELECT_ROLE' | translate"
+                class="w-full">
+            </p-dropdown>
+        </div>
+        
+        <div class="field">
+            <label for="employeeId">{{ 'PERSONNEL.EMPLOYEE_ID' | translate }}</label>
+            <input type="text" id="employeeId" pInputText formControlName="employeeId" class="w-full" />
+        </div>
+        </div>
+        
+        <div class="field">
+        <label for="salary">{{ 'PERSONNEL.SALARY' | translate }}</label>
+        <p-inputNumber id="salary" formControlName="salary" mode="currency" currency="USD" class="w-full"></p-inputNumber>
+        </div>
+        
+        <div class="field">
+        <label for="jobDescription">{{ 'PERSONNEL.JOB_DESCRIPTION' | translate }}</label>
+        <textarea id="jobDescription" pInputTextarea formControlName="jobDescription" rows="3" class="w-full"></textarea>
+        </div>
+    </div>
+    </form>
+    
+    <ng-template pTemplate="footer">
+    <p-button 
+        [label]="'COMMON.CANCEL' | translate" 
+        icon="pi pi-times" 
+        severity="secondary"
+        (onClick)="onCancel()">
+    </p-button>
+    <p-button 
+        [label]="'COMMON.SAVE' | translate" 
+        icon="pi pi-check" 
+        [loading]="loading"
+        [disabled]="userForm.invalid"
+        (onClick)="onSubmit()">
+    </p-button>
+    </ng-template>
+</p-dialog>

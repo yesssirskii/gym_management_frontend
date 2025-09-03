@@ -1,0 +1,10 @@
+<div class="sidebar">
+  <p-menu [model]="menuItems">
+    <ng-template pTemplate="item" let-item>
+      <a [routerLink]="item.routerLink" class="p-menuitem-link">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label | translate }}</span>
+      </a>
+    </ng-template>
+  </p-menu>
+</div>

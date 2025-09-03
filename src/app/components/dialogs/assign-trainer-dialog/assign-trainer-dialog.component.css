@@ -1,0 +1,36 @@
+.field {
+    margin-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.info-section {
+    background: var(--surface-section);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.info-section p {
+    margin: 0.25rem 0;
+}
+
+.trainer-details,
+.assignment-details {
+    margin-top: 1.5rem;
+}
+
+.trainer-details h4,
+.assignment-details h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.trainer-details p {
+    margin: 0.5rem 0;
+}

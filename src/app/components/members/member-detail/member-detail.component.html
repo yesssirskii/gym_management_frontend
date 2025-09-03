@@ -1,0 +1,182 @@
+<div class="page-container">
+    <div class="page-header">
+    <h2>{{ 'MEMBERS.DETAIL_TITLE' | translate }}</h2>
+    <div class="header-actions">
+        <p-button 
+            *ngIf="canEdit"
+            icon="pi pi-credit-card" 
+            [label]="'MEMBERS.UPDATE_SUBSCRIPTION' | translate"
+            severity="secondary"
+            (onClick)="showUpdateSubscription()"
+            class="mr-2">
+        </p-button>
+
+        <p-button 
+            *ngIf="canEdit"
+            icon="pi pi-user-plus" 
+            [label]="'MEMBERS.ASSIGN_TRAINER' | translate"
+            severity="info"
+            (onClick)="showAssignTrainer()"
+            class="mr-2">
+        </p-button>
+
+        <p-button 
+            icon="pi pi-arrow-left" 
+            [label]="'COMMON.BACK' | translate"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="goBack()">
+        </p-button>
+    </div>
+    </div>
+
+    <div class="detail-grid" *ngIf="member">
+    <!-- Personal Information Card -->
+    <p-card [header]="'MEMBERS.PERSONAL_INFO' | translate" class="info-card">
+        <div class="info-grid">
+        <div class="info-item">
+            <label>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}:</label>
+            <span>{{ member.membershipNumber }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'COMMON.NAME' | translate }}:</label>
+            <span>{{ member.firstName }} {{ member.lastName }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'COMMON.EMAIL' | translate }}:</label>
+            <span>{{ member.email }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'COMMON.PHONE' | translate }}:</label>
+            <span>{{ member.phoneNumber }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'MEMBERS.JOIN_DATE' | translate }}:</label>
+            <span>{{ member.joinDate | date:'shortDate' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'COMMON.STATUS' | translate }}:</label>
+            <p-tag 
+            [value]="member.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"
+            [severity]="member.isActive ? 'success' : 'danger'">
+            </p-tag>
+        </div>
+        </div>
+    </p-card>
+
+    <!-- Subscription Information Card -->
+    <p-card [header]="'MEMBERS.SUBSCRIPTION_INFO' | translate" class="info-card">
+        <div class="info-grid" *ngIf="subscription; else noSubscription">
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.TYPE' | translate }}:</label>
+            <span>{{ subscription.type }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.STATUS' | translate }}:</label>
+            <p-tag 
+            [value]="subscription.status"
+            [severity]="subscription.status === 'Active' ? 'success' : 'danger'">
+            </p-tag>
+        </div>
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.START_DATE' | translate }}:</label>
+            <span>{{ subscription.startDate | date:'shortDate' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.END_DATE' | translate }}:</label>
+            <span>{{ subscription.endDate | date:'shortDate' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.DAYS_REMAINING' | translate }}:</label>
+            <span>{{ subscription.daysRemaining }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'SUBSCRIPTIONS.PRICE' | translate }}:</label>
+            <span>{{ subscription.price | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+        </div>
+        <ng-template #noSubscription>
+        <p>{{ 'MEMBERS.NO_SUBSCRIPTION' | translate }}</p>
+        </ng-template>
+    </p-card>
+
+    <!-- Trainer Information Card -->
+    <p-card [header]="'MEMBERS.TRAINER_INFO' | translate" class="info-card">
+        <div class="info-grid" *ngIf="currentTrainer; else noTrainer">
+        <div class="info-item">
+            <label>{{ 'TRAINERS.NAME' | translate }}:</label>
+            <span>{{ currentTrainer.trainerFirstName }} {{ currentTrainer.trainerLastName }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'TRAINERS.SPECIALIZATION' | translate }}:</label>
+            <span>{{ currentTrainer.trainerSpecialization }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'TRAINERS.RATING' | translate }}:</label>
+            <span>{{ currentTrainer.trainerRating }}/5</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'TRAINERS.SESSIONS_PER_WEEK' | translate }}:</label>
+            <span>{{ currentTrainer.sessionsPerWeek }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'TRAINERS.SESSION_RATE' | translate }}:</label>
+            <span>{{ currentTrainer.sessionRate | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'TRAINERS.START_DATE' | translate }}:</label>
+            <span>{{ currentTrainer.startDate | date:'shortDate' }}</span>
+        </div>
+        </div>
+        <ng-template #noTrainer>
+        <p>{{ 'MEMBERS.NO_TRAINER' | translate }}</p>
+        </ng-template>
+    </p-card>
+
+    <!-- Medical Information Card -->
+    <p-card [header]="'MEMBERS.MEDICAL_INFO' | translate" class="info-card">
+        <div class="info-grid">
+        <div class="info-item">
+            <label>{{ 'MEMBERS.EMERGENCY_CONTACT' | translate }}:</label>
+            <span>{{ member.emergencyContactName || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'MEMBERS.EMERGENCY_PHONE' | translate }}:</label>
+            <span>{{ member.emergencyContactPhone || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'MEMBERS.HEIGHT' | translate }}:</label>
+            <span>{{ member.height ? (member.height + ' cm') : 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+            <label>{{ 'MEMBERS.WEIGHT' | translate }}:</label>
+            <span>{{ member.weight ? (member.weight + ' kg') : 'N/A' }}</span>
+        </div>
+        <div class="info-item full-width">
+            <label>{{ 'MEMBERS.MEDICAL_NOTES' | translate }}:</label>
+            <p>{{ member.medicalNotes || 'N/A' }}</p>
+        </div>
+        <div class="info-item full-width">
+            <label>{{ 'MEMBERS.FITNESS_GOALS' | translate }}:</label>
+            <p>{{ member.fitnessGoals || 'N/A' }}</p>
+        </div>
+        </div>
+    </p-card>
+    </div>
+
+    <div class="loading-container" *ngIf="loading">
+    <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
+
+<app-update-subscription-dialog 
+    [(visible)]="subscriptionDialogVisible"
+    [selectedMember]="member"
+    (subscriptionUpdated)="onSubscriptionUpdated()">
+</app-update-subscription-dialog>
+
+<app-assign-trainer-dialog 
+    [(visible)]="assignTrainerDialogVisible"
+    [selectedMember]="member"
+    (trainerAssigned)="onTrainerAssigned()">
+</app-assign-trainer-dialog>
