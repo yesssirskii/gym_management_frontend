@@ -57,7 +57,7 @@
         <p><strong>{{ 'TRAINERS.SPECIALIZATION' | translate }}:</strong> {{ selectedTrainerDetails.specialization }}</p>
         <p><strong>{{ 'TRAINERS.EXPERIENCE' | translate }}:</strong> {{ selectedTrainerDetails.yearsOfExperience }} years</p>
         <p><strong>{{ 'TRAINERS.RATING' | translate }}:</strong> {{ selectedTrainerDetails.rating }}/5</p>
-        <p><strong>{{ 'TRAINERS.HOURLY_RATE' | translate }}:</strong> {{ selectedTrainerDetails.hourlyRate | currency:'USD' }}</p>
+        <p><strong>{{ 'TRAINERS.HOURLY_RATE' | translate }}:</strong> {{ selectedTrainerDetails.hourlyRate | currency:'EUR' }}</p>
     </div>
     
     <!-- Assignment Details -->
@@ -79,7 +79,7 @@
             id="sessionRate" 
             formControlName="sessionRate" 
             mode="currency" 
-            currency="USD" 
+            currency="EUR" 
             class="w-full">
         </p-inputNumber>
         </div>

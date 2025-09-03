@@ -23,41 +23,43 @@
             <p-divider></p-divider>
             
             <form [formGroup]="profileForm">
-                <div class="field-row">
-                    <div class="field">
-                        <label for="firstName">{{ 'PROFILE.First_Name' | translate }}</label>
-                        <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+                <div class="field-group">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="firstName">{{ 'PROFILE.First_Name' | translate }}</label>
+                            <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+                        </div>
+                    
+                        <div class="field">
+                            <label for="lastName">{{ 'PROFILE.Last_Name' | translate }}</label>
+                            <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+                        </div>
                     </div>
-                
+                    
                     <div class="field">
-                        <label for="lastName">{{ 'PROFILE.Last_Name' | translate }}</label>
-                        <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+                        <label for="email">{{ 'PROFILE.Email' | translate }}</label>
+                        <input type="email" id="email" pInputText formControlName="email" class="w-full" />
                     </div>
-                </div>
-                
-                <div class="field">
-                    <label for="email">{{ 'PROFILE.Email' | translate }}</label>
-                    <input type="email" id="email" pInputText formControlName="email" class="w-full" />
-                </div>
-                
-                <div class="field">
-                    <label for="phoneNumber">{{ 'PROFILE.Phone' | translate }}</label>
-                    <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
-                </div>
-                
-                <div class="field">
-                    <label for="address">{{ 'PROFILE.Address' | translate }}</label>
-                    <textarea id="address" pInputTextarea formControlName="address" rows="2" class="w-full"></textarea>
-                </div>
-                
-                <div class="action-buttons">
-                    <p-button 
-                        [label]="'PROFILE.UPDATE_INFO' | translate" 
-                        icon="pi pi-save"
-                        [loading]="loadingProfile"
-                        [disabled]="profileForm.invalid || !profileForm.dirty"
-                        (onClick)="updateProfile()">
-                    </p-button>
+                    
+                    <div class="field">
+                        <label for="phoneNumber">{{ 'PROFILE.Phone' | translate }}</label>
+                        <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+                    </div>
+                    
+                    <div class="field">
+                        <label for="address">{{ 'PROFILE.Address' | translate }}</label>
+                        <textarea id="address" pInputTextarea formControlName="address" rows="2" class="w-full"></textarea>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <p-button 
+                            [label]="'PROFILE.UPDATE_INFO' | translate" 
+                            icon="pi pi-save"
+                            [loading]="loadingProfile"
+                            [disabled]="profileForm.invalid || !profileForm.dirty"
+                            (onClick)="updateProfile()">
+                        </p-button>
+                    </div>
                 </div>
             </form>
         </div>

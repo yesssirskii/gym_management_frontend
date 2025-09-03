@@ -13,7 +13,7 @@ export class SubscriptionService {
   }
 
   getUserActiveSubscription(userId: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/subscriptions/user/${userId}`);
+    return this.http.get<any>(`${environment.apiUrl}/Subscription/${userId}`);
   }
 
   updateUserSubscription(subscriptionData: any): Observable<any> {

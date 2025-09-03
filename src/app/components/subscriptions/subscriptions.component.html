@@ -75,7 +75,7 @@
             [severity]="sub.daysRemaining <= 7 ? 'danger' : (sub.daysRemaining <= 30 ? 'warning' : 'success')">
             </p-tag>
         </td>
-        <td>{{ sub.price | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ sub.price | currency:'EUR':'symbol':'1.2-2' }}</td>
         <td>
             <i class="pi" 
             [ngClass]="{'pi-check-circle': sub.autoRenewal, 'pi-times-circle': !sub.autoRenewal}"

@@ -90,8 +90,6 @@ export class DashboardComponent implements OnInit {
         });
 
         this.stats.activeSubscriptions = subscriptions.filter(s => s.isCancelled == false).length;
-
-        console.log(this.stats.activeSubscriptions);
       }
     });
   }

@@ -44,6 +44,19 @@
     color: var(--text-color);
 }
 
+.field-group {
+    margin-bottom: 2rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.field-group h4,
+.field-group h5 {
+    margin: 0 0 1rem 0;
+    color: var(--primary-color);
+}
+
 .action-buttons {
     margin-top: 1.5rem;
     display: flex;

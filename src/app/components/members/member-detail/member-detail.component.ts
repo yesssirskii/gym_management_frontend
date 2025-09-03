@@ -22,6 +22,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateSubscriptionDialogComponent } from '../../dialogs/update-subscription-dialog/update-subscription-dialog.component';
 import { AssignTrainerDialogComponent } from '../../dialogs/assign-trainer-dialog/assign-trainer-dialog.component';
 
+import { TrainerSpecializationEnum } from '../../../models/enums/trainer-specialization-enum';
+import { SubscriptionTypeEnum } from '../../../models/enums/subscription-type-enum';
+import { SubscriptionStatusEnum } from '../../../models/enums/subscription-status-enum';
+
 @Component({
   selector: 'app-member-detail',
   standalone: true,
@@ -62,7 +66,7 @@ export class MemberDetailComponent implements OnInit {
     private messageService: MessageService,
     private translate: TranslateService
   ) {
-    this.canEdit = this.authService.hasRole(['Owner', 'Manager', 'Receptionist']);
+    this.canEdit = this.authService.hasRole(['Owner', 'Manager', 'Receptionist', 'Trainer']);
   }
 
   ngOnInit() {
@@ -79,6 +83,8 @@ export class MemberDetailComponent implements OnInit {
         this.member = member;
         this.loadSubscription(id);
         this.loadTrainer(id);
+
+        console.log(member)
       },
       error: (error) => {
         this.messageService.add({
@@ -93,11 +99,26 @@ export class MemberDetailComponent implements OnInit {
 
   loadSubscription(memberId: number) {
     this.subscriptionService.getUserActiveSubscription(memberId).subscribe({
-      next: (subscription) => {
-        this.subscription = subscription;
+      next: (sub) => {
+        this.subscription = sub;
+
+        if(this.subscription){
+          const endDate = new Date(sub.endDate);
+          const today = new Date();
+        
+          const diffInTime = endDate.getTime() - today.getTime();
+          const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+        
+          this.subscription = {
+            ...sub,
+            daysRemaining: diffInDays > 0 ? diffInDays : 0
+          }
+        }
+        else{
+        this.subscription = null;
+        }
       },
       error: () => {
-        // No active subscription is not an error
         this.subscription = null;
       }
     });
@@ -118,11 +139,39 @@ export class MemberDetailComponent implements OnInit {
   }
 
   showUpdateSubscription() {
-    this.subscriptionDialogVisible = true;
+    if(this.member.userType == 'Trainer' || this.member.userType == 'Personnel'){
+      this.messageService.add({
+        severity: 'info',
+        detail: this.translate.instant('MEMBERS.Is_trainer_subscription'),
+      });
+
+      this.subscriptionDialogVisible = false;
+    }
+    else{
+      this.subscriptionDialogVisible = true;
+    }
   }
 
   showAssignTrainer() {
-    this.assignTrainerDialogVisible = true;
+    if(this.currentTrainer != null){
+      this.messageService.add({
+        severity: 'info',
+        detail: this.translate.instant('MEMBERS.Trainer_assigned'),
+      });
+
+      this.assignTrainerDialogVisible = false;
+    }
+    else if(this.member.userType == 'Trainer'){
+      this.messageService.add({
+        severity: 'info',
+        detail: this.translate.instant('MEMBERS.Is_trainer'),
+      });
+
+      this.assignTrainerDialogVisible = false;
+    }
+    else{
+      this.assignTrainerDialogVisible = true;
+    }
   }
 
   onSubscriptionUpdated() {
@@ -143,6 +192,18 @@ export class MemberDetailComponent implements OnInit {
       summary: this.translate.instant('COMMON.SUCCESS'),
       detail: this.translate.instant('TRAINERS.ASSIGN_SUCCESS')
     });
+  }
+
+  getSpecializationValue(value: number) : string {
+    return TrainerSpecializationEnum[value];
+  }
+
+  getSubscriptionTypeValue(value: number) : string {
+    return SubscriptionTypeEnum[value];
+  }
+
+  getSubscriptionStatusValue(value: number) : string {
+    return SubscriptionStatusEnum[value];
   }
 
   goBack() {

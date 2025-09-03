@@ -1,0 +1,119 @@
+<p-dialog 
+    [header]="'MEMBERS.EDIT_MEMBER' | translate" 
+    [(visible)]="visible" 
+    [modal]="true" 
+    [style]="{width: '600px'}"
+    [closable]="true"
+    (onHide)="onDialogHide()">
+    
+    <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" *ngIf="memberForm">
+        <!-- Basic Information -->
+        <div class="field-group">
+            <h4>{{ 'USERS.BASIC_INFO' | translate }}</h4>
+            
+            <div class="field">
+            <label for="membershipNumber">{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}</label>
+            <input type="text" id="membershipNumber" pInputText formControlName="membershipNumber" class="w-full" [disabled]="true" />
+            </div>
+            
+            <div class="field">
+            <label for="username">{{ 'USERS.USERNAME' | translate }}</label>
+            <input type="text" id="username" pInputText formControlName="username" class="w-full" />
+            </div>
+            
+            <div class="field">
+            <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
+            <input type="email" id="email" pInputText formControlName="email" class="w-full" />
+            </div>
+            
+            <div class="field-row">
+            <div class="field">
+                <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
+                <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+            </div>
+            
+            <div class="field">
+                <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
+                <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+            </div>
+            </div>
+            
+            <div class="field-row">
+            <div class="field">
+                <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
+                <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+            </div>
+            
+            <div class="field">
+                <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
+                <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full" [dateFormat]="'dd/mm/yy'"></p-calendar>
+            </div>
+            </div>
+            
+            <div class="field">
+            <label for="address">{{ 'COMMON.ADDRESS' | translate }}</label>
+            <input type="text" id="address" pInputText formControlName="address" class="w-full" />
+            </div>
+            
+            <div class="field">
+            <p-checkbox formControlName="isActive" binary="true" inputId="isActive"></p-checkbox>
+            <label for="isActive" class="ml-2">{{ 'MEMBERS.IS_ACTIVE' | translate }}</label>
+            </div>
+        </div>
+
+        <!-- Medical & Emergency Information -->
+        <div class="field-group">
+            <h4>{{ 'MEMBERS.MEDICAL_INFO' | translate }}</h4>
+            
+            <div class="field-row">
+            <div class="field">
+                <label for="emergencyContactName">{{ 'MEMBERS.EMERGENCY_CONTACT' | translate }}</label>
+                <input type="text" id="emergencyContactName" pInputText formControlName="emergencyContactName" class="w-full" />
+            </div>
+            
+            <div class="field">
+                <label for="emergencyContactPhone">{{ 'MEMBERS.EMERGENCY_PHONE' | translate }}</label>
+                <input type="tel" id="emergencyContactPhone" pInputText formControlName="emergencyContactPhone" class="w-full" />
+            </div>
+            </div>
+            
+            <div class="field-row">
+                <div class="field">
+                    <label for="height">{{ 'MEMBERS.HEIGHT' | translate }} (cm)</label>
+                    <p-inputNumber id="height" formControlName="height" class="w-full"></p-inputNumber>
+                </div>
+                
+                <div class="field">
+                    <label for="weight">{{ 'MEMBERS.WEIGHT' | translate }} (kg)</label>
+                    <p-inputNumber id="weight" formControlName="weight" class="w-full"></p-inputNumber>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label for="medicalNotes">{{ 'MEMBERS.MEDICAL_NOTES' | translate }}</label>
+                <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="3" class="w-full"></textarea>
+            </div>
+            
+            <div class="field">
+                <label for="fitnessGoals">{{ 'MEMBERS.FITNESS_GOALS' | translate }}</label>
+                <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="3" class="w-full"></textarea>
+            </div>
+        </div>
+    </form>
+    
+    <ng-template pTemplate="footer">
+        <p-button 
+            [label]="'COMMON.CANCEL' | translate" 
+            icon="pi pi-times" 
+            severity="secondary"
+            (onClick)="onCancel()">
+        </p-button>
+        <p-button 
+            [label]="'COMMON.SAVE' | translate" 
+            icon="pi pi-check" 
+            [loading]="loading"
+            [disabled]="memberForm.invalid"
+            (onClick)="onSubmit()">
+        </p-button>
+    </ng-template>
+</p-dialog>

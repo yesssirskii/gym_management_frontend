@@ -30,39 +30,39 @@
             <label for="username">{{ 'USERS.USERNAME' | translate }}</label>
             <input type="text" id="username" pInputText formControlName="username" class="w-full" />
         </div>
-        
+
         <div class="field">
-        <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
-        <input type="email" id="email" pInputText formControlName="email" class="w-full" />
+            <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
+            <input type="email" id="email" pInputText formControlName="email" class="w-full" />
         </div>
         
         <div class="field">
-        <label for="password">{{ 'USERS.PASSWORD' | translate }}</label>
-        <p-password id="password" formControlName="password" styleClass="w-full" [feedback]="false"></p-password>
-        </div>
-        
-        <div class="field-row">
-        <div class="field">
-            <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
-            <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
-        </div>
-        
-        <div class="field">
-            <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
-            <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
-        </div>
+            <label for="password">{{ 'USERS.PASSWORD' | translate }}</label>
+            <p-password id="password" formControlName="password" styleClass="w-full" [feedback]="false"></p-password>
         </div>
         
         <div class="field-row">
-        <div class="field">
-            <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
-            <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+            <div class="field">
+                <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
+                <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+            </div>
+            
+            <div class="field">
+                <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
+                <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+            </div>
         </div>
         
-        <div class="field">
-            <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
-            <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full"></p-calendar>
-        </div>
+        <div class="field-row">
+            <div class="field">
+                <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
+                <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+            </div>
+            
+            <div class="field">
+                <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
+                <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full"></p-calendar>
+            </div>
         </div>
     </div>
 
@@ -158,7 +158,7 @@
         
         <div class="field">
             <label for="hourlyRate">{{ 'TRAINERS.HOURLY_RATE' | translate }}</label>
-            <p-inputNumber id="hourlyRate" formControlName="hourlyRate" mode="currency" currency="USD" class="w-full"></p-inputNumber>
+            <p-inputNumber id="hourlyRate" formControlName="hourlyRate" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
         </div>
         </div>
         
@@ -199,7 +199,7 @@
         
         <div class="field">
         <label for="salary">{{ 'PERSONNEL.SALARY' | translate }}</label>
-        <p-inputNumber id="salary" formControlName="salary" mode="currency" currency="USD" class="w-full"></p-inputNumber>
+        <p-inputNumber id="salary" formControlName="salary" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
         </div>
         
         <div class="field">

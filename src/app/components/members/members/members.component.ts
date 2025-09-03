@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserDialogComponent } from '../../dialogs/create-user-dialog/create-user-dialog.component';
 import { UpdateSubscriptionDialogComponent } from '../../dialogs/update-subscription-dialog/update-subscription-dialog.component';
+import { UpdateUserDialogComponent } from '../../dialogs/update-user-dialog/update-user-dialog.component';
 
 @Component({
   selector: 'app-members',
@@ -35,8 +36,8 @@ import { UpdateSubscriptionDialogComponent } from '../../dialogs/update-subscrip
     ReactiveFormsModule,
 
     CreateUserDialogComponent,
-    UpdateSubscriptionDialogComponent
-
+    UpdateSubscriptionDialogComponent,
+    UpdateUserDialogComponent
   ],
   templateUrl: './members.component.html',
   styleUrl: './members.component.css'
@@ -45,10 +46,14 @@ import { UpdateSubscriptionDialogComponent } from '../../dialogs/update-subscrip
 export class MembersComponent implements OnInit {
   members: any[] = [];
   loading = false;
+  selectedMember: any = null;
+  selectedMemberDetails: any = null;
+  editLoadingId: number | null = null;
+  canEdit = false;
+
   createDialogVisible = false;
   subscriptionDialogVisible = false;
-  selectedMember: any = null;
-  canEdit = false;
+  editDialogVisible = false;
 
   constructor(
     private userService: UserService,
@@ -88,8 +93,25 @@ export class MembersComponent implements OnInit {
   }
 
   editMember(member: any) {
-    // Navigate to edit form or open edit dialog
-    this.router.navigate(['/members', member.id]);
+    // Show loading on the specific edit button
+    this.editLoadingId = member.id;
+    
+    // Fetch complete member details before opening dialog
+    this.userService.getMemberById(member.id).subscribe({
+      next: (fullMemberData) => {
+        this.selectedMemberDetails = fullMemberData;
+        this.editDialogVisible = true;
+        this.editLoadingId = null;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('COMMON.ERROR'),
+          detail: this.translate.instant('MEMBERS.LOAD_DETAIL_ERROR')
+        });
+        this.editLoadingId = null;
+      }
+    });
   }
 
   showCreateDialog() {
@@ -135,6 +157,11 @@ export class MembersComponent implements OnInit {
 
   onSubscriptionUpdated() {
     this.subscriptionDialogVisible = false;
+    this.loadMembers();
+  }
+
+  onMemberUpdated() {
+    this.editDialogVisible = false;
     this.loadMembers();
   }
 }

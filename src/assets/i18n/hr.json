@@ -51,7 +51,9 @@
     "SAVE": "Spremi",
     "CANCEL": "Odustani",
     "CLOSE": "Zatvori",
-    "User": "Korisnik"
+    "User": "Korisnik",
+    "Back": "Natrag",
+    "User_type": "Tip korisnika"
   },
   "MEMBERS": {
     "TITLE": "Članovi",
@@ -66,7 +68,25 @@
     "DELETE_ERROR": "Neuspješno brisanje člana",
     "SELECT_MEMBER": "Odaberi člana",
     "SELECT_MEMBER_PLACEHOLDER": "Izaberi člana",
-    "MEMBER": "Član"
+    "MEMBER": "Član",
+    "Detail_title": "Podaci o korisniku",
+    "Personal_info": "Osnovne informacije",
+    "Subscription_info": "Podaci o pretplati",
+    "No_subscription": "Korisnik nema aktivnu pretplatu.",
+    "Trainer_info": "Podaci o treneru",
+    "No_trainer": "Korisnik nema trenera.",
+    "Is_trainer": "Korisnik je trener.",
+    "Is_trainer_subscription": "Nemoguće dodijeliti pretplatu korisniku koji nije član.",
+    "Medical_info": "Zdravstveni podaci",
+    "Emergency_contact": "Ime kontakta u hitnom slučaju",
+    "Emergency_phone": "Broj mobitela kontakta u hitnom slučaju",
+    "Height": "Visina",
+    "Weight": "Težina",
+    "Medical_notes": "Zdravstveni zapis",
+    "Fitness_goals": "Fitness ciljevi",
+    "Oib": "OIB",
+    "Assign_trainer": "Dodijeli trenera",
+    "Trainer_assigned": "Korisnik ima dodijeljenog trenera."
   },
   "TRAINERS": {
     "TITLE": "Treneri",
@@ -87,7 +107,17 @@
     "TRAINING_GOALS": "Ciljevi treninga",
     "ASSIGN_SUCCESS": "Trener uspješno dodijeljen",
     "ASSIGN_ERROR": "Neuspješno dodjeljivanje trenera",
-    "ADD_MEMBER_ERROR": "Neuspješno dodavanje člana"
+    "ADD_MEMBER_ERROR": "Neuspješno dodavanje člana",
+    "Name": "Ime trenera",
+    "Specialization": "Specijalizacija",
+    "Sessions_per_week": "Treninga u tjednu",
+    "Start_date": "Datum početka treniranja",
+    "End_date": "Datum završetka treniranja",
+    "Session_rate": "Cijena po treningu",
+    "Rating": "Ocjena trenera",
+    "Years_of_experience": "Godine iskustva",
+    "Certifications": "Certifikati",
+    "Username": "Korisničko ime"
   },
   "DASHBOARD": {
     "TITLE": "Kontrolna ploča",
@@ -121,7 +151,8 @@
     "RENEW_ERROR": "Neuspješno obnavljanje pretplate",
     "UPDATE_ERROR": "Neuspješno ažuriranje pretplate",
     "LOAD_ERROR": "Neuspješno učitavanje pretplata",
-    "End_Date": "Datum isteka",
+    "Start_Date": "Datum početka pretplate",
+    "End_Date": "Datum isteka pretplate",
     "Price": "Cijena",
     "Status": "Status",
     "Days_Remaining": "Dana do isteka",

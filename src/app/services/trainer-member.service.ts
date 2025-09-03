@@ -14,7 +14,7 @@ export class TrainerService {
   }
 
   getTrainerById(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/trainers/${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/Trainers/${id}`);
   }
 
   getTrainerMembers(trainerId: number): Observable<any[]> {
@@ -22,7 +22,7 @@ export class TrainerService {
   }
 
   getMemberTrainer(memberId: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/members/${memberId}/trainer`);
+    return this.http.get<any>(`${environment.apiUrl}/Trainers/${memberId}/trainer`);
   }
 
   assignMemberToTrainer(trainerId: number, assignmentData: any): Observable<any> {
@@ -32,10 +32,10 @@ export class TrainerService {
         formData.append(key, assignmentData[key]);
       }
     });
-    return this.http.post(`${environment.apiUrl}/trainers/${trainerId}/members`, formData);
+    return this.http.post(`${environment.apiUrl}/Trainers/${trainerId}/members`, formData);
   }
 
   removeMemberFromTrainer(trainerId: number, memberId: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/trainers/${trainerId}/members/${memberId}`);
+    return this.http.delete(`${environment.apiUrl}/Trainers/${trainerId}/members/${memberId}`);
   }
 }
