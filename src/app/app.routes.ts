@@ -50,7 +50,7 @@ export const routes: Routes = [
         path: 'trainers', 
         component: TrainersComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['Owner', 'Manager', 'Receptionist', 'Member'] }
+        data: { roles: ['Owner', 'Manager', 'Receptionist', 'Member', 'Trainer'] }
       },
       { 
         path: 'trainers/:id', 

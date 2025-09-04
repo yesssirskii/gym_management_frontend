@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getMembers(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/User/user-table-data`);
+    return this.http.get<any[]>(`${environment.apiUrl}/User/members`);
   }
 
   getMemberById(id: number): Observable<any> {
@@ -18,7 +18,11 @@ export class UserService {
   }
 
   getPersonnel(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/users/paged?userType=Personnel`);
+    return this.http.get<any[]>(`${environment.apiUrl}/User/personnel`);
+  }
+
+  getTrainers(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/User/trainers`);
   }
 
   getPersonnelById(id: number): Observable<any> {

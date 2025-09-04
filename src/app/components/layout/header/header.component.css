@@ -12,7 +12,13 @@
     color: var(--primary-color);
 }
 
-.header-right {
+.header-right, .header-left{
     display: flex;
     align-items: center;
+}
+
+.language-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 2rem;
 }

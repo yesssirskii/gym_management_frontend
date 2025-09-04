@@ -48,6 +48,11 @@ export class SidebarComponent implements OnInit {
           label: 'MENU.PERSONNEL',
           icon: 'pi pi-id-card',
           routerLink: '/personnel'
+        },
+        {
+          label: 'MENU.TRAINERS',
+          icon: 'pi pi-id-card',
+          routerLink: '/trainers'
         }
       );
     }

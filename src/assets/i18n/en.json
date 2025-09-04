@@ -20,7 +20,8 @@
     "LOGOUT": "Logout",
     "LOGOUT_CONFIRM": "Are you sure you want to logout?",
     "LOGOUT_SUCCESS": "Logged Out",
-    "LOGOUT_SUCCESS_DETAIL": "You have been successfully logged out"
+    "LOGOUT_SUCCESS_DETAIL": "You have been successfully logged out",
+    "Language_Changed_To": "Language changed to {{language}}"
   },
   "FOOTER": {
     "RIGHTS": "All rights reserved"

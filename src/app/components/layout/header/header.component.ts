@@ -40,6 +40,7 @@ import { UserProfileDialogComponent } from '../../dialogs/user-profile-dialog/us
 export class HeaderComponent {
   userProfileVisible = false;
   currentUser: UserInfoDto | null = null;
+  currentLanguage = 'en';
 
   constructor(
     private authService: AuthService,
@@ -50,6 +51,25 @@ export class HeaderComponent {
   ) {
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
+    });
+    
+    this.currentLanguage = this.translate.currentLang || this.translate.defaultLang || 'en';
+    
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLanguage = event.lang;
+    });
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+    this.currentLanguage = lang;
+    
+    localStorage.setItem('selectedLanguage', lang);
+    
+    this.messageService.add({
+      severity: 'info',
+      detail: this.translate.instant('HEADER.Language_Changed_To', { language: lang.toUpperCase() }),
+      life: 1000
     });
   }
 

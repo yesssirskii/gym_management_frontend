@@ -1,6 +1,26 @@
 <div class="header">
     <div class="header-left">
-    <h3>{{ 'APP.TITLE' | translate }}</h3>
+        <h3>{{ 'APP.TITLE' | translate }}</h3>
+
+        <div class="language-selector">
+            <p-button 
+                label="EN" 
+                severity="secondary" 
+                size="small"
+                (onClick)="changeLanguage('en')"
+                [outlined]="currentLanguage !== 'en'"
+                class="language-btn">
+            </p-button>
+            
+            <p-button 
+                label="HR" 
+                severity="secondary" 
+                size="small"
+                (onClick)="changeLanguage('hr')"
+                [outlined]="currentLanguage !== 'hr'"
+                class="language-btn">
+            </p-button>
+        </div>
     </div>
     
     <div class="header-right">

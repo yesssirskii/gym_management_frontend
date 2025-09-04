@@ -20,7 +20,8 @@
     "LOGOUT": "Odjava",
     "LOGOUT_CONFIRM": "Jeste li sigurni da se želite odjaviti?",
     "LOGOUT_SUCCESS": "Odjavljeni",
-    "LOGOUT_SUCCESS_DETAIL": "Uspješno ste se odjavili"
+    "LOGOUT_SUCCESS_DETAIL": "Uspješno ste se odjavili",
+    "Language_Changed_To": "Jezik promijenjen na {{language}}"
   },
   "FOOTER": {
     "RIGHTS": "Sva prava pridržana"
