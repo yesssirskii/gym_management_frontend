@@ -1,101 +1,102 @@
 <p-dialog 
-    [header]="'MEMBERS.EDIT_MEMBER' | translate" 
+    [header]="'MEMBERS.Edit_Member.Title' | translate" 
     [(visible)]="visible" 
     [modal]="true" 
-    [style]="{width: '600px'}"
+    [style]="{width: '700px'}"
     [closable]="true"
+    [draggable]="false"
     (onHide)="onDialogHide()">
     
     <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" *ngIf="memberForm">
         <!-- Basic Information -->
         <div class="field-group">
-            <h4>{{ 'USERS.BASIC_INFO' | translate }}</h4>
+            <h4>{{ 'MEMBERS.Edit_Member.Basic_Info' | translate }}</h4>
             
             <div class="field">
-            <label for="membershipNumber">{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}</label>
-            <input type="text" id="membershipNumber" pInputText formControlName="membershipNumber" class="w-full" [disabled]="true" />
+                <label for="membershipNumber">{{ 'MEMBERS.Edit_Member.Membership_Number' | translate }}:</label>
+                <input type="text" id="membershipNumber" pInputText formControlName="membershipNumber" class="w-full" [disabled]="true" />
             </div>
             
             <div class="field">
-            <label for="username">{{ 'USERS.USERNAME' | translate }}</label>
-            <input type="text" id="username" pInputText formControlName="username" class="w-full" />
+                <label for="username">{{ 'MEMBERS.Edit_Member.Username' | translate }}:</label>
+                <input type="text" id="username" pInputText formControlName="username" class="w-full" />
             </div>
             
             <div class="field">
-            <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
-            <input type="email" id="email" pInputText formControlName="email" class="w-full" />
-            </div>
-            
-            <div class="field-row">
-            <div class="field">
-                <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
-                <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
-            </div>
-            
-            <div class="field">
-                <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
-                <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
-            </div>
+                <label for="email">{{ 'MEMBERS.Edit_Member.Email' | translate }}:</label>
+                <input type="email" id="email" pInputText formControlName="email" class="w-full" />
             </div>
             
             <div class="field-row">
-            <div class="field">
-                <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
-                <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+                <div class="field">
+                    <label for="firstName">{{ 'MEMBERS.Edit_Member.First_Name' | translate }}:</label>
+                    <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
+                </div>
+                
+                <div class="field">
+                    <label for="lastName">{{ 'MEMBERS.Edit_Member.Last_Name' | translate }}:</label>
+                    <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
+                </div>
+            </div>
+            
+            <div class="field-row">
+                <div class="field">
+                    <label for="phoneNumber">{{ 'MEMBERS.Edit_Member.Phone' | translate }}:</label>
+                    <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
+                </div>
+                
+                <div class="field">
+                    <label for="dateOfBirth">{{ 'MEMBERS.Edit_Member.Date_Of_Birth'| translate }}:</label>
+                    <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full" [dateFormat]="'dd/mm/yy'"></p-calendar>
+                </div>
             </div>
             
             <div class="field">
-                <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
-                <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full" [dateFormat]="'dd/mm/yy'"></p-calendar>
-            </div>
-            </div>
-            
-            <div class="field">
-            <label for="address">{{ 'COMMON.ADDRESS' | translate }}</label>
-            <input type="text" id="address" pInputText formControlName="address" class="w-full" />
+                <label for="address">{{ 'MEMBERS.Edit_Member.Address' | translate }}:</label>
+                <input type="text" id="address" pInputText formControlName="address" class="w-full" />
             </div>
             
-            <div class="field">
-            <p-checkbox formControlName="isActive" binary="true" inputId="isActive"></p-checkbox>
-            <label for="isActive" class="ml-2">{{ 'MEMBERS.IS_ACTIVE' | translate }}</label>
+            <div class="field checkbox-section-alignment">
+                <label for="isActive" class="ml-2">{{ 'MEMBERS.Edit_Member.Is_Active' | translate }}</label>
+                <p-checkbox formControlName="isActive" binary="true" inputId="isActive"></p-checkbox>
             </div>
         </div>
 
         <!-- Medical & Emergency Information -->
         <div class="field-group">
-            <h4>{{ 'MEMBERS.MEDICAL_INFO' | translate }}</h4>
-            
-            <div class="field-row">
-            <div class="field">
-                <label for="emergencyContactName">{{ 'MEMBERS.EMERGENCY_CONTACT' | translate }}</label>
-                <input type="text" id="emergencyContactName" pInputText formControlName="emergencyContactName" class="w-full" />
-            </div>
-            
-            <div class="field">
-                <label for="emergencyContactPhone">{{ 'MEMBERS.EMERGENCY_PHONE' | translate }}</label>
-                <input type="tel" id="emergencyContactPhone" pInputText formControlName="emergencyContactPhone" class="w-full" />
-            </div>
-            </div>
+            <h4>{{ 'MEMBERS.Medical_info' | translate }}</h4>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="height">{{ 'MEMBERS.HEIGHT' | translate }} (cm)</label>
-                    <p-inputNumber id="height" formControlName="height" class="w-full"></p-inputNumber>
+                    <label for="emergencyContactName">{{ 'MEMBERS.Emergency_Contact' | translate }}:</label>
+                    <input type="text" id="emergencyContactName" pInputText formControlName="emergencyContactName" class="w-full" />
                 </div>
                 
                 <div class="field">
-                    <label for="weight">{{ 'MEMBERS.WEIGHT' | translate }} (kg)</label>
-                    <p-inputNumber id="weight" formControlName="weight" class="w-full"></p-inputNumber>
+                    <label for="emergencyContactPhone">{{ 'MEMBERS.Emergency_Phone' | translate }}:</label>
+                    <input type="tel" id="emergencyContactPhone" pInputText formControlName="emergencyContactPhone" class="w-full" />
+                </div>
+            </div>
+            
+            <div class="field-row">
+                <div class="field">
+                    <label for="height">{{ 'MEMBERS.Height' | translate }} (cm):</label>
+                    <p-inputNumber id="height" formControlName="height" styleClass="w-full"></p-inputNumber>
+                </div>
+                
+                <div class="field">
+                    <label for="weight">{{ 'MEMBERS.Weight' | translate }} (kg):</label>
+                    <p-inputNumber id="weight" formControlName="weight" styleClass="w-full"></p-inputNumber>
                 </div>
             </div>
             
             <div class="field">
-                <label for="medicalNotes">{{ 'MEMBERS.MEDICAL_NOTES' | translate }}</label>
+                <label for="medicalNotes">{{ 'MEMBERS.Medical_Notes' | translate }}:</label>
                 <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="3" class="w-full"></textarea>
             </div>
             
             <div class="field">
-                <label for="fitnessGoals">{{ 'MEMBERS.FITNESS_GOALS' | translate }}</label>
+                <label for="fitnessGoals">{{ 'MEMBERS.Fitness_Goals' | translate }}:</label>
                 <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="3" class="w-full"></textarea>
             </div>
         </div>

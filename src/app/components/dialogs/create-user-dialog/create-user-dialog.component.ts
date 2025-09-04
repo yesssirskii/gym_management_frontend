@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
+
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
@@ -25,7 +26,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 @Component({
   selector: 'app-create-user-dialog',
   standalone: true,
-    imports: [
+  imports: [
     ButtonModule, 
     CardModule, 
     TagModule, 
@@ -48,7 +49,6 @@ import { CheckboxModule } from 'primeng/checkbox';
   templateUrl: './create-user-dialog.component.html',
   styleUrl: './create-user-dialog.component.css'
 })
-
 export class CreateUserDialogComponent implements OnInit {
   @Input() visible = false;
   @Input() userType = '';
@@ -99,6 +99,7 @@ export class CreateUserDialogComponent implements OnInit {
     if (this.userType) {
       this.selectedUserType = this.userType;
       this.userForm.patchValue({ userType: this.userType });
+      this.updateValidators();
     }
   }
 
@@ -133,7 +134,6 @@ export class CreateUserDialogComponent implements OnInit {
       
       // Personnel fields
       role: [''],
-      employeeId: [''],
       salary: [''],
       jobDescription: ['']
     });
@@ -145,32 +145,101 @@ export class CreateUserDialogComponent implements OnInit {
   }
 
   updateValidators() {
-    // Clear all conditional validators
-    Object.keys(this.userForm.controls).forEach(key => {
-      if (!['userType', 'username', 'email', 'password', 'firstName', 'lastName', 'dateOfBirth'].includes(key)) {
-        this.userForm.get(key)?.clearValidators();
+    // Define all conditional field groups
+    const memberFields = ['emergencyContactName', 'emergencyContactPhone', 'height', 'weight', 'medicalNotes', 'fitnessGoals', 'subscriptionType', 'subscriptionStartDate', 'autoRenewal'];
+    const trainerFields = ['specialization', 'yearsOfExperience', 'hourlyRate', 'certifications', 'bio'];
+    const personnelFields = ['role', 'salary', 'jobDescription'];
+    
+    const allConditionalFields = [...memberFields, ...trainerFields, ...personnelFields];
+
+    // Clear all conditional validators and errors
+    allConditionalFields.forEach(fieldName => {
+      const control = this.userForm.get(fieldName);
+      if (control) {
+        control.clearValidators();
+        control.setErrors(null);
+        control.updateValueAndValidity({ emitEvent: false });
       }
     });
 
     // Add validators based on user type
     if (this.selectedUserType === 'Trainer') {
-      this.userForm.get('specialization')?.setValidators([Validators.required]);
-      this.userForm.get('yearsOfExperience')?.setValidators([Validators.required]);
-      this.userForm.get('hourlyRate')?.setValidators([Validators.required]);
+      const specializationControl = this.userForm.get('specialization');
+      const experienceControl = this.userForm.get('yearsOfExperience');
+      const rateControl = this.userForm.get('hourlyRate');
+      
+      if (specializationControl) {
+        specializationControl.setValidators([Validators.required]);
+        specializationControl.updateValueAndValidity({ emitEvent: false });
+      }
+      if (experienceControl) {
+        experienceControl.setValidators([Validators.required, Validators.min(0)]);
+        experienceControl.updateValueAndValidity({ emitEvent: false });
+      }
+      if (rateControl) {
+        rateControl.setValidators([Validators.required, Validators.min(0)]);
+        rateControl.updateValueAndValidity({ emitEvent: false });
+      }
     } else if (this.selectedUserType === 'Personnel') {
-      this.userForm.get('role')?.setValidators([Validators.required]);
-      this.userForm.get('employeeId')?.setValidators([Validators.required]);
-      this.userForm.get('salary')?.setValidators([Validators.required]);
+      const roleControl = this.userForm.get('role');
+      const salaryControl = this.userForm.get('salary');
+      
+      if (roleControl) {
+        roleControl.setValidators([Validators.required]);
+        roleControl.updateValueAndValidity({ emitEvent: false });
+      }
+      if (salaryControl) {
+        salaryControl.setValidators([Validators.required, Validators.min(0)]);
+        salaryControl.updateValueAndValidity({ emitEvent: false });
+      }
     }
 
-    // Update form validation
+    // Update the entire form validation status
     this.userForm.updateValueAndValidity();
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.loading = true;
-      const formData = this.userForm.value;
+
+      const formData = { ...this.userForm.value };
+
+      if (formData.dateOfBirth) {
+        const date = new Date(formData.dateOfBirth);
+        formData.dateOfBirth = date.toISOString().split('T')[0];
+      }
+    
+      if (formData.subscriptionStartDate) {
+        const subDate = new Date(formData.subscriptionStartDate);
+        formData.subscriptionStartDate = subDate.toISOString().split('T')[0];
+      }
+      
+      // Remove irrelevant fields based on user type
+      if (this.selectedUserType !== 'Member') {
+        delete formData.emergencyContactName;
+        delete formData.emergencyContactPhone;
+        delete formData.height;
+        delete formData.weight;
+        delete formData.medicalNotes;
+        delete formData.fitnessGoals;
+        delete formData.subscriptionType;
+        delete formData.subscriptionStartDate;
+        delete formData.autoRenewal;
+      }
+      
+      if (this.selectedUserType !== 'Trainer') {
+        delete formData.specialization;
+        delete formData.yearsOfExperience;
+        delete formData.hourlyRate;
+        delete formData.certifications;
+        delete formData.bio;
+      }
+      
+      if (this.selectedUserType !== 'Personnel') {
+        delete formData.role;
+        delete formData.salary;
+        delete formData.jobDescription;
+      }
       
       this.userService.createUser(formData).subscribe({
         next: (response) => {
@@ -179,6 +248,7 @@ export class CreateUserDialogComponent implements OnInit {
             summary: this.translate.instant('COMMON.SUCCESS'),
             detail: this.translate.instant('USERS.CREATE_SUCCESS')
           });
+
           this.userCreated.emit();
           this.resetForm();
         },
@@ -188,7 +258,16 @@ export class CreateUserDialogComponent implements OnInit {
             summary: this.translate.instant('COMMON.ERROR'),
             detail: this.translate.instant('USERS.CREATE_ERROR')
           });
+
           this.loading = false;
+        }
+      });
+    } else {
+      // Mark all fields as touched to show validation errors
+      Object.keys(this.userForm.controls).forEach(key => {
+        const control = this.userForm.get(key);
+        if (control) {
+          control.markAsTouched();
         }
       });
     }
@@ -209,9 +288,16 @@ export class CreateUserDialogComponent implements OnInit {
     this.userForm.reset();
     this.selectedUserType = '';
     this.loading = false;
+    
+    this.userForm.patchValue({
+      subscriptionStartDate: new Date(),
+      autoRenewal: false
+    });
+    
     if (this.userType) {
       this.selectedUserType = this.userType;
       this.userForm.patchValue({ userType: this.userType });
+      this.updateValidators();
     }
   }
 }

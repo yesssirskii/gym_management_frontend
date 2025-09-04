@@ -32,14 +32,12 @@
     margin-left: 0.5rem;
 }
 
-:host ::ng-deep .p-calendar {
-    width: 100%;
+.checkbox-section-alignment{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-:host ::ng-deep .p-inputnumber {
-    width: 100%;
-}
-
-:host ::ng-deep .p-inputnumber-input {
-    width: 100%;
+.checkbox-section-alignment label {
+  margin-top: 6px; /* nudge checkbox slightly down */
 }

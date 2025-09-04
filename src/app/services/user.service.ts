@@ -36,7 +36,7 @@ export class UserService {
         formData.append(key, userData[key]);
       }
     });
-    return this.http.post(`${environment.apiUrl}/users/create-new-user`, formData);
+    return this.http.post(`${environment.apiUrl}/User/create-new-user`, formData);
   }
 
   updateUser(id: number, userData: any): Observable<any> {
@@ -50,6 +50,6 @@ export class UserService {
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`);
+    return this.http.delete(`${environment.apiUrl}/User/${id}`);
   }
 }

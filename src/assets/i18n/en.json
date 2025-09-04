@@ -79,15 +79,28 @@
     "Is_trainer": "User is a trainer.",
     "Is_trainer_subscription": "Cannot add subscription to a user who is not a member.",
     "Medical_info": "Medical info",
-    "Emergency_contact": "Emergency contact name",
-    "Emergency_phone": "Emergency phone number",
+    "Emergency_Contact": "Emergency contact name",
+    "Emergency_Phone": "Emergency phone number",
     "Height": "Height",
     "Weight": "Weight",
-    "Medical_notes": "Medical notes",
-    "Fitness_goals": "Fitness goals",
+    "Medical_Notes": "Medical notes",
+    "Fitness_Goals": "Fitness goals",
     "Oib": "OIB",
     "Assign_trainer": "Assign trainer",
-    "Trainer_assigned": "User already has an assigned trainer."
+    "Trainer_assigned": "User already has an assigned trainer.",
+    "Edit_Member":{
+      "Title": "Edit member",
+      "Basic_Info": "Basic info",
+      "Membership_Number": "Membership #",
+      "Username": "Username",
+      "Email": "Email",
+      "First_Name": "First name",
+      "Last_Name": "Last name",
+      "Phone": "Phone number",
+      "Date_Of_Birth": "Date of birth",
+      "Address": "Address",
+      "Is_Active": "Active"
+    }
   },
   "TRAINERS": {
     "TITLE": "Trainers",

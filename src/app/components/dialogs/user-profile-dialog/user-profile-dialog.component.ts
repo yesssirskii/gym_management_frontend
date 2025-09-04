@@ -20,6 +20,8 @@ import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
 import { TabViewModule } from 'primeng/tabview';
 import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-user-profile-dialog',
@@ -39,7 +41,9 @@ import { PasswordModule } from 'primeng/password';
     DividerModule,
     DialogModule,
     TabViewModule,
-    PasswordModule
+    PasswordModule,
+    InputTextModule,
+    InputTextareaModule
   ],
   templateUrl: './user-profile-dialog.component.html',
   styleUrl: './user-profile-dialog.component.css'
@@ -120,6 +124,7 @@ export class UserProfileDialogComponent implements OnInit {
             summary: this.translate.instant('COMMON.SUCCESS'),
             detail: this.translate.instant('PROFILE.UPDATE_SUCCESS')
           });
+          
           this.profileForm.markAsPristine();
           this.loadingProfile = false;
         },

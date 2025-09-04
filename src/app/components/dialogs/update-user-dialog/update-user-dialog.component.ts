@@ -20,18 +20,22 @@ import { DialogModule } from 'primeng/dialog';
 import { TabViewModule } from 'primeng/tabview';
 import { PasswordModule } from 'primeng/password';
 import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from "primeng/inputnumber";
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-update-user-dialog',
   standalone: true,
   imports: [
-    ButtonModule, 
-    CardModule, 
-    TagModule, 
-    TableModule, 
-    ProgressSpinnerModule, 
-    TranslateModule, 
-    TooltipModule, 
+    ButtonModule,
+    CardModule,
+    TagModule,
+    TableModule,
+    ProgressSpinnerModule,
+    TranslateModule,
+    TooltipModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
@@ -40,8 +44,12 @@ import { CalendarModule } from 'primeng/calendar';
     DialogModule,
     TabViewModule,
     PasswordModule,
-    CalendarModule
-  ],
+    CalendarModule,
+    InputNumberModule,
+    InputTextModule,
+    InputTextareaModule,
+    CheckboxModule
+],
   templateUrl: './update-user-dialog.component.html',
   styleUrl: './update-user-dialog.component.css'
 })
