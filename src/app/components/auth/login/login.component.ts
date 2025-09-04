@@ -19,8 +19,8 @@ import { ToastModule } from 'primeng/toast';
     PasswordModule,
     ToastModule,
     TranslateModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class SidebarComponent implements OnInit {
   menuItems: MenuItem[] = [];
 
-  constructor(private authService: AuthService, private translate: TranslateService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.buildMenu();
@@ -26,9 +26,7 @@ export class SidebarComponent implements OnInit {
 
   buildMenu() {
     const currentUser = this.authService.getCurrentUser();
-    console.log(currentUser);
 
-    // Always add Dashboard first
     this.menuItems = [
       {
         label: 'MENU.DASHBOARD',
