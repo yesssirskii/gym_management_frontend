@@ -57,12 +57,35 @@ import { CheckboxModule } from 'primeng/checkbox';
 export class UpdateUserDialogComponent implements OnInit, OnChanges {
   @Input() visible = false;
   @Input() member: any = null;
+  @Input() userType = '';
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() memberUpdated = new EventEmitter<void>();
 
   memberForm!: FormGroup;
   loading = false;
   showPasswordFields = false;
+  selectedUserType = '';
+
+    subscriptionTypeOptions = [
+    { label: 'Daily', value: 1 },
+    { label: 'Monthly', value: 2 },
+    { label: 'Yearly', value: 3 }
+  ];
+
+  specializationOptions = [
+    { label: 'Bodybuilding', value: 'Bodybuilding' },
+    { label: 'Nutritionist', value: 'Nutritionist' },
+    { label: 'Cardio', value: 'Cardio' },
+    { label: 'Yoga', value: 'Yoga' }
+  ];
+
+  personnelRoleOptions = [
+    { label: 'Owner', value: 'Owner' },
+    { label: 'Manager', value: 'Manager' },
+    { label: 'Receptionist', value: 'Receptionist' },
+    { label: 'Cleaner', value: 'Cleaner' },
+    { label: 'Maintenance', value: 'Maintenance' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -74,7 +97,9 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if (this.member) {
+    if (this.userType) {
+      this.selectedUserType = this.userType;
+      this.memberForm.patchValue({ userType: this.userType });
       this.populateForm();
     }
   }
@@ -104,6 +129,18 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       weight: [null],
       medicalNotes: [''],
       fitnessGoals: [''],
+
+      // Trainer fields
+      specialization: [''],
+      yearsOfExperience: [''],
+      hourlyRate: [''],
+      certifications: [''],
+      bio: [''],
+      
+      // Personnel fields
+      role: [''],
+      salary: [''],
+      jobDescription: [''],
       
       // Password fields
       changePassword: [false],
@@ -136,6 +173,17 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         weight: this.member.weight,
         medicalNotes: this.member.medicalNotes,
         fitnessGoals: this.member.fitnessGoals,
+
+        specialization: this.member.specialization,
+        yearsOfExperience: this.member.yearsOfExperience,
+        hourlyRate: this.member.hourlyRate,
+        certifications: this.member.certifications,
+        bio: this.member.bio,
+
+        role: this.member.role,
+        salary: this.member.salary,
+        jobDescription: this.member.jobDescription,
+        
         changePassword: false,
         newPassword: '',
         confirmPassword: ''

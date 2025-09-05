@@ -87,5 +87,6 @@
 <app-update-user-dialog 
   [(visible)]="editDialogVisible"
   [member]="selectedTrainerDetails"
+  [userType] = "'Trainer'"
   (memberUpdated)="onTrainerUpdated()">
 </app-update-user-dialog>

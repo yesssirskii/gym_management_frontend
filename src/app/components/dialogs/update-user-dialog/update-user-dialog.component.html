@@ -12,7 +12,7 @@
         <div class="field-group">
             <h4>{{ 'MEMBERS.Edit_Member.Basic_Info' | translate }}</h4>
             
-            <div class="field">
+            <div class="field" *ngIf="selectedUserType === 'Member'">
                 <label for="membershipNumber">{{ 'MEMBERS.Edit_Member.Membership_Number' | translate }}:</label>
                 <input type="text" id="membershipNumber" pInputText formControlName="membershipNumber" class="w-full" [disabled]="true" />
             </div>
@@ -61,9 +61,107 @@
                 <p-checkbox formControlName="isActive" binary="true" inputId="isActive"></p-checkbox>
             </div>
         </div>
+        <!-- Subscription fields -->
+         <div class="field-group" *ngIf="selectedUserType === 'Member'">
+            <div>
+                <h4>{{ 'MEMBERS.Add.Subscription.Subscription_Details' | translate }}</h4>
+                
+                <div class="field">
+                    <label for="subscriptionType">{{ 'MEMBERS.Add.Subscription.Type' | translate }}:</label>
+                    <p-dropdown
+                        id="subscriptionType"
+                        [options]="subscriptionTypeOptions"
+                        formControlName="subscriptionType"
+                        optionLabel="label"
+                        optionValue="value"
+                        [placeholder]="'MEMBERS.Add.Subscription.Select_Type' | translate"
+                        class="w-full">
+                    </p-dropdown>
+                </div>
+                
+                <div class="field">
+                    <label for="subscriptionStartDate">{{ 'MEMBERS.Add.Subscription.Start_Date' | translate }}:</label>
+                    <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full"></p-calendar>
+                </div>
+                
+                <div class="field checkbox-section-alignment">
+                    <label for="autoRenewal" class="ml-2">{{ 'MEMBERS.Add.Subscription.Auto_Renewal' | translate }}</label>
+                    <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainer-specific fields -->
+        <div class="field-group" *ngIf="selectedUserType === 'Trainer'">
+            <h4>{{ 'TRAINERS.Add_Trainer.Trainer_Info.Title' | translate }}</h4>
+            <div class="field">
+                <label for="specialization">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Specialization' | translate }}:</label>
+                <p-dropdown
+                    id="specialization"
+                    [options]="specializationOptions"
+                    formControlName="specialization"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'TRAINERS.Add_Trainer.Trainer_Info.Select_Specialization' | translate"
+                    class="w-full">
+                </p-dropdown>
+            </div>
+            
+            <div class="field-row">
+                <div class="field">
+                    <label for="yearsOfExperience">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Experience' | translate }}:</label>
+                    <p-inputNumber id="yearsOfExperience" formControlName="yearsOfExperience" class="w-full"></p-inputNumber>
+                </div>
+                
+                <div class="field">
+                    <label for="hourlyRate">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Session_Rate' | translate }}:</label>
+                    <p-inputNumber id="hourlyRate" formControlName="hourlyRate" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label for="certifications">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Certifications' | translate }}:</label>
+                <textarea id="certifications" pInputTextarea formControlName="certifications" rows="3" class="w-full"></textarea>
+            </div>
+            
+            <div class="field">
+                <label for="bio">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Bio' | translate }}:</label>
+                <textarea id="bio" pInputTextarea formControlName="bio" rows="3" class="w-full"></textarea>
+            </div>
+        </div>
+
+        <!-- Personnel-specific fields -->
+        <div class="field-group" *ngIf="selectedUserType === 'Personnel'">
+            <h4>{{ 'PERSONNEL.Add.Personnel_Info' | translate }}:</h4>
+            
+            <div class="field-row">
+                <div class="field">
+                    <label for="role">{{ 'PERSONNEL.Add.Role' | translate }}:</label>
+                    <p-dropdown
+                        id="role"
+                        [options]="personnelRoleOptions"
+                        formControlName="role"
+                        optionLabel="label"
+                        optionValue="value"
+                        [placeholder]="'PERSONNEL.Add.Select_Role' | translate"
+                        class="w-full">
+                    </p-dropdown>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label for="salary">{{ 'PERSONNEL.Add.Salary' | translate }}:</label>
+                <p-inputNumber id="salary" formControlName="salary" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
+            </div>
+            
+            <div class="field">
+                <label for="jobDescription">{{ 'PERSONNEL.Add.Job_Description' | translate }}:</label>
+                <textarea id="jobDescription" pInputTextarea formControlName="jobDescription" rows="3" class="w-full"></textarea>
+            </div>
+        </div>
 
         <!-- Medical & Emergency Information -->
-        <div class="field-group">
+        <div class="field-group" *ngIf="selectedUserType === 'Member'">
             <h4>{{ 'MEMBERS.Medical_info' | translate }}</h4>
             
             <div class="field-row">

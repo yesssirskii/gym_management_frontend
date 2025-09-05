@@ -48,7 +48,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit {
 
   subscriptionForm: FormGroup;
   loading = false;
-
+  
   subscriptionTypes = [
     { label: 'Daily', value: 'Daily', days: 1 },
     { label: 'Monthly', value: 'Monthly', days: 30 },

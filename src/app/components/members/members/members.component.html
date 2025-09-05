@@ -103,5 +103,6 @@
 <app-update-user-dialog 
   [(visible)]="editDialogVisible"
   [member]="selectedMemberDetails"
+  [userType] = "'Member'"
   (memberUpdated)="onMemberUpdated()">
 </app-update-user-dialog>
