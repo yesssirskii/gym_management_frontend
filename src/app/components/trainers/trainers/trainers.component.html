@@ -83,3 +83,9 @@
     [userType]="'Trainer'"
     (userCreated)="onUserCreated()">
 </app-create-user-dialog>
+
+<app-update-user-dialog 
+  [(visible)]="editDialogVisible"
+  [member]="selectedTrainerDetails"
+  (memberUpdated)="onTrainerUpdated()">
+</app-update-user-dialog>

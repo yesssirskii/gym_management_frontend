@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserDialogComponent } from '../../dialogs/create-user-dialog/create-user-dialog.component';
+import { UpdateUserDialogComponent } from '../../dialogs/update-user-dialog/update-user-dialog.component';
 
 @Component({
   selector: 'app-trainers',
@@ -32,7 +33,9 @@ import { CreateUserDialogComponent } from '../../dialogs/create-user-dialog/crea
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    CreateUserDialogComponent
+
+    CreateUserDialogComponent,
+    UpdateUserDialogComponent
   ],
   templateUrl: './trainers.component.html',
   styleUrl: './trainers.component.css'
@@ -43,6 +46,10 @@ export class TrainersComponent implements OnInit {
   loading = false;
   createDialogVisible = false;
   canEdit = false;
+
+  editLoadingId: number | null = null;
+  editDialogVisible = false;
+  selectedTrainerDetails: any = null;
 
   constructor(
     private trainerService: TrainerService,
@@ -82,7 +89,23 @@ export class TrainersComponent implements OnInit {
   }
 
   editTrainer(trainer: any) {
-    this.router.navigate(['/trainers', trainer.id]);
+    this.editLoadingId = trainer.id;
+    
+    this.trainerService.getTrainerById(trainer.id).subscribe({
+      next: (fullPersonnelData) => {
+        this.selectedTrainerDetails = fullPersonnelData;
+        this.editDialogVisible = true;
+        this.editLoadingId = null;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('COMMON.ERROR'),
+          detail: this.translate.instant('MEMBERS.LOAD_DETAIL_ERROR')
+        });
+        this.editLoadingId = null;
+      }
+    });
   }
 
   showCreateDialog() {
@@ -109,5 +132,10 @@ export class TrainersComponent implements OnInit {
   onUserCreated() {
     this.createDialogVisible = false;
     this.loadTrainers();
+  }
+
+    onTrainerUpdated() {
+      this.editDialogVisible = false;
+      this.loadTrainers();
   }
 }

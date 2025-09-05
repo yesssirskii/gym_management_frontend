@@ -86,10 +86,8 @@ export class PersonnelComponent implements OnInit {
   }
 
   editPersonnel(person: any) {
-    // Show loading on the specific edit button
     this.editLoadingId = person.id;
     
-    // Fetch complete member details before opening dialog
     this.userService.getPersonnelById(person.id).subscribe({
       next: (fullPersonnelData) => {
         this.selectedPersonnelDetails = fullPersonnelData;
@@ -143,7 +141,7 @@ export class PersonnelComponent implements OnInit {
     this.loadPersonnel();
   }
 
-    onPersonnelUpdated() {
+  onPersonnelUpdated() {
     this.editDialogVisible = false;
     this.loadPersonnel();
   }
