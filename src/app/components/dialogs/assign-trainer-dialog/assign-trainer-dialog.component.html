@@ -4,6 +4,7 @@
     [modal]="true" 
     [style]="{width: '500px'}"
     [closable]="true"
+    [draggable]="false"
     (onHide)="onDialogHide()">
     
     <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
@@ -13,7 +14,7 @@
         {{ selectedMember.firstName }} {{ selectedMember.lastName }}
         </p>
         <p *ngIf="selectedTrainer">
-        <strong>{{ 'TRAINERS.TRAINER' | translate }}:</strong> 
+        <strong>{{ 'TRAINERS.Assign_Member.Trainer' | translate }}:</strong> 
         {{ selectedTrainer.firstName }} {{ selectedTrainer.lastName }}
         </p>
     </div>
@@ -38,14 +39,14 @@
     
     <!-- Select Member (when adding to trainer) -->
     <div class="field" *ngIf="mode === 'addMember'">
-        <label for="memberId">{{ 'MEMBERS.SELECT_MEMBER' | translate }}</label>
+        <label for="memberId">{{ 'TRAINERS.Assign_Member.Select_Member' | translate }}</label>
         <p-dropdown
         id="memberId"
         [options]="availableMembers"
         formControlName="memberId"
         optionLabel="displayName"
         optionValue="id"
-        [placeholder]="'MEMBERS.SELECT_MEMBER_PLACEHOLDER' | translate"
+        [placeholder]="'TRAINERS.Assign_Member.Choose' | translate"
         class="w-full"
         [filter]="true">
         </p-dropdown>
@@ -62,64 +63,50 @@
     
     <!-- Assignment Details -->
     <div class="assignment-details">
-        <h4>{{ 'TRAINERS.ASSIGNMENT_DETAILS' | translate }}</h4>
+        <h4>{{ 'TRAINERS.Assign_Member.Details' | translate }}</h4>
         
         <div class="field">
-        <label for="sessionsPerWeek">{{ 'TRAINERS.SESSIONS_PER_WEEK' | translate }}</label>
-        <p-inputNumber 
-            id="sessionsPerWeek" 
-            formControlName="sessionsPerWeek" 
-            class="w-full">
-        </p-inputNumber>
+            <label for="sessionsPerWeek">{{ 'TRAINERS.Assign_Member.Sessions_Per_Week' | translate }}:</label>
+            <p-inputNumber id="sessionsPerWeek" formControlName="sessionsPerWeek" class="w-full"></p-inputNumber>
         </div>
         
         <div class="field">
-        <label for="sessionRate">{{ 'TRAINERS.SESSION_RATE' | translate }}</label>
-        <p-inputNumber 
-            id="sessionRate" 
-            formControlName="sessionRate" 
-            mode="currency" 
-            currency="EUR" 
-            class="w-full">
-        </p-inputNumber>
+            <label for="sessionRate">{{ 'TRAINERS.Assign_Member.Session_Rate' | translate }}:</label>
+            <p-inputNumber id="sessionRate" formControlName="sessionRate" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
         </div>
         
         <div class="field">
-        <label for="startDate">{{ 'TRAINERS.START_DATE' | translate }}</label>
-        <p-calendar 
-            id="startDate" 
-            formControlName="startDate" 
-            styleClass="w-full"
-            dateFormat="dd/mm/yy">
-        </p-calendar>
+            <label for="startDate">{{ 'TRAINERS.Assign_Member.Start_Date' | translate }}:</label>
+            <p-calendar id="startDate" formControlName="startDate" styleClass="w-full"dateFormat="dd/mm/yy"></p-calendar>
         </div>
         
         <div class="field">
-        <label for="trainingGoals">{{ 'TRAINERS.TRAINING_GOALS' | translate }}</label>
-        <textarea 
-            id="trainingGoals" 
-            pInputTextarea 
-            formControlName="trainingGoals" 
-            rows="3" 
-            class="w-full">
-        </textarea>
+            <label for="trainingGoals">{{ 'TRAINERS.Assign_Member.Training_Goals' | translate }}:</label>
+            <textarea id="trainingGoals" pInputTextarea formControlName="trainingGoals" rows="3" class="w-full">
+            </textarea>
+        </div>
+
+        <div class="field">
+            <label for="notes">{{ 'TRAINERS.Assign_Member.Notes' | translate }}:</label>
+            <textarea id="notes" pInputTextarea formControlName="notes" rows="3" class="w-full">
+            </textarea>
         </div>
     </div>
     </form>
     
     <ng-template pTemplate="footer">
-    <p-button 
-        [label]="'COMMON.CANCEL' | translate" 
-        icon="pi pi-times" 
-        severity="secondary"
-        (onClick)="onCancel()">
-    </p-button>
-    <p-button 
-        [label]="'COMMON.SAVE' | translate" 
-        icon="pi pi-check" 
-        [loading]="loading"
-        [disabled]="assignmentForm.invalid"
-        (onClick)="onSubmit()">
-    </p-button>
+        <p-button 
+            [label]="'COMMON.CANCEL' | translate" 
+            icon="pi pi-times" 
+            severity="secondary"
+            (onClick)="onCancel()">
+        </p-button>
+        <p-button 
+            [label]="'COMMON.SAVE' | translate" 
+            icon="pi pi-check" 
+            [loading]="loading"
+            [disabled]="assignmentForm.invalid"
+            (onClick)="onSubmit()">
+        </p-button>
     </ng-template>
 </p-dialog>

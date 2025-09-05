@@ -1,5 +1,5 @@
 <p-dialog 
-    [header]="'USERS.CREATE_' + userType.toUpperCase() | translate" 
+    [header]=" 'USERS.Add' + userType.toUpperCase() | translate" 
     [(visible)]="visible" 
     [modal]="true" 
     [style]="{width: '600px'}"
@@ -10,14 +10,14 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <!-- User Type Selection -->
         <div class="field">
-            <label for="userType">{{ 'USERS.USER_TYPE' | translate }}</label>
+            <label for="userType">{{ 'USERS.User_Type' | translate }}:</label>
             <p-dropdown
                 id="userType"
                 [options]="userTypeOptions"
                 formControlName="userType"
                 optionLabel="label"
                 optionValue="value"
-                [placeholder]="'USERS.SELECT_USER_TYPE' | translate"
+                [placeholder]="'USERS.Select_User_Type' | translate"
                 class="w-full"
                 (onChange)="onUserTypeChange()">
             </p-dropdown>
@@ -25,44 +25,44 @@
 
         <!-- Basic Information -->
         <div class="field-group">
-            <h4>{{ 'USERS.BASIC_INFO' | translate }}</h4>
+            <h4>{{ 'USERS.Basic_Info.Title' | translate }}</h4>
             
-            <div class="field">
-                <label for="username">{{ 'USERS.USERNAME' | translate }}</label>
-                <input type="text" id="username" pInputText formControlName="username" class="w-full" />
+            <div class="field-row">
+                <div class="field">
+                    <label for="username">{{ 'USERS.Basic_Info.Username' | translate }}:</label>
+                    <input type="text" id="username" pInputText formControlName="username" class="w-full" />
+                </div>
+                <div class="field">
+                    <label for="password">{{ 'USERS.Basic_Info.Password' | translate }}:</label>
+                    <p-password id="password" formControlName="password" styleClass="w-full" inputStyleClass="w-full" [feedback]="false"></p-password>
+                </div>
             </div>
 
             <div class="field">
-                <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
+                <label for="email">{{ 'USERS.Basic_Info.Email' | translate }}:</label>
                 <input type="email" id="email" pInputText formControlName="email" class="w-full" />
-            </div>
-            
-            <div class="field">
-                <label for="password">{{ 'USERS.PASSWORD' | translate }}</label>
-                <p-password id="password" formControlName="password" styleClass="w-full" [feedback]="false"></p-password>
             </div>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="firstName">{{ 'USERS.FIRST_NAME' | translate }}</label>
+                    <label for="firstName">{{ 'USERS.Basic_Info.First_Name' | translate }}:</label>
                     <input type="text" id="firstName" pInputText formControlName="firstName" class="w-full" />
                 </div>
                 
                 <div class="field">
-                    <label for="lastName">{{ 'USERS.LAST_NAME' | translate }}</label>
+                    <label for="lastName">{{ 'USERS.Basic_Info.Last_Name' | translate }}:</label>
                     <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
                 </div>
             </div>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="phoneNumber">{{ 'COMMON.PHONE' | translate }}</label>
-                    <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
-                </div>
-                
-                <div class="field">
-                    <label for="dateOfBirth">{{ 'USERS.DATE_OF_BIRTH' | translate }}</label>
+                    <label for="dateOfBirth">{{ 'USERS.Basic_Info.Date_Of_Birth' | translate }}:</label>
                     <p-calendar id="dateOfBirth" formControlName="dateOfBirth" styleClass="w-full"></p-calendar>
+                </div>
+                <div class="field">
+                    <label for="phoneNumber">{{ 'USERS.Basic_Info.Phone' | translate }}:</label>
+                    <input type="tel" id="phoneNumber" pInputText formControlName="phoneNumber" class="w-full" />
                 </div>
             </div>
         </div>
@@ -135,50 +135,50 @@
 
         <!-- Trainer-specific fields -->
         <div class="field-group" *ngIf="selectedUserType === 'Trainer'">
-            <h4>{{ 'TRAINERS.TRAINER_INFO' | translate }}</h4>
+            <h4>{{ 'TRAINERS.Add_Trainer.Trainer_Info.Title' | translate }}</h4>
             <div class="field">
-                <label for="specialization">{{ 'TRAINERS.SPECIALIZATION' | translate }}</label>
+                <label for="specialization">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Specialization' | translate }}:</label>
                 <p-dropdown
                     id="specialization"
                     [options]="specializationOptions"
                     formControlName="specialization"
                     optionLabel="label"
                     optionValue="value"
-                    [placeholder]="'TRAINERS.SELECT_SPECIALIZATION' | translate"
+                    [placeholder]="'TRAINERS.Add_Trainer.Trainer_Info.Select_Specialization' | translate"
                     class="w-full">
                 </p-dropdown>
             </div>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="yearsOfExperience">{{ 'TRAINERS.EXPERIENCE' | translate }}</label>
+                    <label for="yearsOfExperience">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Experience' | translate }}:</label>
                     <p-inputNumber id="yearsOfExperience" formControlName="yearsOfExperience" class="w-full"></p-inputNumber>
                 </div>
                 
                 <div class="field">
-                    <label for="hourlyRate">{{ 'TRAINERS.HOURLY_RATE' | translate }}</label>
+                    <label for="hourlyRate">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Session_Rate' | translate }}:</label>
                     <p-inputNumber id="hourlyRate" formControlName="hourlyRate" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
                 </div>
             </div>
             
             <div class="field">
-                <label for="certifications">{{ 'TRAINERS.CERTIFICATIONS' | translate }}</label>
+                <label for="certifications">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Certifications' | translate }}:</label>
                 <textarea id="certifications" pInputTextarea formControlName="certifications" rows="3" class="w-full"></textarea>
             </div>
             
             <div class="field">
-                <label for="bio">{{ 'TRAINERS.BIO' | translate }}</label>
+                <label for="bio">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Bio' | translate }}:</label>
                 <textarea id="bio" pInputTextarea formControlName="bio" rows="3" class="w-full"></textarea>
             </div>
         </div>
 
         <!-- Personnel-specific fields -->
         <div class="field-group" *ngIf="selectedUserType === 'Personnel'">
-            <h4>{{ 'PERSONNEL.PERSONNEL_INFO' | translate }}</h4>
+            <h4>{{ 'PERSONNEL.PERSONNEL_INFO' | translate }}:</h4>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="role">{{ 'PERSONNEL.ROLE' | translate }}</label>
+                    <label for="role">{{ 'PERSONNEL.ROLE' | translate }}:</label>
                     <p-dropdown
                         id="role"
                         [options]="personnelRoleOptions"

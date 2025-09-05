@@ -56,7 +56,7 @@ export const routes: Routes = [
         path: 'trainers/:id', 
         component: TrainerDetailComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['Owner', 'Manager', 'Receptionist', 'Member'] }
+        data: { roles: ['Owner', 'Manager', 'Receptionist', 'Member', 'Trainer'] }
       },
       { 
         path: 'subscriptions', 

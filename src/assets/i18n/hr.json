@@ -56,6 +56,21 @@
     "Back": "Natrag",
     "User_type": "Tip korisnika"
   },
+    "USERS": {
+    "Add": "Dodaj novog",
+    "User_Type": "Tip korisnika",
+    "Select_User_Type": "Odaberi tip korisnika",
+    "Basic_Info": {
+      "Title": "Osnovni podaci",
+      "Username": "korisničko ime",
+      "Email": "Email",
+      "Password": "Lozinka",
+      "First_Name": "Ime",
+      "Last_Name": "Prezime",
+      "Phone": "Broj mobitela",
+      "Date_Of_Birth": "Datum rođenja"
+    }
+  },
   "MEMBERS": {
     "TITLE": "Članovi",
     "ADD_NEW": "Dodaj novog člana",
@@ -131,7 +146,73 @@
     "Rating": "Ocjena trenera",
     "Years_of_experience": "Godine iskustva",
     "Certifications": "Certifikati",
-    "Username": "Korisničko ime"
+    "Username": "Korisničko ime",
+    "Trainer_Details": {
+      "Title": "Detalji o treneru",
+      "Add_Member": "Dodaj člana",
+      "Personal_Info": {
+        "Title": "Osnovne informacije",
+        "Name": "Ime trenera",
+        "Email": "Email",
+        "Phone": "Broj mobitela",
+        "Specialization": "Specijalizacija",
+        "Experience": "Iskustvo",
+        "Session_Rate": "Cijena po treningu",
+        "Rating": "Ocjena trenera",
+        "Status": "Status",
+        "Bio": "O treneru",
+        "Certifications": "Certifikati"
+      },
+      "Assigned_Members": {
+        "Title": "Dodani članovi",
+        "No_Members": "Trener trenutno nema pridodanih članova."
+      }
+    },
+    "Add_Trainer": {
+      "Title": "Dodavanje novog trenera",
+      "User_Type": "Tip korisnika",
+      "Basic_Info": {
+        "Username": "Korisničko ime",
+        "Email": "Email",
+        "Password": "Lozinka",
+        "First_Name": "Ime",
+        "Last_Name":"Prezime",
+        "Phone": "Broj mobitela",
+        "Date_Of_Birth": "Datum rođenja"
+      },
+      "Trainer_Info": {
+        "Title": "Podaci o treneru",
+        "Specialization": "Specijalizacija",
+        "Select_Specialization": "Odaberi specijalizaciju",
+        "Experience": "Iskustvo",
+        "Session_Rate": "Cijena po treningu",
+        "Certifications": "Certifikati",
+        "Bio": "O treneru"
+      }
+    },
+    "Assign_Member": {
+      "Title": "Pridodaj člana treneru",
+      "Trainer": "Trener",
+      "Select_Member": "Član za dodati",
+      "Choose": "Odaberi člana",
+      "Details": "Podaci o dodjeljivanju",
+      "Sessions_Per_Week": "Broj treninga tjedno",
+      "Session_Rate": "Cijena po treningu",
+      "Start_Date": "Datum početka treniranja",
+      "Training_Goals": "Ciljevi treniranja",
+      "Notes": "Bilješke",
+      "Success": "Član uspješno pridodan treneru.",
+      "Error": "Greška prilikom dodavanja člana ili je ovaj član već dodan treneru."
+    },
+    "Assigned_Members": {
+      "Name": "Ime",
+      "Membership_Number": "# Pretplate",
+      "Sessions_Per_Week": "Broj treninga tjedno",
+      "Session_Rate": "Cijena po treningu",
+      "Status": "Status",
+      "Actions": "Akcije",
+      "Remove": "Ukloni člana"
+    }
   },
   "DASHBOARD": {
     "TITLE": "Kontrolna ploča",

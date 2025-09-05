@@ -56,6 +56,21 @@
     "Back": "Back",
     "User_type": "User type"
   },
+  "USERS": {
+    "Add": "Add new",
+    "User_Type": "User type",
+    "Select_User_Type": "Select user type",
+    "Basic_Info": {
+      "Title": "Basic information",
+      "Username": "Username",
+      "Email": "Email",
+      "Password": "Password",
+      "First_Name": "First name",
+      "Last_Name": "Last name",
+      "Phone": "Phone number",
+      "Date_Of_Birth": "Date of birth"
+    }
+  },
   "MEMBERS": {
     "TITLE": "Members",
     "ADD_NEW": "Add New Member",
@@ -128,7 +143,73 @@
     "Rating": "Rating",
     "Years_of_experience": "Years of experience",
     "Certifications": "Certifications",
-    "Username": "Username"
+    "Username": "Username",
+    "Trainer_Details": {
+      "Title": "Trainer details",
+      "Add_Member": "Add member to trainer",
+      "Personal_Info": {
+        "Title": "Basic info",
+        "Name": "Trainer name",
+        "Email": "Email",
+        "Phone": "Phone number",
+        "Specialization": "Specialization",
+        "Experience": "Experience",
+        "Session_Rate": "Session rate",
+        "Rating": "Rating",
+        "Status": "Status",
+        "Bio": "Bio",
+        "Certifications": "Certifications"
+      },
+      "Assigned_Members": {
+        "Title": "Assigned members",
+        "No_Members": "Trainer currently has no members."
+      }
+    },
+    "Add_Trainer": {
+      "Title": "Add new trainer",
+      "User_Type": "User type",
+      "Basic_Info": {
+        "Username": "Username",
+        "Email": "Email",
+        "Password": "Password",
+        "First_Name": "First name",
+        "Last_Name":"Last name",
+        "Phone": "Phone number",
+        "Date_Of_Birth": "Date of birth"
+      },
+      "Trainer_Info": {
+        "Title": "Trainer info",
+        "Specialization": "Specialization",
+        "Select_Specialization": "Select specialization",
+        "Experience": "Experience",
+        "Session_Rate": "Session rate",
+        "Certifications": "Certifications",
+        "Bio": "Bio"
+      }
+    },
+    "Assign_Member": {
+      "Title": "Assign member to trainer",
+      "Trainer": "Trainer",
+      "Select_Member": "Select member to assign",
+      "Details": "Assignment details",
+      "Choose": "Choose a member",
+      "Sessions_Per_Week": "Sessions per week",
+      "Session_Rate": "Session rate",
+      "Start_Date": "Training start date",
+      "Training_Goals": "Training goals",
+      "Notes": "Notes",
+      "Success": "Successfully addes user to trainer.",
+      "Error": "Error while adding user to trainer or user is already assigned."
+    },
+    "Assigned_Members": {
+      "Name": "Name",
+      "Membership_Number": "Membership #",
+      "Sessions_Per_Week": "Sessions per week",
+      "Session_Rate": "Session rate",
+      "Status": "Status",
+      "Actions": "Actions",
+      "Remove": "Remove member"
+    }
   },
   "DASHBOARD": {
     "TITLE": "Dashboard",

@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-assign-trainer-dialog',
@@ -35,7 +36,8 @@ import { DialogModule } from 'primeng/dialog';
     ReactiveFormsModule,
     DropdownModule,
     DividerModule,
-    DialogModule
+    DialogModule,
+    InputTextareaModule
   ],
   templateUrl: './assign-trainer-dialog.component.html',
   styleUrl: './assign-trainer-dialog.component.css'
@@ -59,7 +61,7 @@ export class AssignTrainerDialogComponent implements OnInit {
   get dialogTitle(): string {
     return this.mode === 'assignTrainer' 
       ? this.translate.instant('TRAINERS.ASSIGN_TRAINER')
-      : this.translate.instant('TRAINERS.ADD_MEMBER');
+      : this.translate.instant('TRAINERS.Assign_Member.Title');
   }
 
   constructor(
@@ -75,7 +77,8 @@ export class AssignTrainerDialogComponent implements OnInit {
       sessionsPerWeek: [3, [Validators.required, Validators.min(1), Validators.max(7)]],
       sessionRate: [50, [Validators.required, Validators.min(0)]],
       startDate: [new Date(), Validators.required],
-      trainingGoals: ['']
+      trainingGoals: [''],
+      notes: ['']
     });
   }
 
@@ -83,9 +86,11 @@ export class AssignTrainerDialogComponent implements OnInit {
     if (this.mode === 'assignTrainer') {
       this.loadAvailableTrainers();
       this.assignmentForm.get('trainerId')?.setValidators([Validators.required]);
-    } else {
+    }
+    else {
       this.loadAvailableMembers();
       this.assignmentForm.get('memberId')?.setValidators([Validators.required]);
+
       if (this.selectedTrainer) {
         this.assignmentForm.patchValue({ 
           trainerId: this.selectedTrainer.id,
@@ -149,7 +154,7 @@ export class AssignTrainerDialogComponent implements OnInit {
             severity: 'success',
             summary: this.translate.instant('COMMON.SUCCESS'),
             detail: this.translate.instant(
-              this.mode === 'assignTrainer' ? 'TRAINERS.ASSIGN_SUCCESS' : 'TRAINERS.ADD_MEMBER_SUCCESS'
+              this.mode === 'assignTrainer' ? 'TRAINERS.ASSIGN_SUCCESS' : 'TRAINERS.Assign_Member.Success'
             )
           });
           
@@ -166,7 +171,7 @@ export class AssignTrainerDialogComponent implements OnInit {
             severity: 'error',
             summary: this.translate.instant('COMMON.ERROR'),
             detail: this.translate.instant(
-              this.mode === 'assignTrainer' ? 'TRAINERS.ASSIGN_ERROR' : 'TRAINERS.ADD_MEMBER_ERROR'
+              this.mode === 'assignTrainer' ? 'TRAINERS.ASSIGN_ERROR' : 'TRAINERS.Assign_Member.Error'
             )
           });
           this.loading = false;

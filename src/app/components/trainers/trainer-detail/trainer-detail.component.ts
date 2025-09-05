@@ -53,7 +53,7 @@ export class TrainerDetailComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private translate: TranslateService
   ) {
-    this.canEdit = this.authService.hasRole(['Owner', 'Manager', 'Receptionist']);
+    this.canEdit = this.authService.hasRole(['Owner', 'Manager', 'Receptionist', 'Trainer']);
   }
 
   ngOnInit() {

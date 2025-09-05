@@ -132,7 +132,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     const detailLabelMap: { [key: string]: string } = {
       'members': 'MEMBERS.Detail_title',
       'personnel': 'PERSONNEL.DETAIL_TITLE',
-      'trainers': 'TRAINERS.DETAIL_TITLE',
+      'trainers': 'TRAINERS.Trainer_Details.Title',
       'subscriptions': 'SUBSCRIPTIONS.DETAIL_TITLE'
     };
 
