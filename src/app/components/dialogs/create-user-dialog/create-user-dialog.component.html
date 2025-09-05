@@ -1,5 +1,5 @@
 <p-dialog 
-    [header]=" 'USERS.Add' + userType.toUpperCase() | translate" 
+    [header]=" 'USERS.Add' | translate" 
     [(visible)]="visible" 
     [modal]="true" 
     [style]="{width: '600px'}"
@@ -69,66 +69,68 @@
 
         <!-- Member-specific fields -->
         <div class="field-group" *ngIf="selectedUserType === 'Member'">
-            <h4>{{ 'MEMBERS.MEMBER_INFO' | translate }}</h4>
+            <h4>{{ 'MEMBERS.Add.Member_Info' | translate }}</h4>
             <div class="field-row">
                 <div class="field">
-                    <label for="emergencyContactName">{{ 'MEMBERS.EMERGENCY_CONTACT' | translate }}</label>
+                    <label for="emergencyContactName">{{ 'MEMBERS.Add.Emergency_Contact' | translate }}:</label>
                     <input type="text" id="emergencyContactName" pInputText formControlName="emergencyContactName" class="w-full" />
                 </div>
                 
                 <div class="field">
-                    <label for="emergencyContactPhone">{{ 'MEMBERS.EMERGENCY_PHONE' | translate }}</label>
+                    <label for="emergencyContactPhone">{{ 'MEMBERS.Add.Emergency_Phone' | translate }}:</label>
                     <input type="tel" id="emergencyContactPhone" pInputText formControlName="emergencyContactPhone" class="w-full" />
                 </div>
             </div>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="height">{{ 'MEMBERS.HEIGHT' | translate }} (cm)</label>
+                    <label for="height">{{ 'MEMBERS.Add.Height' | translate }} (cm):</label>
                     <p-inputNumber id="height" formControlName="height" class="w-full"></p-inputNumber>
                 </div>
                 
                 <div class="field">
-                    <label for="weight">{{ 'MEMBERS.WEIGHT' | translate }} (kg)</label>
+                    <label for="weight">{{ 'MEMBERS.Add.Weight' | translate }} (kg):</label>
                     <p-inputNumber id="weight" formControlName="weight" class="w-full"></p-inputNumber>
                 </div>
             </div>
             
             <div class="field">
-                <label for="medicalNotes">{{ 'MEMBERS.MEDICAL_NOTES' | translate }}</label>
+                <label for="medicalNotes">{{ 'MEMBERS.Add.Medical_Notes' | translate }}:</label>
                 <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="3" class="w-full"></textarea>
             </div>
             
             <div class="field">
-                <label for="fitnessGoals">{{ 'MEMBERS.FITNESS_GOALS' | translate }}</label>
+                <label for="fitnessGoals">{{ 'MEMBERS.Add.Fitness_Goals' | translate }}:</label>
                 <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="3" class="w-full"></textarea>
             </div>
+        </div>
 
-            <!-- Subscription fields -->
-            <div class="subscription-section">
-                <h5>{{ 'SUBSCRIPTIONS.INITIAL_SUBSCRIPTION' | translate }}</h5>
+        <!-- Subscription fields -->
+         <div class="field-group" *ngIf="selectedUserType === 'Member'">
+            <div>
+                <h4>{{ 'MEMBERS.Add.Subscription.Subscription_Details' | translate }}</h4>
                 
                 <div class="field">
-                    <label for="subscriptionType">{{ 'SUBSCRIPTIONS.TYPE' | translate }}</label>
+                    <label for="subscriptionType">{{ 'MEMBERS.Add.Subscription.Type' | translate }}:</label>
                     <p-dropdown
                         id="subscriptionType"
                         [options]="subscriptionTypeOptions"
                         formControlName="subscriptionType"
                         optionLabel="label"
                         optionValue="value"
-                        [placeholder]="'SUBSCRIPTIONS.SELECT_TYPE' | translate"
+                        [placeholder]="'MEMBERS.Add.Subscription.Select_Type' | translate"
                         class="w-full">
                     </p-dropdown>
                 </div>
                 
                 <div class="field">
-                    <label for="subscriptionStartDate">{{ 'SUBSCRIPTIONS.START_DATE' | translate }}</label>
+                    <label for="subscriptionStartDate">{{ 'MEMBERS.Add.Subscription.Start_Date' | translate }}:</label>
                     <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full"></p-calendar>
                 </div>
                 
                 <div class="field">
+                    <label for="autoRenewal" class="ml-2">{{ 'MEMBERS.Add.Subscription.Auto_Renewal' | translate }}</label>
                     <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
-                    <label for="autoRenewal" class="ml-2">{{ 'SUBSCRIPTIONS.AUTO_RENEWAL' | translate }}</label>
                 </div>
             </div>
         </div>
@@ -174,30 +176,30 @@
 
         <!-- Personnel-specific fields -->
         <div class="field-group" *ngIf="selectedUserType === 'Personnel'">
-            <h4>{{ 'PERSONNEL.PERSONNEL_INFO' | translate }}:</h4>
+            <h4>{{ 'PERSONNEL.Add.Personnel_Info' | translate }}:</h4>
             
             <div class="field-row">
                 <div class="field">
-                    <label for="role">{{ 'PERSONNEL.ROLE' | translate }}:</label>
+                    <label for="role">{{ 'PERSONNEL.Add.Role' | translate }}:</label>
                     <p-dropdown
                         id="role"
                         [options]="personnelRoleOptions"
                         formControlName="role"
                         optionLabel="label"
                         optionValue="value"
-                        [placeholder]="'PERSONNEL.SELECT_ROLE' | translate"
+                        [placeholder]="'PERSONNEL.Add.Select_Role' | translate"
                         class="w-full">
                     </p-dropdown>
                 </div>
             </div>
             
             <div class="field">
-                <label for="salary">{{ 'PERSONNEL.SALARY' | translate }}</label>
+                <label for="salary">{{ 'PERSONNEL.Add.Salary' | translate }}:</label>
                 <p-inputNumber id="salary" formControlName="salary" mode="currency" currency="EUR" class="w-full"></p-inputNumber>
             </div>
             
             <div class="field">
-                <label for="jobDescription">{{ 'PERSONNEL.JOB_DESCRIPTION' | translate }}</label>
+                <label for="jobDescription">{{ 'PERSONNEL.Add.Job_Description' | translate }}:</label>
                 <textarea id="jobDescription" pInputTextarea formControlName="jobDescription" rows="3" class="w-full"></textarea>
             </div>
         </div>

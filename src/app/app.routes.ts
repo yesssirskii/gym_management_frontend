@@ -44,7 +44,7 @@ export const routes: Routes = [
         path: 'personnel/:id', 
         component: PersonnelDetailComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['Owner', 'Manager'] }
+        data: { roles: ['Owner', 'Manager', 'Trainer'] }
       },
       { 
         path: 'trainers', 

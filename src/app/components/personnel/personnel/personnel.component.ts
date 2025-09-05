@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateUserDialogComponent } from '../../dialogs/create-user-dialog/create-user-dialog.component';
+import { UpdateUserDialogComponent } from '../../dialogs/update-user-dialog/update-user-dialog.component';
 
 @Component({
   selector: 'app-personnel',
@@ -32,7 +33,9 @@ import { CreateUserDialogComponent } from '../../dialogs/create-user-dialog/crea
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    CreateUserDialogComponent
+
+    CreateUserDialogComponent,
+    UpdateUserDialogComponent
   ],
   templateUrl: './personnel.component.html',
   styleUrl: './personnel.component.css'
@@ -42,6 +45,10 @@ export class PersonnelComponent implements OnInit {
   personnel: any[] = [];
   loading = false;
   createDialogVisible = false;
+
+  editLoadingId: number | null = null;
+  editDialogVisible = false;
+  selectedPersonnelDetails: any = null;
 
   constructor(
     private userService: UserService,
@@ -79,7 +86,25 @@ export class PersonnelComponent implements OnInit {
   }
 
   editPersonnel(person: any) {
-    this.router.navigate(['/personnel', person.id]);
+    // Show loading on the specific edit button
+    this.editLoadingId = person.id;
+    
+    // Fetch complete member details before opening dialog
+    this.userService.getPersonnelById(person.id).subscribe({
+      next: (fullPersonnelData) => {
+        this.selectedPersonnelDetails = fullPersonnelData;
+        this.editDialogVisible = true;
+        this.editLoadingId = null;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('COMMON.ERROR'),
+          detail: this.translate.instant('MEMBERS.LOAD_DETAIL_ERROR')
+        });
+        this.editLoadingId = null;
+      }
+    });
   }
 
   showCreateDialog() {
@@ -115,6 +140,11 @@ export class PersonnelComponent implements OnInit {
 
   onUserCreated() {
     this.createDialogVisible = false;
+    this.loadPersonnel();
+  }
+
+    onPersonnelUpdated() {
+    this.editDialogVisible = false;
     this.loadPersonnel();
   }
 }

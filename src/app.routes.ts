@@ -37,13 +37,13 @@ const routes: Routes = [
         path: 'personnel', 
         component: PersonnelComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['Owner', 'Manager'] }
+        data: { roles: ['Owner', 'Manager', 'Trainer'] }
       },
       { 
         path: 'personnel/:id', 
         component: PersonnelDetailComponent,
         canActivate: [RoleGuard],
-        data: { roles: ['Owner', 'Manager'] }
+        data: { roles: ['Owner', 'Manager', 'Trainer'] }
       },
       { 
         path: 'trainers', 

@@ -79,13 +79,13 @@
             <div class="info-grid" *ngIf="subscription; else noSubscription">
                 <div class="info-item">
                     <label>{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}:</label>
-                    <span>{{ getSubscriptionTypeValue(subscription.type) }}</span>
+                    <span>{{ subscription.type }}</span>
                 </div>
                 <div class="info-item">
                     <label>{{ 'SUBSCRIPTIONS.Status' | translate }}:</label>
                     <p-tag 
-                        [value]="getSubscriptionStatusValue(subscription.status)"
-                        [severity]="subscription.status === 'Active' ? 'danger' : 'success'">
+                        [value]="subscription.status"
+                        [severity]="subscription.status === 'Active' ? 'success' : 'danger'">
                     </p-tag>
                 </div>
                 <div class="info-item">
@@ -124,7 +124,7 @@
                 </div>
                 <div class="info-item">
                     <label>{{ 'TRAINERS.Specialization' | translate }}:</label>
-                    <span>{{ getSpecializationValue(currentTrainer.trainerSpecialization) }}</span>
+                    <span>{{ currentTrainer.trainerSpecialization }}</span>
                 </div>
                 <div class="info-item">
                     <label>{{ 'TRAINERS.Rating' | translate }}:</label>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="info-item">
                         <label>{{ 'TRAINERS.Specialization' | translate }}:</label>
-                        <span>{{ getSpecializationValue(member.specialization) }}</span>
+                        <span>{{ member.specialization }}</span>
                     </div>
                     <div class="info-item">
                         <label>{{ 'TRAINERS.Rating' | translate }}:</label>
@@ -178,11 +178,11 @@
         <p-card [header]="'MEMBERS.Medical_info' | translate" class="info-card">
             <div class="info-grid">
                 <div class="info-item">
-                    <label>{{ 'MEMBERS.Emergency_contact' | translate }}:</label>
+                    <label>{{ 'MEMBERS.Emergency_Contact' | translate }}:</label>
                     <span>{{ member.emergencyContactName || 'N/A' }}</span>
                 </div>
                 <div class="info-item">
-                    <label>{{ 'MEMBERS.Emergency_phone' | translate }}:</label>
+                    <label>{{ 'MEMBERS.Emergency_Phone' | translate }}:</label>
                     <span>{{ member.emergencyContactPhone || 'N/A' }}</span>
                 </div>
                 <div class="info-item">
@@ -194,11 +194,11 @@
                     <span>{{ member.weight ? (member.weight + ' kg') : 'N/A' }}</span>
                 </div>
                 <div class="info-item full-width">
-                    <label>{{ 'MEMBERS.Medical_notes' | translate }}:</label>
+                    <label>{{ 'MEMBERS.Medical_Notes' | translate }}:</label>
                     <p>{{ member.medicalNotes || 'N/A' }}</p>
                 </div>
                 <div class="info-item full-width">
-                    <label>{{ 'MEMBERS.Fitness_goals' | translate }}:</label>
+                    <label>{{ 'MEMBERS.Fitness_Goals' | translate }}:</label>
                     <p>{{ member.fitnessGoals || 'N/A' }}</p>
                 </div>
             </div>

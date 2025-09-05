@@ -38,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class PersonnelDetailComponent implements OnInit {
   personnel: any = null;
   loading = true;
+  canEdit = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,9 @@ export class PersonnelDetailComponent implements OnInit {
     private authService: AuthService,
     private messageService: MessageService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.canEdit = this.authService.hasRole(['Owner', 'Manager', 'Receptionist', 'Trainer']);
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];

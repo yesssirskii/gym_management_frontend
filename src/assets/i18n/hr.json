@@ -115,6 +115,22 @@
       "Date_Of_Birth": "Datum učlanjenja",
       "Address": "Adresa",
       "Is_Active": "Aktivan"
+    },
+    "Add": {
+      "Member_Info": "Podaci o članu",
+      "Emergency_Contact": "Ime kontakta u hitnom slučaju",
+      "Emergency_Phone": "Broj mobitela kontakta u hitnom slučaju",
+      "Height": "Visina",
+      "Weight": "Težina",
+      "Medical_Notes": "Zdravstveni zapis",
+      "Fitness_Goals": "Fitness ciljevi",
+      "Subscription": {
+        "Subscription_Details": "Podaci o pretplati",
+        "Type": "Vrsta pretplate",
+        "Select_Type": "Odaberi vrstu pretplate",
+        "Start_Date": "Datum početka pretplate",
+        "Auto_Renewal": "Automatsko obnavljanje"
+      }
     }
   },
   "TRAINERS": {
@@ -229,7 +245,22 @@
     "ADD_NEW": "Dodaj novo osoblje",
     "DELETE_CONFIRM": "Jeste li sigurni da želite obrisati {{name}}?",
     "DELETE_SUCCESS": "Osoblje uspješno obrisano",
-    "DELETE_ERROR": "Neuspješno brisanje osoblja"
+    "DELETE_ERROR": "Neuspješno brisanje osoblja",
+    "Employee_Id": "Identifikacijski broj",
+    "Name": "Ime",
+    "Email": "Email",
+    "Role": "Uloga",
+    "Phone": "Broj mobitela",
+    "Hire_Date": "Datum zapošljavanja",
+    "Status": "Status",
+    "Actions": "Akcije",
+    "Add": {
+      "Personnel_Info": "Podaci o osoblju",
+      "Role": "Uloga",
+      "Select_Role": "Odaberi ulogu osoblja",
+      "Salary": "Plaća",
+      "Job_Description": "Opis posla"
+    }
   },
   "SUBSCRIPTIONS": {
     "TITLE": "Pretplate",

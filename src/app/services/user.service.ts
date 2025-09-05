@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getPersonnelById(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/users/${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/User/${id}`);
   }
 
   createUser(userData: any): Observable<any> {

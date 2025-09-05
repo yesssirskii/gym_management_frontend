@@ -20,14 +20,14 @@
     
     <ng-template pTemplate="header">
         <tr>
-        <th>{{ 'PERSONNEL.EMPLOYEE_ID' | translate }}</th>
-        <th>{{ 'COMMON.NAME' | translate }}</th>
-        <th>{{ 'COMMON.EMAIL' | translate }}</th>
-        <th>{{ 'PERSONNEL.ROLE' | translate }}</th>
-        <th>{{ 'COMMON.PHONE' | translate }}</th>
-        <th>{{ 'PERSONNEL.HIRE_DATE' | translate }}</th>
-        <th>{{ 'COMMON.STATUS' | translate }}</th>
-        <th>{{ 'COMMON.ACTIONS' | translate }}</th>
+        <th>{{ 'PERSONNEL.Employee_Id' | translate }}</th>
+        <th>{{ 'PERSONNEL.Name' | translate }}</th>
+        <th>{{ 'PERSONNEL.Email' | translate }}</th>
+        <th>{{ 'PERSONNEL.Role' | translate }}</th>
+        <th>{{ 'PERSONNEL.Phone' | translate }}</th>
+        <th>{{ 'PERSONNEL.Hire_Date' | translate }}</th>
+        <th>{{ 'PERSONNEL.Status' | translate }}</th>
+        <th>{{ 'PERSONNEL.Actions' | translate }}</th>
         </tr>
     </ng-template>
     
@@ -43,8 +43,8 @@
         <td>{{ person.hireDate | date:'shortDate' }}</td>
         <td>
             <p-tag 
-            [value]="person.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"
-            [severity]="person.isActive ? 'success' : 'danger'">
+            [value]="person.isActive ? ('COMMON.INACTIVE' | translate) : ('COMMON.ACTIVE' | translate)"
+            [severity]="person.isActive ? 'danger' : 'success'">
             </p-tag>
         </td>
         <td>
@@ -61,7 +61,7 @@
                 [pTooltip]="'COMMON.EDIT' | translate"
                 severity="warning"
                 size="small"
-                (onClick)="editPersonnel(person)"
+                (onClick)="editPersonnel(person)"   
                 class="mr-2">
             </p-button>
             <p-button 
@@ -82,3 +82,9 @@
     [userType]="'Personnel'"
     (userCreated)="onUserCreated()">
 </app-create-user-dialog>
+
+<app-update-user-dialog 
+  [(visible)]="editDialogVisible"
+  [member]="selectedPersonnelDetails"
+  (memberUpdated)="onPersonnelUpdated()">
+</app-update-user-dialog>

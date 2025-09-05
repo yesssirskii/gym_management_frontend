@@ -57,7 +57,7 @@
     "User_type": "User type"
   },
   "USERS": {
-    "Add": "Add new",
+    "Add": "Add new user",
     "User_Type": "User type",
     "Select_User_Type": "Select user type",
     "Basic_Info": {
@@ -85,7 +85,7 @@
     "SELECT_MEMBER": "Select Member",
     "SELECT_MEMBER_PLACEHOLDER": "Choose a member",
     "MEMBER": "Member",
-    "Detail_title": "User details",
+    "Detail_title": "Member details",
     "Personal_info": "Basic information",
     "Subscription_info": "Subscription info",
     "No_subscription": "No active subscription.",
@@ -115,6 +115,22 @@
       "Date_Of_Birth": "Date of birth",
       "Address": "Address",
       "Is_Active": "Active"
+    },
+    "Add": {
+      "Member_Info": "Member info",
+      "Emergency_Contact": "Emergency contact name",
+      "Emergency_Phone": "Emergency phone number",
+      "Height": "Height",
+      "Weight": "Weight",
+      "Medical_Notes": "Medical notes",
+      "Fitness_Goals": "Fitness goals",
+      "Subscription": {
+        "Subscription_Details": "Subscription details",
+        "Type": "Subscription type",
+        "Select_Type": "Select subscription type",
+        "Start_Date": "Start date",
+        "Auto_Renewal": "Auto renewal"
+      }
     }
   },
   "TRAINERS": {
@@ -226,7 +242,22 @@
     "ADD_NEW": "Add New Personnel",
     "DELETE_CONFIRM": "Are you sure you want to delete {{name}}?",
     "DELETE_SUCCESS": "Personnel deleted successfully",
-    "DELETE_ERROR": "Failed to delete personnel"
+    "DELETE_ERROR": "Failed to delete personnel",
+    "Employee_Id": "Identification number",
+    "Name": "Name",
+    "Email": "Email",
+    "Role": "Role",
+    "Phone": "Phone number",
+    "Hire_Date": "Hire date",
+    "Status": "Status",
+    "Actions": "Actions",
+    "Add": {
+      "Personnel_Info": "Personnel info",
+      "Role": "Role",
+      "Select_Role": "Select personnel role",
+      "Salary": "Salary",
+      "Job_Description": "Job description"
+    }
   },
   "SUBSCRIPTIONS": {
     "TITLE": "Subscriptions",

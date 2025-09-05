@@ -193,19 +193,7 @@ export class MemberDetailComponent implements OnInit {
       detail: this.translate.instant('TRAINERS.ASSIGN_SUCCESS')
     });
   }
-
-  getSpecializationValue(value: number) : string {
-    return TrainerSpecializationEnum[value];
-  }
-
-  getSubscriptionTypeValue(value: number) : string {
-    return SubscriptionTypeEnum[value];
-  }
-
-  getSubscriptionStatusValue(value: number) : string {
-    return SubscriptionStatusEnum[value];
-  }
-
+  
   goBack() {
     this.router.navigate(['/members']);
   }

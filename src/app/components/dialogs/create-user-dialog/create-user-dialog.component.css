@@ -22,12 +22,6 @@
     color: var(--primary-color);
 }
 
-.subscription-section {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--surface-border);
-}
-
 .field label {
     display: block;
     margin-bottom: 0.5rem;
