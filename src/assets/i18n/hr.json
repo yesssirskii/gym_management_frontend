@@ -69,7 +69,9 @@
       "Last_Name": "Prezime",
       "Phone": "Broj mobitela",
       "Date_Of_Birth": "Datum rođenja"
-    }
+    },
+    "Update_Success": "Korisnik je uspiješno ažuriran.",
+    "Update_Error": "Dogodila se greška prilikom ažuriranja korisnika."
   },
   "MEMBERS": {
     "TITLE": "Članovi",
@@ -109,6 +111,7 @@
       "Membership_Number": "Broj pretplate #",
       "Username": "Korisničko ime",
       "Email": "Email",
+      "Oib": "OIB",
       "First_Name": "Ime",
       "Last_Name": "Prezime",
       "Phone": "Broj mobitela",

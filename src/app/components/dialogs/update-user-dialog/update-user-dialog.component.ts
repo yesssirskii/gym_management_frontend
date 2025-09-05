@@ -63,7 +63,6 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
 
   memberForm!: FormGroup;
   loading = false;
-  showPasswordFields = false;
   selectedUserType = '';
 
     subscriptionTypeOptions = [
@@ -115,6 +114,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       membershipNumber: [{value: '', disabled: true}],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      oib: ['', [Validators.required]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phoneNumber: [''],
@@ -141,12 +141,8 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       role: [''],
       salary: [''],
       jobDescription: [''],
-      
-      // Password fields
-      changePassword: [false],
-      newPassword: [''],
-      confirmPassword: ['']
-    }, { validators: this.passwordMatchValidator });
+    
+    });
   }
 
   populateForm() {
@@ -161,6 +157,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         membershipNumber: this.member.membershipNumber,
         username: this.member.username,
         email: this.member.email,
+        oib: this.member.oib,
         firstName: this.member.firstName,
         lastName: this.member.lastName,
         phoneNumber: this.member.phoneNumber,
@@ -182,47 +179,9 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
 
         role: this.member.role,
         salary: this.member.salary,
-        jobDescription: this.member.jobDescription,
-        
-        changePassword: false,
-        newPassword: '',
-        confirmPassword: ''
+        jobDescription: this.member.jobDescription
       });
     }
-  }
-
-  onChangePasswordToggle() {
-    this.showPasswordFields = this.memberForm.get('changePassword')?.value;
-    
-    if (this.showPasswordFields) {
-      this.memberForm.get('newPassword')?.setValidators([Validators.required, Validators.minLength(6)]);
-      this.memberForm.get('confirmPassword')?.setValidators([Validators.required]);
-    } else {
-      this.memberForm.get('newPassword')?.clearValidators();
-      this.memberForm.get('confirmPassword')?.clearValidators();
-      this.memberForm.get('newPassword')?.setValue('');
-      this.memberForm.get('confirmPassword')?.setValue('');
-    }
-    
-    this.memberForm.get('newPassword')?.updateValueAndValidity();
-    this.memberForm.get('confirmPassword')?.updateValueAndValidity();
-  }
-
-  passwordMatchValidator(formGroup: FormGroup) {
-    const changePassword = formGroup.get('changePassword')?.value;
-    if (!changePassword) {
-      return null;
-    }
-
-    const password = formGroup.get('newPassword')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
-    
-    if (password !== confirmPassword) {
-      formGroup.get('confirmPassword')?.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
-    }
-    
-    return null;
   }
 
   onSubmit() {
@@ -231,14 +190,6 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       
       const formData = { ...this.memberForm.value };
       
-      // Remove password fields if not changing password
-      if (!formData.changePassword) {
-        delete formData.newPassword;
-        delete formData.confirmPassword;
-      }
-      delete formData.changePassword;
-      
-      // Format date if needed
       if (formData.dateOfBirth instanceof Date) {
         formData.dateOfBirth = formData.dateOfBirth.toISOString().split('T')[0];
       }
@@ -248,7 +199,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('COMMON.SUCCESS'),
-            detail: this.translate.instant('MEMBERS.UPDATE_SUCCESS')
+            detail: this.translate.instant('USERS.Update_Success')
           });
           this.memberUpdated.emit();
           this.onCancel();
@@ -257,7 +208,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('COMMON.ERROR'),
-            detail: this.translate.instant('MEMBERS.UPDATE_ERROR')
+            detail: this.translate.instant('USERS.Update_Error')
           });
           this.loading = false;
         }
@@ -277,7 +228,6 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
   }
 
   resetForm() {
-    this.showPasswordFields = false;
     this.loading = false;
     if (this.member) {
       this.populateForm();

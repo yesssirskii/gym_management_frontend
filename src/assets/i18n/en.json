@@ -69,7 +69,9 @@
       "Last_Name": "Last name",
       "Phone": "Phone number",
       "Date_Of_Birth": "Date of birth"
-    }
+    },
+    "Update_Success": "User updated successfully.",
+    "Update_Error": "Error occured while updating user."
   },
   "MEMBERS": {
     "TITLE": "Members",
@@ -109,6 +111,7 @@
       "Membership_Number": "Membership #",
       "Username": "Username",
       "Email": "Email",
+      "Oib": "OIB",
       "First_Name": "First name",
       "Last_Name": "Last name",
       "Phone": "Phone number",

@@ -92,8 +92,8 @@ export class TrainersComponent implements OnInit {
     this.editLoadingId = trainer.id;
     
     this.trainerService.getTrainerById(trainer.id).subscribe({
-      next: (fullPersonnelData) => {
-        this.selectedTrainerDetails = fullPersonnelData;
+      next: (fullTrainerData) => {
+        this.selectedTrainerDetails = fullTrainerData;
         this.editDialogVisible = true;
         this.editLoadingId = null;
       },
