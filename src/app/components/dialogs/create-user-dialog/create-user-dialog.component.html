@@ -122,6 +122,19 @@
                         class="w-full">
                     </p-dropdown>
                 </div>
+
+                <div class="field">
+                    <label for="paymentMethod">{{ 'SUBSCRIPTIONS.PAYMENT_METHOD' | translate }}</label>
+                    <p-dropdown
+                        id="paymentMethod"
+                        [options]="paymentMethodOptions"
+                        formControlName="paymentMethod"
+                        optionLabel="label"
+                        optionValue="value"
+                        [placeholder]="'SUBSCRIPTIONS.SELECT_PAYMENT' | translate"
+                        class="w-full">
+                    </p-dropdown>
+                </div>
                 
                 <div class="field">
                     <label for="subscriptionStartDate">{{ 'MEMBERS.Add.Subscription.Start_Date' | translate }}:</label>

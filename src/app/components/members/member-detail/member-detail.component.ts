@@ -22,10 +22,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateSubscriptionDialogComponent } from '../../dialogs/update-subscription-dialog/update-subscription-dialog.component';
 import { AssignTrainerDialogComponent } from '../../dialogs/assign-trainer-dialog/assign-trainer-dialog.component';
 
-import { TrainerSpecializationEnum } from '../../../models/enums/trainer-specialization-enum';
-import { SubscriptionTypeEnum } from '../../../models/enums/subscription-type-enum';
-import { SubscriptionStatusEnum } from '../../../models/enums/subscription-status-enum';
-
 @Component({
   selector: 'app-member-detail',
   standalone: true,
@@ -83,8 +79,6 @@ export class MemberDetailComponent implements OnInit {
         this.member = member;
         this.loadSubscription(id);
         this.loadTrainer(id);
-
-        console.log(member)
       },
       error: (error) => {
         this.messageService.add({

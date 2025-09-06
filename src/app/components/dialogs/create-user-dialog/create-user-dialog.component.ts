@@ -86,6 +86,12 @@ export class CreateUserDialogComponent implements OnInit {
     { label: 'Maintenance', value: 5 }
   ];
 
+  paymentMethodOptions = [
+    { label: 'Credit card', value: 'Credit Card' },
+    { label: 'Cash', value: 'Cash' },
+    { label: 'MultiSport', value: 'MultiSport' },
+  ];
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -114,25 +120,26 @@ export class CreateUserDialogComponent implements OnInit {
       phoneNumber: [''],
       dateOfBirth: ['', Validators.required],
       
-      // Member fields
+      // Member
       emergencyContactName: [''],
       emergencyContactPhone: [''],
       height: [''],
       weight: [''],
       medicalNotes: [''],
       fitnessGoals: [''],
-      subscriptionType: [''],
+      subscriptionType: ['', Validators.required],
       subscriptionStartDate: [new Date()],
+      paymentMethod: ['', Validators.required],
       autoRenewal: [false],
       
-      // Trainer fields
+      // Trainer
       specialization: [''],
       yearsOfExperience: [''],
       hourlyRate: [''],
       certifications: [''],
       bio: [''],
       
-      // Personnel fields
+      // Personnel
       role: [''],
       salary: [''],
       jobDescription: ['']
@@ -145,16 +152,15 @@ export class CreateUserDialogComponent implements OnInit {
   }
 
   updateValidators() {
-    // Define all conditional field groups
     const memberFields = ['emergencyContactName', 'emergencyContactPhone', 'height', 'weight', 'medicalNotes', 'fitnessGoals', 'subscriptionType', 'subscriptionStartDate', 'autoRenewal'];
     const trainerFields = ['specialization', 'yearsOfExperience', 'hourlyRate', 'certifications', 'bio'];
     const personnelFields = ['role', 'salary', 'jobDescription'];
     
     const allConditionalFields = [...memberFields, ...trainerFields, ...personnelFields];
 
-    // Clear all conditional validators and errors
     allConditionalFields.forEach(fieldName => {
       const control = this.userForm.get(fieldName);
+
       if (control) {
         control.clearValidators();
         control.setErrors(null);
@@ -162,7 +168,6 @@ export class CreateUserDialogComponent implements OnInit {
       }
     });
 
-    // Add validators based on user type
     if (this.selectedUserType === 'Trainer') {
       const specializationControl = this.userForm.get('specialization');
       const experienceControl = this.userForm.get('yearsOfExperience');
@@ -180,7 +185,8 @@ export class CreateUserDialogComponent implements OnInit {
         rateControl.setValidators([Validators.required, Validators.min(0)]);
         rateControl.updateValueAndValidity({ emitEvent: false });
       }
-    } else if (this.selectedUserType === 'Personnel') {
+    } 
+    else if (this.selectedUserType === 'Personnel') {
       const roleControl = this.userForm.get('role');
       const salaryControl = this.userForm.get('salary');
       
@@ -192,9 +198,16 @@ export class CreateUserDialogComponent implements OnInit {
         salaryControl.setValidators([Validators.required, Validators.min(0)]);
         salaryControl.updateValueAndValidity({ emitEvent: false });
       }
+    } 
+    else if (this.selectedUserType === 'Member') {
+      const subscriptionTypeControl = this.userForm.get('subscriptionType');
+      
+      if (subscriptionTypeControl) {
+        subscriptionTypeControl.setValidators([Validators.required]);
+        subscriptionTypeControl.updateValueAndValidity({ emitEvent: false });
+      }
     }
 
-    // Update the entire form validation status
     this.userForm.updateValueAndValidity();
   }
 
@@ -211,42 +224,69 @@ export class CreateUserDialogComponent implements OnInit {
     
       if (formData.subscriptionStartDate) {
         const subDate = new Date(formData.subscriptionStartDate);
-        formData.subscriptionStartDate = subDate.toISOString().split('T')[0];
+        formData.subscriptionStartDate = subDate.toISOString();
       }
       
-      // Remove irrelevant fields based on user type
-      if (this.selectedUserType !== 'Member') {
-        delete formData.emergencyContactName;
-        delete formData.emergencyContactPhone;
-        delete formData.height;
-        delete formData.weight;
-        delete formData.medicalNotes;
-        delete formData.fitnessGoals;
-        delete formData.subscriptionType;
-        delete formData.subscriptionStartDate;
-        delete formData.autoRenewal;
-      }
+      const requestData = {
+        // Basic user fields - mapped to PascalCase
+        Username: formData.username,
+        Email: formData.email,
+        Password: formData.password,
+        FirstName: formData.firstName,
+        LastName: formData.lastName,
+        PhoneNumber: formData.phoneNumber,
+        Oib: formData.oib,
+        DateOfBirth: formData.dateOfBirth,
+        Address: formData.address || '',
+        Gender: formData.gender,
+        UserType: this.selectedUserType,
+        
+        // Member specific fields (only include if user type is Member)
+        ...(this.selectedUserType === 'Member' && {
+          EmergencyContactName: formData.emergencyContactName || '',
+          EmergencyContactPhone: formData.emergencyContactPhone || '',
+          Height: formData.height || null,
+          Weight: formData.weight || null,
+          MedicalNotes: formData.medicalNotes || '',
+          FitnessGoals: formData.fitnessGoals || '',
+          SubscriptionType: formData.subscriptionType,
+          
+          // Subscription object for Members
+          Subscription: {
+            Type: formData.subscriptionType,
+            StartDate: formData.subscriptionStartDate || new Date().toISOString(),
+            PaymentMethod: formData.paymentMethod,
+            AutoRenewal: formData.autoRenewal || false,
+            IsCancelled: false,
+            CancelledAt: null
+          }
+        }),
+        
+        // Trainer specific fields (only include if user type is Trainer)
+        ...(this.selectedUserType === 'Trainer' && {
+          Specialization: formData.specialization || '',
+          YearsOfExperience: formData.yearsOfExperience || 0,
+          HourlyRate: formData.hourlyRate || 0,
+          Certifications: formData.certifications || '',
+          Bio: formData.bio || '',
+          SubscriptionType: formData.subscriptionType
+        }),
+        
+        // Personnel specific fields (only include if user type is Personnel)
+        ...(this.selectedUserType === 'Personnel' && {
+          Role: formData.role,
+          Salary: formData.salary || 0,
+          JobDescription: formData.jobDescription || '',
+          SubscriptionType: formData.subscriptionType
+        })
+      };
       
-      if (this.selectedUserType !== 'Trainer') {
-        delete formData.specialization;
-        delete formData.yearsOfExperience;
-        delete formData.hourlyRate;
-        delete formData.certifications;
-        delete formData.bio;
-      }
-      
-      if (this.selectedUserType !== 'Personnel') {
-        delete formData.role;
-        delete formData.salary;
-        delete formData.jobDescription;
-      }
-      
-      this.userService.createUser(formData).subscribe({
+      this.userService.createUser(requestData).subscribe({
         next: (response) => {
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('COMMON.SUCCESS'),
-            detail: this.translate.instant('USERS.CREATE_SUCCESS')
+            detail: this.translate.instant('USERS.Create_Success')
           });
 
           this.userCreated.emit();
@@ -256,16 +296,17 @@ export class CreateUserDialogComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('COMMON.ERROR'),
-            detail: this.translate.instant('USERS.CREATE_ERROR')
+            detail: this.translate.instant('USERS.Create_Error')
           });
 
           this.loading = false;
         }
       });
-    } else {
-      // Mark all fields as touched to show validation errors
+    }
+    else {
       Object.keys(this.userForm.controls).forEach(key => {
         const control = this.userForm.get(key);
+
         if (control) {
           control.markAsTouched();
         }

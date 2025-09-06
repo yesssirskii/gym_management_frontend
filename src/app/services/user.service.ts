@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -30,23 +31,19 @@ export class UserService {
   }
 
   createUser(userData: any): Observable<any> {
-    const formData = new FormData();
-    Object.keys(userData).forEach(key => {
-      if (userData[key] !== null && userData[key] !== undefined) {
-        formData.append(key, userData[key]);
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    return this.http.post(`${environment.apiUrl}/User/create-new-user`, formData);
+
+    return this.http.post(`${environment.apiUrl}/User/new`, userData, { headers });
   }
 
   updateUser(id: number, userData: any): Observable<any> {
-    const formData = new FormData();
-    Object.keys(userData).forEach(key => {
-      if (userData[key] !== null && userData[key] !== undefined) {
-        formData.append(key, userData[key]);
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    return this.http.put(`${environment.apiUrl}/User/${id}`, formData);
+    
+    return this.http.put(`${environment.apiUrl}/User/${id}`, userData, { headers });
   }
 
   deleteUser(id: number): Observable<any> {

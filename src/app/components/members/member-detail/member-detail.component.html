@@ -79,7 +79,7 @@
             <div class="info-grid" *ngIf="subscription; else noSubscription">
                 <div class="info-item">
                     <label>{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}:</label>
-                    <span>{{ subscription.type }}</span>
+                    <span>{{ subscription.subscriptionType }}</span>
                 </div>
                 <div class="info-item">
                     <label>{{ 'SUBSCRIPTIONS.Status' | translate }}:</label>
@@ -117,7 +117,7 @@
                 <p>{{ 'MEMBERS.Is_trainer' | translate }}</p>
             </div>
 
-            <div class="info-grid" *ngIf="member.userType != 'Trainer'; else userIsTrainer">
+            <div class="info-grid" *ngIf="member.userType != 'Trainer' && currentTrainer; else noTrainerAssigned">
                 <div class="info-item">
                     <label>{{ 'TRAINERS.Username' | translate }}:</label>
                     <span>{{ currentTrainer.trainerUsername }}</span>
@@ -170,6 +170,12 @@
                         <label>{{ 'TRAINERS.Certifications' | translate }}:</label>
                         <span>{{ member.certifications }}</span>
                     </div>
+                </div>
+            </ng-template>
+
+            <ng-template #noTrainerAssigned>
+                <div *ngIf="member.userType != 'Trainer'">
+                    <p>{{ 'MEMBERS.No_Trainer_Assigned' | translate }}</p>
                 </div>
             </ng-template>
         </p-card>

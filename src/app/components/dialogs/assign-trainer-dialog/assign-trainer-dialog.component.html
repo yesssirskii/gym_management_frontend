@@ -25,30 +25,30 @@
     <div class="field" *ngIf="mode === 'assignTrainer'">
         <label for="trainerId">{{ 'TRAINERS.SELECT_TRAINER' | translate }}</label>
         <p-dropdown
-        id="trainerId"
-        [options]="availableTrainers"
-        formControlName="trainerId"
-        optionLabel="displayName"
-        optionValue="id"
-        [placeholder]="'TRAINERS.SELECT_TRAINER_PLACEHOLDER' | translate"
-        class="w-full"
-        [filter]="true"
-        (onChange)="onTrainerSelect()">
-        </p-dropdown>
+            id="trainerId"
+            [options]="availableTrainers"
+            formControlName="trainerId"
+            optionLabel="displayName"
+            optionValue="id"
+            [placeholder]="'TRAINERS.SELECT_TRAINER_PLACEHOLDER' | translate"
+            class="w-full"
+            [filter]="true"
+            (onChange)="onTrainerSelect()">
+            </p-dropdown>
     </div>
     
     <!-- Select Member (when adding to trainer) -->
     <div class="field" *ngIf="mode === 'addMember'">
         <label for="memberId">{{ 'TRAINERS.Assign_Member.Select_Member' | translate }}</label>
         <p-dropdown
-        id="memberId"
-        [options]="availableMembers"
-        formControlName="memberId"
-        optionLabel="displayName"
-        optionValue="id"
-        [placeholder]="'TRAINERS.Assign_Member.Choose' | translate"
-        class="w-full"
-        [filter]="true">
+            id="memberId"
+            [options]="availableMembers"
+            formControlName="memberId"
+            optionLabel="displayName"
+            optionValue="id"
+            [placeholder]="'TRAINERS.Assign_Member.Choose' | translate"
+            class="w-full"
+            [filter]="true">
         </p-dropdown>
     </div>
     

@@ -71,7 +71,9 @@
       "Date_Of_Birth": "Datum rođenja"
     },
     "Update_Success": "Korisnik je uspiješno ažuriran.",
-    "Update_Error": "Dogodila se greška prilikom ažuriranja korisnika."
+    "Update_Error": "Dogodila se greška prilikom ažuriranja korisnika.",
+      "Create_Success": "Korisnik je uspiješno kreiran.",
+    "Create_Error": "Dogodila se greška prilikom kreiranja korisnika.."
   },
   "MEMBERS": {
     "TITLE": "Članovi",
@@ -105,6 +107,7 @@
     "Oib": "OIB",
     "Assign_trainer": "Dodijeli trenera",
     "Trainer_assigned": "Korisnik ima dodijeljenog trenera.",
+    "No_Trainer_Assigned": "Korisnik nije pridodijeljen treneru.",
     "Edit_Member":{
       "Title": "Uređivanje člana",
       "Basic_Info": "Osnovne informacije",

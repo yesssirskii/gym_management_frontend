@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
@@ -40,7 +40,7 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './update-subscription-dialog.component.css'
 })
 
-export class UpdateSubscriptionDialogComponent implements OnInit {
+export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   @Input() visible = false;
   @Input() selectedMember: any = null;
   @Output() visibleChange = new EventEmitter<boolean>();
@@ -79,20 +79,29 @@ export class UpdateSubscriptionDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.selectedMember?.subscriptionType) {
-      this.subscriptionForm.patchValue({
-        type: this.selectedMember.subscriptionType,
-        autoRenewal: this.selectedMember.autoRenewal || false
-      });
-      this.onTypeChange();
+    this.onTypeChange();
+  }
+
+    ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedMember'] && this.selectedMember) {
+      this.patchFormValues();
     }
+  }
+
+  patchFormValues() {
+        console.log('Selected member:', this.selectedMember);
+    console.log('Member subscription:', this.selectedMember?.subscription);
+    this.subscriptionForm.patchValue({
+      type: this.selectedMember.subscription.subscriptionType,
+      autoRenewal: this.selectedMember.subscription.autoRenewal || false
+    });
   }
 
   onTypeChange() {
     const selectedType = this.subscriptionTypes.find(t => t.value === this.subscriptionForm.get('type')?.value);
     if (selectedType) {
-      // Set price based on type
       const prices = { Daily: 10, Monthly: 100, Yearly: 1000 };
+      
       this.subscriptionForm.patchValue({ price: prices[selectedType.value as keyof typeof prices] });
       this.calculateEndDate();
     }

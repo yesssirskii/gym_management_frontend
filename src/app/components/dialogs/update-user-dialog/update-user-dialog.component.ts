@@ -65,10 +65,10 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
   loading = false;
   selectedUserType = '';
 
-    subscriptionTypeOptions = [
-    { label: 'Daily', value: 1 },
-    { label: 'Monthly', value: 2 },
-    { label: 'Yearly', value: 3 }
+  subscriptionTypeOptions = [
+    { label: 'Daily', value: 'Daily' },
+    { label: 'Monthly', value: 'Monthly' },
+    { label: 'Yearly', value: 'Yearly' }
   ];
 
   specializationOptions = [
@@ -84,6 +84,12 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
     { label: 'Receptionist', value: 'Receptionist' },
     { label: 'Cleaner', value: 'Cleaner' },
     { label: 'Maintenance', value: 'Maintenance' }
+  ];
+
+  paymentMethodOptions = [
+    { label: 'Credit card', value: 'Credit Card' },
+    { label: 'Cash', value: 'Cash' },
+    { label: 'MultiSport', value: 'MultiSport' },
   ];
 
   constructor(
@@ -122,7 +128,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       address: [''],
       isActive: [true],
       
-      // Medical fields
+      // Member fields
       emergencyContactName: [''],
       emergencyContactPhone: [''],
       height: [null],
@@ -130,6 +136,11 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       medicalNotes: [''],
       fitnessGoals: [''],
 
+      subscriptionType : [''],
+      paymentMethod: [''],
+      subscriptionStartDate: [{value: '', disabled: true}],
+      autoRenewal: [''],
+    
       // Trainer fields
       specialization: [''],
       yearsOfExperience: [''],
@@ -147,10 +158,18 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
 
   populateForm() {
     if (this.member && this.memberForm) {
+
       // Convert date string to Date object if needed
       let dateOfBirth = this.member.dateOfBirth;
+      
       if (typeof dateOfBirth === 'string') {
         dateOfBirth = new Date(dateOfBirth);
+      }
+
+      let subscriptionStartDate = this.member.subscription?.startDate;
+      
+      if (typeof subscriptionStartDate === 'string') {
+        subscriptionStartDate = new Date(subscriptionStartDate);
       }
 
       this.memberForm.patchValue({
@@ -171,6 +190,11 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         medicalNotes: this.member.medicalNotes,
         fitnessGoals: this.member.fitnessGoals,
 
+        subscriptionType: this.member.subscription?.subscriptionType,
+        paymentMethod: this.member.subscription?.paymentMethod,
+        subscriptionStartDate: subscriptionStartDate,
+        autoRenewal: this.member.subscription?.autoRenewal,   
+
         specialization: this.member.specialization,
         yearsOfExperience: this.member.yearsOfExperience,
         hourlyRate: this.member.hourlyRate,
@@ -188,13 +212,50 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
     if (this.memberForm.valid && this.member) {
       this.loading = true;
       
-      const formData = { ...this.memberForm.value };
+      const formData = { ...this.memberForm.getRawValue() };
       
       if (formData.dateOfBirth instanceof Date) {
         formData.dateOfBirth = formData.dateOfBirth.toISOString().split('T')[0];
       }
+
+      if (formData.subscriptionStartDate instanceof Date) {
+        formData.subscriptionStartDate = formData.subscriptionStartDate.toISOString().split('T')[0];
+      }
+
+      const requestData = {
+        Username: formData.username,
+        Email: formData.email,
+        Oib: formData.oib,
+        FirstName: formData.firstName,
+        LastName: formData.lastName,
+        PhoneNumber: formData.phoneNumber,
+        DateOfBirth: formData.dateOfBirth,
+        Address: formData.address,
+        IsActive: formData.isActive,
+        EmergencyContactName: formData.emergencyContactName,
+        EmergencyContactPhone: formData.emergencyContactPhone,
+        Height: formData.height,
+        Weight: formData.weight,
+        MedicalNotes: formData.medicalNotes,
+        FitnessGoals: formData.fitnessGoals,
+        Specialization: formData.specialization,
+        YearsOfExperience: formData.yearsOfExperience,
+        HourlyRate: formData.hourlyRate,
+        Certifications: formData.certifications,
+        Bio: formData.bio,
+        Role: formData.role,
+        Salary: formData.salary,
+        JobDescription: formData.jobDescription,
+        
+        // Create subscription object manually
+        Subscription: {
+          SubscriptionType: formData.subscriptionType,
+          PaymentMethod: formData.paymentMethod,
+          AutoRenewal: formData.autoRenewal
+        }
+      };
       
-      this.userService.updateUser(this.member.id, formData).subscribe({
+      this.userService.updateUser(this.member.id, requestData).subscribe({
         next: (response) => {
           this.messageService.add({
             severity: 'success',

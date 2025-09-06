@@ -93,32 +93,4 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
-  getStatusLabel(status: number) : string{
-    switch(status) {
-      case SubscriptionStatusEnum.Active:
-        return 'SUBSCRIPTIONS.Active';
-      case SubscriptionStatusEnum.Expired:
-        return 'SUBSCRIPTIONS.Expired';
-      case SubscriptionStatusEnum.Suspended:
-        return 'SUBSCRIPTIONS.Suspended';
-      case SubscriptionStatusEnum.Cancelled:
-        return 'SUBSCRIPTIONS.Cancelled';
-      default:
-        return "N/A"
-    }
-  }
-
-  getTypeLabel(type: number) : string{
-    switch(type) {
-      case SubscriptionTypeEnum.Daily:
-        return 'SUBSCRIPTIONS.Daily';
-      case SubscriptionTypeEnum.Monthly:
-        return 'SUBSCRIPTIONS.Monthly';
-      case SubscriptionTypeEnum.Yearly:
-        return 'SUBSCRIPTIONS.Yearly';
-      default:
-        return "N/A"
-    }
-  }
 }

@@ -91,8 +91,8 @@
                             <td>{{ sub.userName }}</td>
                             <td>{{ sub.endDate | date:'shortDate' }}</td>
                             <td>{{ sub.price }}</td>
-                            <td>{{ getStatusLabel(sub.status) | translate }}</td>
-                            <td>{{ getTypeLabel(sub.subscriptionType) | translate }}</td>
+                            <td>{{ sub.status | translate }}</td>
+                            <td>{{ sub.subscriptionType | translate }}</td>
                             <td>
                                 <p-tag 
                                     [value]="sub.daysRemaining"

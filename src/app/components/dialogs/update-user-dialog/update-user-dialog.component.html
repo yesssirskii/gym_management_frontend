@@ -73,28 +73,44 @@
             <div>
                 <h4>{{ 'MEMBERS.Add.Subscription.Subscription_Details' | translate }}</h4>
                 
-                <div class="field">
-                    <label for="subscriptionType">{{ 'MEMBERS.Add.Subscription.Type' | translate }}:</label>
-                    <p-dropdown
-                        id="subscriptionType"
-                        [options]="subscriptionTypeOptions"
-                        formControlName="subscriptionType"
-                        optionLabel="label"
-                        optionValue="value"
-                        [placeholder]="'MEMBERS.Add.Subscription.Select_Type' | translate"
-                        class="w-full">
-                    </p-dropdown>
-                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="subscriptionType">{{ 'MEMBERS.Add.Subscription.Type' | translate }}:</label>
+                        <p-dropdown
+                            id="subscriptionType"
+                            [options]="subscriptionTypeOptions"
+                            formControlName="subscriptionType"
+                            optionLabel="label"
+                            optionValue="value"
+                            [placeholder]="'MEMBERS.Add.Subscription.Select_Type' | translate"
+                            class="w-full">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="field">
+                        <label for="paymentMethod">{{ 'SUBSCRIPTIONS.PAYMENT_METHOD' | translate }}</label>
+                        <p-dropdown
+                            id="paymentMethod"
+                            [options]="paymentMethodOptions"
+                            formControlName="paymentMethod"
+                            optionLabel="label"
+                            optionValue="value"
+                            [placeholder]="'SUBSCRIPTIONS.SELECT_PAYMENT' | translate"
+                            class="w-full">
+                        </p-dropdown>
+                    </div>
+                </div>  
                 
                 <div class="field">
                     <label for="subscriptionStartDate">{{ 'MEMBERS.Add.Subscription.Start_Date' | translate }}:</label>
-                    <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full"></p-calendar>
+                    <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full" [dateFormat]="'dd/mm/yy'"></p-calendar>
                 </div>
                 
                 <div class="field checkbox-section-alignment">
                     <label for="autoRenewal" class="ml-2">{{ 'MEMBERS.Add.Subscription.Auto_Renewal' | translate }}</label>
                     <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
                 </div>
+                
             </div>
         </div>
 
@@ -128,12 +144,12 @@
             
             <div class="field">
                 <label for="certifications">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Certifications' | translate }}:</label>
-                <textarea id="certifications" pInputTextarea formControlName="certifications" rows="3" class="w-full"></textarea>
+                <textarea id="certifications" pInputTextarea formControlName="certifications" rows="10" class="w-full"></textarea>
             </div>
             
             <div class="field">
                 <label for="bio">{{ 'TRAINERS.Add_Trainer.Trainer_Info.Bio' | translate }}:</label>
-                <textarea id="bio" pInputTextarea formControlName="bio" rows="3" class="w-full"></textarea>
+                <textarea id="bio" pInputTextarea formControlName="bio" rows="10" class="w-full"></textarea>
             </div>
         </div>
 
@@ -163,7 +179,7 @@
             
             <div class="field">
                 <label for="jobDescription">{{ 'PERSONNEL.Add.Job_Description' | translate }}:</label>
-                <textarea id="jobDescription" pInputTextarea formControlName="jobDescription" rows="3" class="w-full"></textarea>
+                <textarea id="jobDescription" pInputTextarea formControlName="jobDescription" rows="10" class="w-full"></textarea>
             </div>
         </div>
 
@@ -197,12 +213,12 @@
             
             <div class="field">
                 <label for="medicalNotes">{{ 'MEMBERS.Medical_Notes' | translate }}:</label>
-                <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="3" class="w-full"></textarea>
+                <textarea id="medicalNotes" pInputTextarea formControlName="medicalNotes" rows="10" class="w-full"></textarea>
             </div>
             
             <div class="field">
                 <label for="fitnessGoals">{{ 'MEMBERS.Fitness_Goals' | translate }}:</label>
-                <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="3" class="w-full"></textarea>
+                <textarea id="fitnessGoals" pInputTextarea formControlName="fitnessGoals" rows="10" class="w-full"></textarea>
             </div>
         </div>
     </form>

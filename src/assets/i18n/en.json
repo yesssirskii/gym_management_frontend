@@ -71,7 +71,9 @@
       "Date_Of_Birth": "Date of birth"
     },
     "Update_Success": "User updated successfully.",
-    "Update_Error": "Error occured while updating user."
+    "Update_Error": "Failed to create user.",
+    "Create_Success": "User created successfully.",
+    "Create_Error": "Failed to create user."
   },
   "MEMBERS": {
     "TITLE": "Members",
@@ -104,7 +106,8 @@
     "Fitness_Goals": "Fitness goals",
     "Oib": "OIB",
     "Assign_trainer": "Assign trainer",
-    "Trainer_assigned": "User already has an assigned trainer.",
+    "Trainer_assigned": "Member already has an assigned trainer.",
+    "No_Trainer_Assigned": "Member has no trainer assigned.",
     "Edit_Member":{
       "Title": "Edit member",
       "Basic_Info": "Basic info",
