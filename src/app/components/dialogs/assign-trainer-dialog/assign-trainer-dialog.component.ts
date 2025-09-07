@@ -19,6 +19,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-assign-trainer-dialog',
@@ -37,7 +39,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     DropdownModule,
     DividerModule,
     DialogModule,
-    InputTextareaModule
+    InputTextareaModule,
+    InputNumberModule,
+    CalendarModule
   ],
   templateUrl: './assign-trainer-dialog.component.html',
   styleUrl: './assign-trainer-dialog.component.css'

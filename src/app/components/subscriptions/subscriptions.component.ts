@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 import { UpdateSubscriptionDialogComponent } from '../dialogs/update-subscription-dialog/update-subscription-dialog.component';
 
@@ -32,7 +33,9 @@ import { UpdateSubscriptionDialogComponent } from '../dialogs/update-subscriptio
     RouterModule,
     ReactiveFormsModule,
     DropdownModule,
-    UpdateSubscriptionDialogComponent
+    FormsModule,
+
+    UpdateSubscriptionDialogComponent,
   ],
   templateUrl: './subscriptions.component.html',
   styleUrl: './subscriptions.component.css'
@@ -43,9 +46,10 @@ export class SubscriptionsComponent implements OnInit {
   filteredSubscriptions: any[] = [];
   loading = false;
   editDialogVisible = false;
-  selectedMember: any = null;
-  selectedStatus = '';
-  selectedType = '';
+  subscription: any = null;
+
+  selectedStatus: string | null = null;
+  selectedType: string | null = null;
 
   statusOptions = [
     { label: 'Active', value: 'Active' },
@@ -73,8 +77,18 @@ export class SubscriptionsComponent implements OnInit {
     this.loading = true;
     this.subscriptionService.getSubscriptions().subscribe({
       next: (data) => {
-        this.subscriptions = data;
-        this.filteredSubscriptions = data;
+          this.subscriptions = data.map(sub => {
+            const endDate = new Date(sub.endDate);
+            const today = new Date();
+
+            const diffInTime = endDate.getTime() - today.getTime();
+            const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+
+            return {...sub, daysRemaining: diffInDays};
+        });
+
+        this.subscriptions = this.subscriptions;
+        this.filteredSubscriptions = this.subscriptions;
         this.loading = false;
       },
       error: (error) => {
@@ -86,18 +100,36 @@ export class SubscriptionsComponent implements OnInit {
         this.loading = false;
       }
     });
+
+    console.log(this.subscriptions)
+  }
+
+  onStatusChange(value: string | null) {
+    this.selectedStatus = value;
+    this.filterSubscriptions();
+  }
+
+  onTypeChange(value: string | null) {
+    this.selectedType = value;
+    this.filterSubscriptions();
   }
 
   filterSubscriptions() {
     this.filteredSubscriptions = this.subscriptions.filter(sub => {
       const statusMatch = !this.selectedStatus || sub.status === this.selectedStatus;
-      const typeMatch = !this.selectedType || sub.type === this.selectedType;
+      const typeMatch = !this.selectedType || sub.subscriptionType === this.selectedType;
       return statusMatch && typeMatch;
     });
   }
 
+  resetFilters() {
+    this.selectedStatus = null;
+    this.selectedType = null;
+    this.filterSubscriptions();
+  }
+
   editSubscription(sub: any) {
-    this.selectedMember = { id: sub.memberId, ...sub };
+    this.subscription = sub;
     this.editDialogVisible = true;
   }
 
@@ -109,7 +141,7 @@ export class SubscriptionsComponent implements OnInit {
       autoRenewal: sub.autoRenewal
     };
 
-    this.subscriptionService.updateUserSubscription(this.selectedMember.id, renewData).subscribe({
+    this.subscriptionService.updateUserSubscription(this.subscription.userId, renewData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
@@ -129,7 +161,6 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   showPriceDialog() {
-    // Implementation for price management dialog
     this.messageService.add({
       severity: 'info',
       summary: 'Coming Soon',
@@ -139,6 +170,7 @@ export class SubscriptionsComponent implements OnInit {
 
   onSubscriptionUpdated() {
     this.editDialogVisible = false;
+    this.subscription = null;
     this.loadSubscriptions();
   }
 }

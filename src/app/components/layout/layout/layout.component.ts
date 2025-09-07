@@ -44,10 +44,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Initialize breadcrumbs
     this.updateBreadcrumbs();
     
-    // Listen to route changes to update breadcrumbs
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -57,7 +55,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.updateBreadcrumbs();
       });
 
-    // Update breadcrumbs when language changes
     this.translate.onLangChange
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
@@ -90,9 +87,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       const segment = segments[i];
       currentPath += `/${segment}`;
       
-      // Skip numeric segments (IDs) for cleaner breadcrumbs
       if (this.isNumeric(segment) && i === segments.length - 1) {
-        // For detail pages, use a more descriptive label
         const parentSegment = segments[i - 1];
         const detailLabel = this.getDetailLabel(parentSegment);
         breadcrumbs.push({
@@ -131,7 +126,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private getDetailLabel(parentSegment: string): string {
     const detailLabelMap: { [key: string]: string } = {
       'members': 'MEMBERS.Detail_title',
-      'personnel': 'PERSONNEL.DETAIL_TITLE',
+      'personnel': 'PERSONNEL.Detail_Title',
       'trainers': 'TRAINERS.Trainer_Details.Title',
       'subscriptions': 'SUBSCRIPTIONS.DETAIL_TITLE'
     };

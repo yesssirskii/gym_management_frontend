@@ -1,92 +1,89 @@
 <div class="page-container">
     <div class="page-header">
-    <h2>{{ 'PERSONNEL.DETAIL_TITLE' | translate }}</h2>
-    <div class="header-actions">
-        <p-button 
-        icon="pi pi-arrow-left" 
-        [label]="'COMMON.BACK' | translate"
-        severity="secondary"
-        [outlined]="true"
-        (onClick)="goBack()">
-        </p-button>
-    </div>
+        <h2>{{ 'PERSONNEL.Detail_Title' | translate }}</h2>
+        <div class="header-actions">
+            <p-button 
+                icon="pi pi-arrow-left" 
+                [label]="'COMMON.Back' | translate"
+                severity="secondary"
+                [outlined]="true"
+                (onClick)="goBack()">
+            </p-button>
+        </div>
     </div>
 
     <div class="detail-grid" *ngIf="personnel">
-    <!-- Personal Information Card -->
-    <p-card [header]="'PERSONNEL.PERSONAL_INFO' | translate" class="info-card">
-        <div class="info-grid">
-            <div class="info-item">
-                <label>{{ 'PERSONNEL.EMPLOYEE_ID' | translate }}:</label>
-                <span>{{ personnel.employeeId }}</span>
+        <p-card [header]="'PERSONNEL.Personal_Info' | translate" class="info-card">
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Employee_Id' | translate }}:</label>
+                    <span>{{ personnel.employeeId }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Name' | translate }}:</label>
+                    <span>{{ personnel.firstName }} {{ personnel.lastName }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Email' | translate }}:</label>
+                    <span>{{ personnel.email }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Phone' | translate }}:</label>
+                    <span>{{ personnel.phoneNumber }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Role' | translate }}:</label>
+                    <p-tag [value]="personnel.role" severity="info"></p-tag>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Hire_Date' | translate }}:</label>
+                    <span>{{ personnel.hireDate | date:'shortDate' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Salary' | translate }}:</label>
+                    <span>{{ personnel.salary | currency:'EUR':'symbol':'1.2-2' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Status' | translate }}:</label>
+                    <p-tag 
+                    [value]="personnel.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"
+                    [severity]="personnel.isActive ? 'success' : 'danger'">
+                    </p-tag>
+                </div>
+                <div class="info-item full-width">
+                    <label>{{ 'PERSONNEL.Add.Job_Description' | translate }}:</label>
+                    <p>{{ personnel.jobDescription || 'N/A' }}</p>
+                </div>
             </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.NAME' | translate }}:</label>
-                <span>{{ personnel.firstName }} {{ personnel.lastName }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.EMAIL' | translate }}:</label>
-                <span>{{ personnel.email }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.PHONE' | translate }}:</label>
-                <span>{{ personnel.phoneNumber }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'PERSONNEL.ROLE' | translate }}:</label>
-                <p-tag [value]="personnel.role" severity="info"></p-tag>
-            </div>
-            <div class="info-item">
-                <label>{{ 'PERSONNEL.HIRE_DATE' | translate }}:</label>
-                <span>{{ personnel.hireDate | date:'shortDate' }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'PERSONNEL.SALARY' | translate }}:</label>
-                <span>{{ personnel.salary | currency:'EUR':'symbol':'1.2-2' }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.STATUS' | translate }}:</label>
-                <p-tag 
-                [value]="personnel.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"
-                [severity]="personnel.isActive ? 'success' : 'danger'">
-                </p-tag>
-            </div>
-            <div class="info-item full-width">
-                <label>{{ 'PERSONNEL.JOB_DESCRIPTION' | translate }}:</label>
-                <p>{{ personnel.jobDescription || 'N/A' }}</p>
-            </div>
-        </div>
-    </p-card>
+        </p-card>
 
-    <!-- Additional Information Card -->
-    <p-card [header]="'PERSONNEL.ADDITIONAL_INFO' | translate" class="info-card">
-        <div class="info-grid">
-            <div class="info-item">
-                <label>{{ 'COMMON.GENDER' | translate }}:</label>
-                <span>{{ personnel.gender || 'N/A' }}</span>
+        <p-card [header]="'PERSONNEL.Additional_Info' | translate" class="info-card">
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Gender' | translate }}:</label>
+                    <span>{{ personnel.gender || 'N/A' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Address' | translate }}:</label>
+                    <span>{{ personnel.address || 'N/A' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Date_Of_Birth' | translate }}:</label>
+                    <span>{{ personnel.dateOfBirth | date:'shortDate' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Created_At' | translate }}:</label>
+                    <span>{{ personnel.createdAt | date:'short' }}</span>
+                </div>
+                <div class="info-item">
+                    <label>{{ 'PERSONNEL.Last_Login' | translate }}:</label>
+                    <span>{{ personnel.lastLoginAt ? (personnel.lastLoginAt | date:'short') : 'Never' }}</span>
+                </div>
             </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.ADDRESS' | translate }}:</label>
-                <span>{{ personnel.address || 'N/A' }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.DATE_OF_BIRTH' | translate }}:</label>
-                <span>{{ personnel.dateOfBirth | date:'shortDate' }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.CREATED_AT' | translate }}:</label>
-                <span>{{ personnel.createdAt | date:'short' }}</span>
-            </div>
-            <div class="info-item">
-                <label>{{ 'COMMON.LAST_LOGIN' | translate }}:</label>
-                <span>{{ personnel.lastLoginAt ? (personnel.lastLoginAt | date:'short') : 'Never' }}</span>
-            </div>
-        </div>
-    </p-card>
+        </p-card>
     </div>
 
-    <!-- Loading State -->
     <div class="loading-container" *ngIf="loading">
-    <p-progressSpinner></p-progressSpinner>
+        <p-progressSpinner></p-progressSpinner>
     </div>
 </div>

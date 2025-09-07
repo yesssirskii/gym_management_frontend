@@ -9,7 +9,7 @@
     
     <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
         <div class="member-info" *ngIf="selectedMember">
-            <p><strong>{{ 'COMMON.NAME' | translate }}:</strong> {{ selectedMember.firstName }} {{ selectedMember.lastName }}</p>
+            <p><strong>{{ 'COMMON.NAME' | translate }}:</strong> {{ selectedMember.userName }}</p>
             <p><strong>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}:</strong> {{ selectedMember.membershipNumber }}</p>
         </div>
         
@@ -24,7 +24,7 @@
                     formControlName="subscriptionType"
                     optionLabel="label"
                     optionValue="value"
-                    [placeholder]="'SUBSCRIPTIONS.Select_Subscription_Type' | translate"
+                    [placeholder]="'SUBSCRIPTIONS.Select_Type' | translate"
                     class="w-full"
                     (onChange)="onTypeChange()">
                 </p-dropdown>

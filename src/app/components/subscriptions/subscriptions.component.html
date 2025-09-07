@@ -12,29 +12,39 @@
     </div>
 
     <div class="filters-section">
-    <div class="filter-item">
-        <label>{{ 'SUBSCRIPTIONS.FILTER_STATUS' | translate }}</label>
-        <p-dropdown 
-            [options]="statusOptions"
-            formControlName="selectedStatus"
-            optionLabel="label"
-            optionValue="value"
-            [placeholder]="'SUBSCRIPTIONS.ALL_STATUSES' | translate"
-            (onChange)="filterSubscriptions()">
-        </p-dropdown>
-    </div>
-    
-    <div class="filter-item">
-        <label>{{ 'SUBSCRIPTIONS.FILTER_TYPE' | translate }}</label>
-        <p-dropdown 
-            [options]="typeOptions"
-            formControlName="selectedType"
-            optionLabel="label"
-            optionValue="value"
-            [placeholder]="'SUBSCRIPTIONS.ALL_TYPES' | translate"
-            (onChange)="filterSubscriptions()">
-        </p-dropdown>
-    </div>
+        <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.FILTER_STATUS' | translate }}</label>
+            <p-dropdown 
+                [options]="statusOptions"
+                [(ngModel)] = "selectedStatus"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.ALL_STATUSES' | translate"
+                (onChange)="onStatusChange($event.value)">
+            </p-dropdown>
+        </div>
+        
+        <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.FILTER_TYPE' | translate }}</label>
+            <p-dropdown 
+                [options]="typeOptions"
+                [(ngModel)] = "selectedType"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.ALL_TYPES' | translate"
+                (onChange)="onTypeChange($event.value)">
+            </p-dropdown>
+        </div>
+
+          <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.Other_Options' | translate }}</label>
+            <p-button 
+                label="{{ 'SUBSCRIPTIONS.Reset_Filters' | translate }}" 
+                class="p-button-secondary" 
+                (click)="resetFilters()"
+                class="mr-2">
+            </p-button>
+        </div>
     </div>
 
     <p-table 
@@ -51,13 +61,14 @@
         <tr>
         <th>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}</th>
         <th>{{ 'COMMON.NAME' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.TYPE' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.START_DATE' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.END_DATE' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.DAYS_REMAINING' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.PRICE' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.AUTO_RENEWAL' | translate }}</th>
-        <th>{{ 'SUBSCRIPTIONS.STATUS' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Start_Date' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.End_Date' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Days_Remaining' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Price' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Payment_Method' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Auto_Renewal' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Status' | translate }}</th>
         <th>{{ 'COMMON.ACTIONS' | translate }}</th>
         </tr>
     </ng-template>
@@ -65,17 +76,18 @@
     <ng-template pTemplate="body" let-sub>
         <tr>
         <td>{{ sub.membershipNumber }}</td>
-        <td>{{ sub.memberName }}</td>
-        <td>{{ sub.type }}</td>
+        <td>{{ sub.userName }}</td>
+        <td>{{ sub.subscriptionType }}</td>
         <td>{{ sub.startDate | date:'shortDate' }}</td>
         <td>{{ sub.endDate | date:'shortDate' }}</td>
         <td>
             <p-tag 
-            [value]="sub.daysRemaining"
-            [severity]="sub.daysRemaining <= 7 ? 'danger' : (sub.daysRemaining <= 30 ? 'warning' : 'success')">
+                [value]="sub.daysRemaining"
+                [severity]="sub.daysRemaining <= 7 ? 'danger' : (sub.daysRemaining <= 30 ? 'warning' : 'success')">
             </p-tag>
         </td>
         <td>{{ sub.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td>{{ sub.paymentMethod }}</td>
         <td>
             <i class="pi" 
             [ngClass]="{'pi-check-circle': sub.autoRenewal, 'pi-times-circle': !sub.autoRenewal}"
@@ -90,20 +102,20 @@
         </td>
         <td>
             <p-button 
-            icon="pi pi-pencil" 
-            [pTooltip]="'SUBSCRIPTIONS.EDIT' | translate"
-            severity="warning"
-            size="small"
-            (onClick)="editSubscription(sub)"
-            class="mr-2">
+                icon="pi pi-pencil" 
+                [pTooltip]="'SUBSCRIPTIONS.Edit' | translate"
+                severity="warning"
+                size="small"
+                (onClick)="editSubscription(sub)"
+                class="mr-2">
             </p-button>
             <p-button 
-            icon="pi pi-refresh" 
-            [pTooltip]="'SUBSCRIPTIONS.RENEW' | translate"
-            severity="success"
-            size="small"
-            (onClick)="renewSubscription(sub)"
-            [disabled]="sub.status === 'Active'">
+                icon="pi pi-refresh" 
+                [pTooltip]="'SUBSCRIPTIONS.RENEW' | translate"
+                severity="success"
+                size="small"
+                (onClick)="renewSubscription(sub)"
+                [disabled]="sub.status === 'Active'">
             </p-button>
         </td>
         </tr>
@@ -113,6 +125,6 @@
 
 <app-update-subscription-dialog 
     [(visible)]="editDialogVisible"
-    [selectedMember]="selectedMember"
+    [selectedMember]="subscription"
     (subscriptionUpdated)="onSubscriptionUpdated()">
 </app-update-subscription-dialog>

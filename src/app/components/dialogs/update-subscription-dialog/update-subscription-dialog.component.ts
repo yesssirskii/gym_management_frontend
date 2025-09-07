@@ -101,29 +101,55 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   }
 
   patchFormValues() {
-    console.log(this.selectedMember)
+    console.log("Selected member:", this.selectedMember);
 
-    let subscriptionStartDate = this.selectedMember.subscription.startDate;
-      
+    // Detect data structure and extract subscription data
+    const subscriptionData = this.getSubscriptionData();
+    
+    if (!subscriptionData) {
+      console.warn('No subscription data found');
+      return;
+    }
+
+    // Parse dates
+    let subscriptionStartDate = subscriptionData.startDate;
     if (typeof subscriptionStartDate === 'string') {
       subscriptionStartDate = new Date(subscriptionStartDate);
     }
 
-    let subscriptionEndDate = this.selectedMember.subscription.endDate;
-      
+    let subscriptionEndDate = subscriptionData.endDate;
     if (typeof subscriptionEndDate === 'string') {
       subscriptionEndDate = new Date(subscriptionEndDate);
     }
 
+    // Patch form with the extracted data
     this.subscriptionForm.patchValue({
-      subscriptionType: this.selectedMember.subscription.subscriptionType,
+      subscriptionType: subscriptionData.subscriptionType,
       startDate: subscriptionStartDate,
       endDate: subscriptionEndDate,
-      price: this.selectedMember.subscription.price,
-      status: this.selectedMember.subscription.status,
-      paymentMethod: this.selectedMember.subscription.paymentMethod,
-      autoRenewal: this.selectedMember.subscription.autoRenewal || false
+      price: subscriptionData.price,
+      status: subscriptionData.status,
+      paymentMethod: subscriptionData.paymentMethod,
+      autoRenewal: subscriptionData.autoRenewal || false
     });
+  }
+
+  private getSubscriptionData(): any {
+    if (!this.selectedMember) {
+      return null;
+    }
+
+    if (this.selectedMember.subscription) {
+      return this.selectedMember.subscription;
+    }
+
+    if (this.selectedMember.subscriptionType || 
+        this.selectedMember.startDate || 
+        this.selectedMember.endDate) {
+      return this.selectedMember;
+    }
+
+    return null;
   }
 
   onTypeChange() {
@@ -163,7 +189,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('COMMON.SUCCESS'),
-            detail: this.translate.instant('SUBSCRIPTIONS.UPDATE_SUCCESS')
+            detail: this.translate.instant('SUBSCRIPTIONS.Update_Success')
           });
           this.subscriptionUpdated.emit();
           this.resetForm();
@@ -172,7 +198,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('COMMON.ERROR'),
-            detail: this.translate.instant('SUBSCRIPTIONS.UPDATE_ERROR')
+            detail: this.translate.instant('SUBSCRIPTIONS.Update_Error')
           });
           this.loading = false;
         }

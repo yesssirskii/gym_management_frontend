@@ -90,7 +90,7 @@
                         <tr>
                             <td>{{ sub.userName }}</td>
                             <td>{{ sub.endDate | date:'shortDate' }}</td>
-                            <td>{{ sub.price }}</td>
+                            <td>{{ sub.price | currency:'EUR':'symbol':'1.2-2' }}</td>
                             <td>{{ sub.status | translate }}</td>
                             <td>{{ sub.subscriptionType | translate }}</td>
                             <td>

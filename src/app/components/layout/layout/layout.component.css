@@ -1,4 +1,4 @@
-layout-wrapper {
+.layout-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -16,4 +16,25 @@ layout-wrapper {
 
 .breadcrumb-container {
     margin-bottom: 1rem;
+}
+
+app-footer {
+    margin-top: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+app-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+app-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
