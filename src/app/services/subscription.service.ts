@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { HttpHeaders } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,14 +18,12 @@ export class SubscriptionService {
     return this.http.get<any>(`${environment.apiUrl}/Subscription/${userId}`);
   }
 
-  updateUserSubscription(subscriptionData: any): Observable<any> {
-    const formData = new FormData();
-    Object.keys(subscriptionData).forEach(key => {
-      if (subscriptionData[key] !== null && subscriptionData[key] !== undefined) {
-        formData.append(key, subscriptionData[key]);
-      }
+  updateUserSubscription(id: number, subscriptionData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    return this.http.put(`${environment.apiUrl}/subscriptions/update`, formData);
+
+    return this.http.put(`${environment.apiUrl}/Subscription/${id}`, subscriptionData);
   }
 
   getSubscriptionPrices(): Observable<any> {

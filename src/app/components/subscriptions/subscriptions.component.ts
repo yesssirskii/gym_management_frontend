@@ -109,7 +109,7 @@ export class SubscriptionsComponent implements OnInit {
       autoRenewal: sub.autoRenewal
     };
 
-    this.subscriptionService.updateUserSubscription(renewData).subscribe({
+    this.subscriptionService.updateUserSubscription(this.selectedMember.id, renewData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',

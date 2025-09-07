@@ -87,9 +87,9 @@ export class CreateUserDialogComponent implements OnInit {
   ];
 
   paymentMethodOptions = [
-    { label: 'Credit card', value: 'Credit Card' },
-    { label: 'Cash', value: 'Cash' },
-    { label: 'MultiSport', value: 'MultiSport' },
+    { label: 'Credit card', value: 1 },
+    { label: 'Cash', value: 1 },
+    { label: 'MultiSport', value: 3 },
   ];
 
   constructor(
@@ -127,6 +127,7 @@ export class CreateUserDialogComponent implements OnInit {
       weight: [''],
       medicalNotes: [''],
       fitnessGoals: [''],
+
       subscriptionType: ['', Validators.required],
       subscriptionStartDate: [new Date()],
       paymentMethod: ['', Validators.required],

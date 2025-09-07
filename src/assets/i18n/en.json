@@ -273,8 +273,8 @@
     "FILTER_TYPE": "Filter by Type",
     "ALL_STATUSES": "All Statuses",
     "ALL_TYPES": "All Types",
-    "PAYMENT_METHOD": "Payment Method",
-    "SELECT_PAYMENT": "Select Payment Method",
+    "Payment_Method": "Payment Method",
+    "Select_Payment": "Select Payment Method",
     "RENEW": "Renew",
     "RENEW_SUCCESS": "Subscription renewed successfully",
     "RENEW_ERROR": "Failed to renew subscription",
@@ -290,9 +290,11 @@
     "Suspended": "Suspended",
     "Cancelled": "Cancelled",
     "Subscription_Type": "Type",
+    "Select_SUbscription_Type": "Select Subscription Type",
     "Daily": "Daily",
     "Monthly": "Monthly",
-    "Yearly": "Yearly"
+    "Yearly": "Yearly",
+    "Auto_Renewal": "Auto renewal"
   },
   "PROFILE": {
     "TITLE": "User Profile",

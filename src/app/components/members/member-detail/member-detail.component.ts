@@ -138,12 +138,12 @@ export class MemberDetailComponent implements OnInit {
         severity: 'info',
         detail: this.translate.instant('MEMBERS.Is_trainer_subscription'),
       });
+    }
 
-      this.subscriptionDialogVisible = false;
-    }
-    else{
+    this.userService.getMemberById(this.member.id).subscribe(updated => {
+      this.member = updated;
       this.subscriptionDialogVisible = true;
-    }
+  });
   }
 
   showAssignTrainer() {
@@ -170,7 +170,7 @@ export class MemberDetailComponent implements OnInit {
 
   onSubscriptionUpdated() {
     this.subscriptionDialogVisible = false;
-    this.loadSubscription(this.member.id);
+    this.loadMemberDetail(this.member.id);
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('COMMON.SUCCESS'),

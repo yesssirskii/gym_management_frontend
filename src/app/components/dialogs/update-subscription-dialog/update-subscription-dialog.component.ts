@@ -17,6 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from "primeng/inputnumber";
 
 @Component({
   selector: 'app-update-subscription-dialog',
@@ -34,7 +37,10 @@ import { DialogModule } from 'primeng/dialog';
     ReactiveFormsModule,
     DropdownModule,
     DividerModule,
-    DialogModule
+    DialogModule,
+    CalendarModule,
+    CheckboxModule,
+    InputNumberModule
   ],
   templateUrl: './update-subscription-dialog.component.html',
   styleUrl: './update-subscription-dialog.component.css'
@@ -57,9 +63,14 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
 
   paymentMethods = [
     { label: 'Cash', value: 'Cash' },
-    { label: 'Credit Card', value: 'CreditCard' },
-    { label: 'Bank Transfer', value: 'BankTransfer' },
-    { label: 'Online', value: 'Online' }
+    { label: 'Credit Card', value: 'Credit Card' },
+    { label: 'MultiSport', value: 'MultiSport' },
+  ];
+
+  subscriptionStatuses = [
+    { label: 'Active', value: 'Active' },
+    { label: 'Expired', value: 'Expired' },
+    { label: 'Cancelled', value: 'Cancelled' },
   ];
 
   constructor(
@@ -69,12 +80,13 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
     private translate: TranslateService
   ) {
     this.subscriptionForm = this.fb.group({
-      type: ['', Validators.required],
-      startDate: [new Date(), Validators.required],
+      subscriptionType: ['', Validators.required],
+      startDate: [{ value: '', disabled: true}],
       endDate: [{ value: '', disabled: true }],
-      price: ['', [Validators.required, Validators.min(0)]],
-      autoRenewal: [false],
-      paymentMethod: ['', Validators.required]
+      price: [{ value: '', disabled: true }],
+      status: ['', Validators.required],
+      paymentMethod: ['', Validators.required],
+      autoRenewal: ['', Validators.required],
     });
   }
 
@@ -89,18 +101,35 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   }
 
   patchFormValues() {
-        console.log('Selected member:', this.selectedMember);
-    console.log('Member subscription:', this.selectedMember?.subscription);
+    console.log(this.selectedMember)
+
+    let subscriptionStartDate = this.selectedMember.subscription.startDate;
+      
+    if (typeof subscriptionStartDate === 'string') {
+      subscriptionStartDate = new Date(subscriptionStartDate);
+    }
+
+    let subscriptionEndDate = this.selectedMember.subscription.endDate;
+      
+    if (typeof subscriptionEndDate === 'string') {
+      subscriptionEndDate = new Date(subscriptionEndDate);
+    }
+
     this.subscriptionForm.patchValue({
-      type: this.selectedMember.subscription.subscriptionType,
+      subscriptionType: this.selectedMember.subscription.subscriptionType,
+      startDate: subscriptionStartDate,
+      endDate: subscriptionEndDate,
+      price: this.selectedMember.subscription.price,
+      status: this.selectedMember.subscription.status,
+      paymentMethod: this.selectedMember.subscription.paymentMethod,
       autoRenewal: this.selectedMember.subscription.autoRenewal || false
     });
   }
 
   onTypeChange() {
-    const selectedType = this.subscriptionTypes.find(t => t.value === this.subscriptionForm.get('type')?.value);
+    const selectedType = this.subscriptionTypes.find(t => t.value === this.subscriptionForm.get('subscriptionType')?.value);
     if (selectedType) {
-      const prices = { Daily: 10, Monthly: 100, Yearly: 1000 };
+      const prices = { Daily: 5, Monthly: 50, Yearly: 500 };
       
       this.subscriptionForm.patchValue({ price: prices[selectedType.value as keyof typeof prices] });
       this.calculateEndDate();
@@ -109,7 +138,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
 
   calculateEndDate() {
     const startDate = this.subscriptionForm.get('startDate')?.value;
-    const type = this.subscriptionForm.get('type')?.value;
+    const type = this.subscriptionForm.get('subscriptionType')?.value;
     
     if (startDate && type) {
       const selectedType = this.subscriptionTypes.find(t => t.value === type);
@@ -129,7 +158,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
         ...this.subscriptionForm.getRawValue()
       };
 
-      this.subscriptionService.updateUserSubscription(formData).subscribe({
+      this.subscriptionService.updateUserSubscription(this.selectedMember.id, formData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',

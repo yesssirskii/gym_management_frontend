@@ -4,6 +4,7 @@
     [modal]="true" 
     [style]="{width: '500px'}"
     [closable]="true"
+    [draggable]="false"
     (onHide)="onDialogHide()">
     
     <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
@@ -14,22 +15,51 @@
         
         <p-divider></p-divider>
         
+        <div class="field-row">
+            <div class="field">
+                <label for="subscriptionType">{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}:</label>
+                <p-dropdown
+                    id="subscriptionType"
+                    [options]="subscriptionTypes"
+                    formControlName="subscriptionType"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'SUBSCRIPTIONS.Select_Subscription_Type' | translate"
+                    class="w-full"
+                    (onChange)="onTypeChange()">
+                </p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="status">{{ 'SUBSCRIPTIONS.Status' | translate }}:</label>
+                <p-dropdown
+                    id="status"
+                    [options]="subscriptionStatuses"
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'SUBSCRIPTIONS.Select_Status' | translate"
+                    class="w-full"
+                    (onChange)="onTypeChange()">
+                </p-dropdown>
+            </div>
+        </div>
+
         <div class="field">
-            <label for="type">{{ 'SUBSCRIPTIONS.TYPE' | translate }}</label>
+            <label for="paymentMethod">{{ 'SUBSCRIPTIONS.Payment_Method' | translate }}:</label>
             <p-dropdown
-                id="type"
-                [options]="subscriptionTypes"
-                formControlName="type"
+                id="paymentMethod"
+                [options]="paymentMethods"
+                formControlName="paymentMethod"
                 optionLabel="label"
                 optionValue="value"
-                [placeholder]="'SUBSCRIPTIONS.SELECT_TYPE' | translate"
-                class="w-full"
-                (onChange)="onTypeChange()">
+                [placeholder]="'SUBSCRIPTIONS.Select_Payment' | translate"
+                class="w-full">
             </p-dropdown>
         </div>
         
         <div class="field">
-            <label for="startDate">{{ 'SUBSCRIPTIONS.START_DATE' | translate }}</label>
+            <label for="startDate">{{ 'SUBSCRIPTIONS.Start_Date' | translate }}:</label>
             <p-calendar 
                 id="startDate" 
                 formControlName="startDate" 
@@ -40,7 +70,7 @@
         </div>
         
         <div class="field">
-            <label for="endDate">{{ 'SUBSCRIPTIONS.END_DATE' | translate }}</label>
+            <label for="endDate">{{ 'SUBSCRIPTIONS.End_Date' | translate }}:</label>
             <p-calendar 
                 id="endDate" 
                 formControlName="endDate" 
@@ -51,7 +81,7 @@
         </div>
         
         <div class="field">
-            <label for="price">{{ 'SUBSCRIPTIONS.PRICE' | translate }}</label>
+            <label for="price">{{ 'SUBSCRIPTIONS.Price' | translate }}:</label>
             <p-inputNumber 
                 id="price" 
                 formControlName="price" 
@@ -61,22 +91,9 @@
             </p-inputNumber>
         </div>
         
-        <div class="field">
-            <label for="autoRenewal" class="ml-2">{{ 'SUBSCRIPTIONS.AUTO_RENEWAL' | translate }}</label>
+        <div class="field checkbox-section-alignment">
+            <label for="autoRenewal" class="ml-2">{{ 'SUBSCRIPTIONS.Auto_Renewal' | translate }}</label>
             <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
-        </div>
-        
-        <div class="field">
-            <label for="paymentMethod">{{ 'SUBSCRIPTIONS.PAYMENT_METHOD' | translate }}</label>
-            <p-dropdown
-                id="paymentMethod"
-                [options]="paymentMethods"
-                formControlName="paymentMethod"
-                optionLabel="label"
-                optionValue="value"
-                [placeholder]="'SUBSCRIPTIONS.SELECT_PAYMENT' | translate"
-                class="w-full">
-            </p-dropdown>
         </div>
     </form>
     
