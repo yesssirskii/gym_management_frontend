@@ -100,8 +100,6 @@ export class SubscriptionsComponent implements OnInit {
         this.loading = false;
       }
     });
-
-    console.log(this.subscriptions)
   }
 
   onStatusChange(value: string | null) {

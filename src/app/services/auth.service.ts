@@ -9,6 +9,11 @@ export interface LoginDto {
   password: string;
 }
 
+export interface ChangePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
+
 export interface LoginResponseDto {
   token: string;
   refreshToken: string;
@@ -69,6 +74,38 @@ export class AuthService {
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+      }));
+  }
+
+  changePassword(changePasswordData: ChangePasswordDto): Observable<any> {
+    const user = this.getCurrentUser();
+    if (!user) {
+      throw new Error('User not logged in');
+    }
+
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const formData = new FormData();
+    formData.append('currentPassword', changePasswordData.currentPassword);
+    formData.append('newPassword', changePasswordData.newPassword);
+
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+
+    return this.http.post<any>(`${environment.apiUrl}/auth/change-password`, formData, { headers })
+      .pipe(map(response => {
+        // Since all tokens are revoked on the backend, we need to logout the user
+        // They will need to login again with the new password
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
+        
+        return response;
       }));
   }
 

@@ -101,9 +101,6 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   }
 
   patchFormValues() {
-    console.log("Selected member:", this.selectedMember);
-
-    // Detect data structure and extract subscription data
     const subscriptionData = this.getSubscriptionData();
     
     if (!subscriptionData) {
@@ -111,7 +108,6 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
       return;
     }
 
-    // Parse dates
     let subscriptionStartDate = subscriptionData.startDate;
     if (typeof subscriptionStartDate === 'string') {
       subscriptionStartDate = new Date(subscriptionStartDate);
@@ -122,7 +118,6 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
       subscriptionEndDate = new Date(subscriptionEndDate);
     }
 
-    // Patch form with the extracted data
     this.subscriptionForm.patchValue({
       subscriptionType: subscriptionData.subscriptionType,
       startDate: subscriptionStartDate,

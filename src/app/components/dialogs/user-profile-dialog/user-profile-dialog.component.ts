@@ -22,6 +22,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-dialog',
@@ -43,7 +45,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     TabViewModule,
     PasswordModule,
     InputTextModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ToastModule
   ],
   templateUrl: './user-profile-dialog.component.html',
   styleUrl: './user-profile-dialog.component.css'
@@ -65,7 +68,8 @@ export class UserProfileDialogComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private messageService: MessageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -144,16 +148,43 @@ export class UserProfileDialogComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.loadingPassword = true;
       
-      // API call to change password would go here
-      setTimeout(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: this.translate.instant('COMMON.SUCCESS'),
-          detail: this.translate.instant('PROFILE.PASSWORD_CHANGE_SUCCESS')
-        });
-        this.passwordForm.reset();
-        this.loadingPassword = false;
-      }, 1000);
+      const changePasswordData = {
+        currentPassword: this.passwordForm.get('currentPassword')?.value,
+        newPassword: this.passwordForm.get('newPassword')?.value
+      };
+
+      this.authService.changePassword(changePasswordData).subscribe({
+        next: (result) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: this.translate.instant('COMMON.SUCCESS'),
+            detail: this.translate.instant('PROFILE.PASSWORD_CHANGE_SUCCESS')
+          });
+
+          this.passwordForm.reset();
+          this.loadingPassword = false;
+          
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1000);
+        },
+        error: (error) => {
+          let errorMessage = this.translate.instant('PROFILE.PASSWORD_CHANGE_ERROR');
+          
+          if (error.status === 401) {
+            errorMessage = this.translate.instant('PROFILE.CURRENT_PASSWORD_INCORRECT');
+          } else if (error.status === 404) {
+            errorMessage = this.translate.instant('PROFILE.USER_NOT_FOUND');
+          }
+
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('COMMON.ERROR'),
+            detail: errorMessage
+          });
+          this.loadingPassword = false;
+        }
+      });
     }
   }
 
