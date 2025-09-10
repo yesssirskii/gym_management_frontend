@@ -64,7 +64,7 @@ export class AssignTrainerDialogComponent implements OnInit {
 
   get dialogTitle(): string {
     return this.mode === 'assignTrainer' 
-      ? this.translate.instant('TRAINERS.ASSIGN_TRAINER')
+      ? this.translate.instant('MEMBERS.Assign_Trainer')
       : this.translate.instant('TRAINERS.Assign_Member.Title');
   }
 

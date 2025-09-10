@@ -97,7 +97,7 @@
     "Has_trainer": "User has a trainer.",
     "Is_trainer": "User is a trainer.",
     "Is_trainer_subscription": "Cannot add subscription to a user who is not a member.",
-    "Medical_info": "Medical info",
+    "Medical_Info": "Medical info",
     "Emergency_Contact": "Emergency contact name",
     "Emergency_Phone": "Emergency phone number",
     "Height": "Height",
@@ -105,7 +105,7 @@
     "Medical_Notes": "Medical notes",
     "Fitness_Goals": "Fitness goals",
     "Oib": "OIB",
-    "Assign_trainer": "Assign trainer",
+    "Assign_Trainer": "Assign trainer",
     "Trainer_assigned": "Member already has an assigned trainer.",
     "No_Trainer_Assigned": "Member has no trainer assigned.",
     "Edit_Member":{

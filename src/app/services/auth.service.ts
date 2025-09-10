@@ -34,6 +34,7 @@ export interface UserInfoDto {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<UserInfoDto | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -98,8 +99,7 @@ export class AuthService {
 
     return this.http.post<any>(`${environment.apiUrl}/auth/change-password`, formData, { headers })
       .pipe(map(response => {
-        // Since all tokens are revoked on the backend, we need to logout the user
-        // They will need to login again with the new password
+
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('currentUser');

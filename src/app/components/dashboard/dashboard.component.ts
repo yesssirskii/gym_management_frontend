@@ -12,9 +12,6 @@ import { TableModule } from 'primeng/table';
 import { CurrencyPipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
 
-import { SubscriptionStatusEnum } from '../../models/enums/subscription-status-enum';
-import { SubscriptionTypeEnum } from '../../models/enums/subscription-type-enum';
-
 @Component({
   selector: 'app-dashboard',
   standalone: true,

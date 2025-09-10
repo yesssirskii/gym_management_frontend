@@ -14,7 +14,7 @@
             <p-button 
                 *ngIf="canEdit"
                 icon="pi pi-user-plus" 
-                [label]="'MEMBERS.Assign_trainer' | translate"
+                [label]="'MEMBERS.Assign_Trainer' | translate"
                 severity="info"
                 (onClick)="showAssignTrainer()"
                 class="mr-2">
@@ -180,8 +180,7 @@
             </ng-template>
         </p-card>
 
-        <!-- Medical Information Card -->
-        <p-card [header]="'MEMBERS.Medical_info' | translate" class="info-card">
+        <p-card [header]="'MEMBERS.Medical_Info' | translate" class="info-card">
             <div class="info-grid">
                 <div class="info-item">
                     <label>{{ 'MEMBERS.Emergency_Contact' | translate }}:</label>
