@@ -48,7 +48,7 @@ import { InputNumberModule } from "primeng/inputnumber";
 
 export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   @Input() visible = false;
-  @Input() selectedMember: any = null;
+  @Input() selectedSubscription: any = null;
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() subscriptionUpdated = new EventEmitter<void>();
 
@@ -80,6 +80,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
     private translate: TranslateService
   ) {
     this.subscriptionForm = this.fb.group({
+      subscriptionId: [''],
       subscriptionType: ['', Validators.required],
       startDate: [{ value: '', disabled: true}],
       endDate: [{ value: '', disabled: true }],
@@ -95,9 +96,11 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   }
 
     ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedMember'] && this.selectedMember) {
-      this.patchFormValues();
-    }
+      console.log("Selected member: ",this.selectedSubscription)
+
+      if (changes['selectedSubscription'] && this.selectedSubscription) {
+        this.patchFormValues();
+      }
   }
 
   patchFormValues() {
@@ -119,6 +122,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
     }
 
     this.subscriptionForm.patchValue({
+      subscriptionId: subscriptionData.id,
       subscriptionType: subscriptionData.subscriptionType,
       startDate: subscriptionStartDate,
       endDate: subscriptionEndDate,
@@ -127,21 +131,23 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
       paymentMethod: subscriptionData.paymentMethod,
       autoRenewal: subscriptionData.autoRenewal || false
     });
+
+    console.log(this.subscriptionForm)
   }
 
   private getSubscriptionData(): any {
-    if (!this.selectedMember) {
+    if (!this.selectedSubscription) {
       return null;
     }
 
-    if (this.selectedMember.subscription) {
-      return this.selectedMember.subscription;
+    if (this.selectedSubscription.subscription) {
+      return this.selectedSubscription.subscription;
     }
 
-    if (this.selectedMember.subscriptionType || 
-        this.selectedMember.startDate || 
-        this.selectedMember.endDate) {
-      return this.selectedMember;
+    if (this.selectedSubscription.subscriptionType || 
+        this.selectedSubscription.startDate || 
+        this.selectedSubscription.endDate) {
+      return this.selectedSubscription;
     }
 
     return null;
@@ -172,14 +178,15 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    if (this.subscriptionForm.valid && this.selectedMember) {
+    if (this.subscriptionForm.valid && this.selectedSubscription) {
       this.loading = true;
+
       const formData = {
-        userId: this.selectedMember.id,
+        userId: this.selectedSubscription.id,
         ...this.subscriptionForm.getRawValue()
       };
 
-      this.subscriptionService.updateUserSubscription(this.selectedMember.id, formData).subscribe({
+      this.subscriptionService.updateUserSubscription(this.selectedSubscription.userId, formData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',

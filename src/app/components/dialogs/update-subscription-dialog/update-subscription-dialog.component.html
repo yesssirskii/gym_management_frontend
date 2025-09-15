@@ -8,9 +8,9 @@
     (onHide)="onDialogHide()">
     
     <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
-        <div class="member-info" *ngIf="selectedMember">
-            <p><strong>{{ 'COMMON.NAME' | translate }}:</strong> {{ selectedMember.userName }}</p>
-            <p><strong>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}:</strong> {{ selectedMember.membershipNumber }}</p>
+        <div class="member-info" *ngIf="selectedSubscription">
+            <p><strong>{{ 'COMMON.NAME' | translate }}:</strong> {{ selectedSubscription.userName }}</p>
+            <p><strong>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}:</strong> {{ selectedSubscription.membershipNumber }}</p>
         </div>
         
         <p-divider></p-divider>

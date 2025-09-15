@@ -71,6 +71,12 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
     { label: 'Yearly', value: 'Yearly' }
   ];
 
+  subscriptionStatuses = [
+    { label: 'Active', value: 'Active' },
+    { label: 'Expired', value: 'Expired' },
+    { label: 'Cancelled', value: 'Cancelled' },
+  ];
+
   specializationOptions = [
     { label: 'Bodybuilding', value: 'Bodybuilding' },
     { label: 'Nutritionist', value: 'Nutritionist' },
@@ -118,7 +124,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
   initializeForm() {
     this.memberForm = this.fb.group({
       membershipNumber: [{value: '', disabled: true}],
-      username: ['', Validators.required],
+      username: [{value: '', disabled: true}],
       email: ['', [Validators.required, Validators.email]],
       oib: ['', [Validators.required]],
       firstName: ['', Validators.required],
@@ -137,6 +143,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       fitnessGoals: [''],
 
       subscriptionType : [''],
+      status: [''],
       paymentMethod: [''],
       subscriptionStartDate: [{value: '', disabled: true}],
       autoRenewal: [''],
@@ -191,6 +198,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         fitnessGoals: this.member.fitnessGoals,
 
         subscriptionType: this.member.subscription?.subscriptionType,
+        status: this.member.subscription?.status,
         paymentMethod: this.member.subscription?.paymentMethod,
         subscriptionStartDate: subscriptionStartDate,
         autoRenewal: this.member.subscription?.autoRenewal,   
@@ -250,12 +258,13 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         // Create subscription object manually
         Subscription: {
           SubscriptionType: formData.subscriptionType,
+          Status: formData.status,
           PaymentMethod: formData.paymentMethod,
           AutoRenewal: formData.autoRenewal
         }
       };
       
-      this.userService.updateUser(this.member.id, requestData).subscribe({
+      this.userService.updateUser(this.member.id, true, requestData).subscribe({
         next: (response) => {
           this.messageService.add({
             severity: 'success',

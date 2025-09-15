@@ -29,6 +29,8 @@ export interface UserInfoDto {
   lastName: string;
   userType: string;
   role?: string;
+  phoneNumber: string,
+  address: string
 }
 
 @Injectable({
@@ -57,6 +59,7 @@ export class AuthService {
         localStorage.setItem('refreshToken', response.refreshToken);
         localStorage.setItem('currentUser', JSON.stringify(response.user));
         this.currentUserSubject.next(response.user);
+        console.log(response);
         
         return response;
       }));
@@ -111,6 +114,11 @@ export class AuthService {
 
   getCurrentUser(): UserInfoDto | null {
     return this.currentUserSubject.value;
+  }
+
+  updateCurrentUser(user: UserInfoDto) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user);
   }
 
   getToken(): string | null {

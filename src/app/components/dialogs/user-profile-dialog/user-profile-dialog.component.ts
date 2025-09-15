@@ -76,7 +76,8 @@ export class UserProfileDialogComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: [''],
-      address: ['']
+      address: [''],
+      username: [{value: '', disabled: true}]
     });
 
     this.passwordForm = this.fb.group({
@@ -88,15 +89,16 @@ export class UserProfileDialogComponent implements OnInit {
 
   ngOnInit() {
     if (this.user) {
+      console.log(this.user)
       this.profileForm.patchValue({
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         email: this.user.email,
         phoneNumber: this.user.phoneNumber || '',
-        address: this.user.address || ''
+        address: this.user.address || '',
+        username: this.user.username
       });
       
-      // Load activity log (mock data for now)
       this.activityLog = [
         { date: new Date(), action: 'Login', details: 'Successful login' },
         { date: new Date(Date.now() - 86400000), action: 'Profile Update', details: 'Updated contact information' }
@@ -110,7 +112,8 @@ export class UserProfileDialogComponent implements OnInit {
     
     if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
-    } else {
+    }
+    else {
       confirmPassword?.setErrors(null);
     }
     
@@ -121,8 +124,11 @@ export class UserProfileDialogComponent implements OnInit {
     if (this.profileForm.valid && this.user) {
       this.loadingProfile = true;
       
-      this.userService.updateUser(this.user.id, this.profileForm.value).subscribe({
+      this.userService.updateUser(this.user.id, false, this.profileForm.value).subscribe({
         next: () => {
+          const updatedUser = { ...this.user, ...this.profileForm.getRawValue() };
+          this.authService.updateCurrentUser(updatedUser);
+          
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('COMMON.SUCCESS'),

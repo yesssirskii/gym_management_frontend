@@ -38,12 +38,12 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/User/new`, userData, { headers });
   }
 
-  updateUser(id: number, userData: any): Observable<any> {
+  updateUser(id: number, isSubscriptionUpdate: boolean, userData: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
     
-    return this.http.put(`${environment.apiUrl}/User/${id}`, userData, { headers });
+    return this.http.put(`${environment.apiUrl}/User/${id}/${isSubscriptionUpdate}`, userData, { headers });
   }
 
   deleteUser(id: number): Observable<any> {

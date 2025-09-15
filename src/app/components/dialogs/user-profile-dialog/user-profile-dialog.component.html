@@ -5,6 +5,7 @@
     [modal]="true" 
     [style]="{width: '600px'}"
     [closable]="true"
+    [draggable]="false"
     (onHide)="onDialogHide()">
     
     <p-tabView>
@@ -35,6 +36,11 @@
                             <label for="lastName">{{ 'PROFILE.Last_Name' | translate }}</label>
                             <input type="text" id="lastName" pInputText formControlName="lastName" class="w-full" />
                         </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="username">{{ 'USERS.Basic_Info.Username' | translate }}:</label>
+                        <input type="text" id="username" pInputText formControlName="username" class="w-full" />
                     </div>
                     
                     <div class="field">
