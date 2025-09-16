@@ -33,7 +33,7 @@
             <tr>
                 <td>{{ member.firstName }} {{ member.lastName }}</td>
                 <td>{{ member.oib }}</td>
-                <td>{{ member.createdAt | date:'shortDate' }}</td>
+                <td>{{ member.createdAt | date:'dd/MM/yyyy' }}</td>
                 <td>
                     <p-tag 
                         [value]="member.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"

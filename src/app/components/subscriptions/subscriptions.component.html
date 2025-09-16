@@ -78,8 +78,8 @@
         <td>{{ sub.membershipNumber }}</td>
         <td>{{ sub.userName }}</td>
         <td>{{ sub.subscriptionType }}</td>
-        <td>{{ sub.startDate | date:'shortDate' }}</td>
-        <td>{{ sub.endDate | date:'shortDate' }}</td>
+        <td>{{ sub.startDate | date:'dd/MM/yyyy' }}</td>
+        <td>{{ sub.endDate | date:'dd/MM/yyyy' }}</td>
         <td>
             <p-tag 
                 [value]="sub.daysRemaining"

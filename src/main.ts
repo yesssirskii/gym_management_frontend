@@ -31,7 +31,7 @@ bootstrapApplication(AppComponent, {
       multi: true
     },
     ...TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'hr',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    this.translate.setDefaultLang('hr');
+    this.translate.use('hr');
   }
 
   onSubmit() {

@@ -243,12 +243,12 @@
     "TOTAL_MEMBERS": "Ukupno članova",
     "ACTIVE_SUBSCRIPTIONS": "Aktivne pretplate",
     "TOTAL_TRAINERS": "Ukupno trenera",
-    "MONTHLY_REVENUE": "Mjesečni prihod",
+    "MONTHLY_REVENUE": "Ukupni prihod",
     "RECENT_MEMBERS": "Nedavni članovi",
     "Subscriptions": "Pretplate"
   },
   "PERSONNEL": {
-    "TITLE": "Upravljanje osobljem",
+    "TITLE": "Osoblje",
     "ADD_NEW": "Dodaj novo osoblje",
     "DELETE_CONFIRM": "Jeste li sigurni da želite obrisati {{name}}?",
     "DELETE_SUCCESS": "Osoblje uspješno obrisano",
