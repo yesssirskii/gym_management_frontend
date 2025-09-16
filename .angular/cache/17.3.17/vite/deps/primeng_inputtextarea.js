@@ -1,10 +1,10 @@
 import {
-  PrimeNGConfig
-} from "./chunk-THG6YEWH.js";
-import {
   NgControl,
   NgModel
 } from "./chunk-6FTXPPWK.js";
+import {
+  PrimeNGConfig
+} from "./chunk-THG6YEWH.js";
 import {
   CommonModule
 } from "./chunk-RU5QBMYY.js";

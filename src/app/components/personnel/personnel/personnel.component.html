@@ -43,8 +43,8 @@
         <td>{{ person.hireDate | date:'shortDate' }}</td>
         <td>
             <p-tag 
-            [value]="person.isActive ? ('COMMON.INACTIVE' | translate) : ('COMMON.ACTIVE' | translate)"
-            [severity]="person.isActive ? 'danger' : 'success'">
+                [value]="person.isActive ? ('COMMON.INACTIVE' | translate) : ('COMMON.ACTIVE' | translate)"
+                [severity]="person.isActive ? 'danger' : 'success'">
             </p-tag>
         </td>
         <td>

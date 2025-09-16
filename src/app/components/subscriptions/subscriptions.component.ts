@@ -106,8 +106,6 @@ export class SubscriptionsComponent implements OnInit {
     });
   }
 
-
-
   onStatusChange(value: string | null) {
     this.selectedStatus = value;
     this.filterSubscriptions();
@@ -145,7 +143,7 @@ export class SubscriptionsComponent implements OnInit {
       autoRenewal: sub.autoRenewal
     };
 
-    this.subscriptionService.renewSubscription(this.subscription.userId, renewData).subscribe({
+    this.subscriptionService.renewSubscription(sub.userId, renewData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',

@@ -2,6 +2,10 @@ import {
   CheckIcon
 } from "./chunk-X76NXUTC.js";
 import {
+  NG_VALUE_ACCESSOR,
+  NgControl
+} from "./chunk-6FTXPPWK.js";
+import {
   AutoFocus,
   AutoFocusModule
 } from "./chunk-6BCSZ5SY.js";
@@ -13,10 +17,6 @@ import {
   PrimeTemplate,
   SharedModule
 } from "./chunk-THG6YEWH.js";
-import {
-  NG_VALUE_ACCESSOR,
-  NgControl
-} from "./chunk-6FTXPPWK.js";
 import {
   CommonModule,
   NgClass,

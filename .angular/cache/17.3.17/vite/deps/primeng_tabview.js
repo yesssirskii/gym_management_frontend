@@ -2,12 +2,12 @@ import {
   ChevronLeftIcon
 } from "./chunk-X7LD3GSH.js";
 import {
-  ChevronRightIcon
-} from "./chunk-LRQKQBIC.js";
-import {
   Tooltip,
   TooltipModule
 } from "./chunk-4ZZHZ3XW.js";
+import {
+  ChevronRightIcon
+} from "./chunk-LRQKQBIC.js";
 import {
   TimesIcon
 } from "./chunk-WAE3DQV3.js";

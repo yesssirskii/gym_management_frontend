@@ -3,6 +3,21 @@ import {
   TooltipModule
 } from "./chunk-4ZZHZ3XW.js";
 import {
+  animate,
+  style,
+  transition,
+  trigger
+} from "./chunk-XOJIA74V.js";
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule
+} from "./chunk-VPIJXS2V.js";
+import {
+  DomSanitizer
+} from "./chunk-6MZBRZ54.js";
+import "./chunk-ZEGHIHRZ.js";
+import {
   Ripple,
   RippleModule
 } from "./chunk-XV7G4YER.js";
@@ -18,21 +33,6 @@ import {
   UniqueComponentId,
   zindexutils
 } from "./chunk-THG6YEWH.js";
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterModule
-} from "./chunk-VPIJXS2V.js";
-import {
-  animate,
-  style,
-  transition,
-  trigger
-} from "./chunk-XOJIA74V.js";
-import {
-  DomSanitizer
-} from "./chunk-6MZBRZ54.js";
-import "./chunk-ZEGHIHRZ.js";
 import {
   CommonModule,
   DOCUMENT,
