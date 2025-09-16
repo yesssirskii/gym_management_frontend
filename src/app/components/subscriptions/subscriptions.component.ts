@@ -77,17 +77,21 @@ export class SubscriptionsComponent implements OnInit {
     this.loading = true;
     this.subscriptionService.getSubscriptions().subscribe({
       next: (data) => {
-          this.subscriptions = data.map(sub => {
-            const endDate = new Date(sub.endDate);
-            const today = new Date();
+        this.subscriptions = data.map(sub => {
+          const endDate = new Date(sub.endDate);
+          const today = new Date();
 
-            const diffInTime = endDate.getTime() - today.getTime();
-            const diffInDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+          // normalize both dates to midnight
+          endDate.setHours(0, 0, 0, 0);
+          today.setHours(0, 0, 0, 0);
 
-            return {...sub, daysRemaining: diffInDays};
+          const diffInTime = endDate.getTime() - today.getTime();
+          // +1 to make the end date inclusive
+          const diffInDays = Math.max(0, Math.ceil(diffInTime / (1000 * 60 * 60 * 24)) + 1);
+
+          return { ...sub, daysRemaining: diffInDays };
         });
 
-        this.subscriptions = this.subscriptions;
         this.filteredSubscriptions = this.subscriptions;
         this.loading = false;
       },
@@ -101,6 +105,8 @@ export class SubscriptionsComponent implements OnInit {
       }
     });
   }
+
+
 
   onStatusChange(value: string | null) {
     this.selectedStatus = value;
@@ -139,7 +145,7 @@ export class SubscriptionsComponent implements OnInit {
       autoRenewal: sub.autoRenewal
     };
 
-    this.subscriptionService.updateUserSubscription(this.subscription.userId, renewData).subscribe({
+    this.subscriptionService.renewSubscription(this.subscription.userId, renewData).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',

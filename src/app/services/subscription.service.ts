@@ -26,6 +26,14 @@ export class SubscriptionService {
     return this.http.put(`${environment.apiUrl}/Subscription/${id}`, subscriptionData);
   }
 
+  renewSubscription(id: number, subscriptionData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put(`${environment.apiUrl}/Subscription/renew/${id}`, subscriptionData);
+  }
+
   getSubscriptionPrices(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/subscriptions/prices`);
   }

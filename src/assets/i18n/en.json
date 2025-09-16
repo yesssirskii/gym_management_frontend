@@ -57,7 +57,8 @@
     "User_type": "User type"
   },
   "USERS": {
-    "Add": "Add new user",
+    "Add_New": "Add new user",
+    "Edit": "Edit user",
     "User_Type": "User type",
     "Select_User_Type": "Select user type",
     "Basic_Info": {

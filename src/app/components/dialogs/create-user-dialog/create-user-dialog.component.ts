@@ -129,7 +129,7 @@ export class CreateUserDialogComponent implements OnInit {
       fitnessGoals: [''],
 
       subscriptionType: ['', Validators.required],
-      subscriptionStartDate: [new Date()],
+      subscriptionStartDate: [{value: new Date(), disabled: true}],
       paymentMethod: ['', Validators.required],
       autoRenewal: [false],
       

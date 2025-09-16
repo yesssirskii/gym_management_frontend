@@ -1,5 +1,5 @@
 <p-dialog 
-    [header]=" 'USERS.Add' | translate" 
+    [header]="'USERS.Add_New' | translate" 
     [(visible)]="visible" 
     [modal]="true" 
     [style]="{width: '600px'}"
@@ -141,7 +141,7 @@
                     <p-calendar id="subscriptionStartDate" formControlName="subscriptionStartDate" styleClass="w-full"></p-calendar>
                 </div>
                 
-                <div class="field">
+                <div class="checkbox-section-alignment">
                     <label for="autoRenewal" class="ml-2">{{ 'MEMBERS.Add.Subscription.Auto_Renewal' | translate }}</label>
                     <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
                 </div>

@@ -1,13 +1,10 @@
 import {
-  Tooltip,
-  TooltipModule
-} from "./chunk-QGJL2ECI.js";
-import {
   ChevronDownIcon
 } from "./chunk-I7MTT75K.js";
 import {
-  CheckIcon
-} from "./chunk-X76NXUTC.js";
+  Tooltip,
+  TooltipModule
+} from "./chunk-4ZZHZ3XW.js";
 import {
   TimesIcon
 } from "./chunk-WAE3DQV3.js";
@@ -17,7 +14,10 @@ import {
 import {
   Ripple,
   RippleModule
-} from "./chunk-GE4C5X2Z.js";
+} from "./chunk-XV7G4YER.js";
+import {
+  CheckIcon
+} from "./chunk-X76NXUTC.js";
 import {
   AutoFocus,
   AutoFocusModule
@@ -29,6 +29,17 @@ import {
   ConnectedOverlayScrollHandler,
   DomHandler
 } from "./chunk-JZQAVOZS.js";
+import {
+  FilterService,
+  ObjectUtils,
+  OverlayService,
+  PrimeNGConfig,
+  PrimeTemplate,
+  SharedModule,
+  TranslationKeys,
+  UniqueComponentId,
+  zindexutils
+} from "./chunk-THG6YEWH.js";
 import {
   NG_VALUE_ACCESSOR
 } from "./chunk-6FTXPPWK.js";
@@ -50,17 +61,6 @@ import {
   NgTemplateOutlet,
   isPlatformBrowser
 } from "./chunk-RU5QBMYY.js";
-import {
-  FilterService,
-  ObjectUtils,
-  OverlayService,
-  PrimeNGConfig,
-  PrimeTemplate,
-  SharedModule,
-  TranslationKeys,
-  UniqueComponentId,
-  zindexutils
-} from "./chunk-THG6YEWH.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -5700,4 +5700,4 @@ export {
   Dropdown,
   DropdownModule
 };
-//# sourceMappingURL=chunk-LSRFIHDZ.js.map
+//# sourceMappingURL=chunk-MP5CQYRB.js.map

@@ -4,12 +4,12 @@ import {
 import {
   ButtonDirective,
   ButtonModule
-} from "./chunk-Q7TEYJWL.js";
+} from "./chunk-FU5RXFZZ.js";
 import "./chunk-F7K2ZPJ2.js";
 import {
   Ripple,
   RippleModule
-} from "./chunk-GE4C5X2Z.js";
+} from "./chunk-XV7G4YER.js";
 import "./chunk-6BCSZ5SY.js";
 import {
   BaseIcon
@@ -17,6 +17,16 @@ import {
 import {
   DomHandler
 } from "./chunk-JZQAVOZS.js";
+import {
+  Footer,
+  Header,
+  PrimeNGConfig,
+  PrimeTemplate,
+  SharedModule,
+  TranslationKeys,
+  UniqueComponentId,
+  zindexutils
+} from "./chunk-THG6YEWH.js";
 import {
   animate,
   animation,
@@ -34,16 +44,6 @@ import {
   NgTemplateOutlet,
   isPlatformBrowser
 } from "./chunk-RU5QBMYY.js";
-import {
-  Footer,
-  Header,
-  PrimeNGConfig,
-  PrimeTemplate,
-  SharedModule,
-  TranslationKeys,
-  UniqueComponentId,
-  zindexutils
-} from "./chunk-THG6YEWH.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

@@ -32,3 +32,9 @@
 .ml-2 {
     margin-left: 0.5rem;
 }
+
+.checkbox-section-alignment{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

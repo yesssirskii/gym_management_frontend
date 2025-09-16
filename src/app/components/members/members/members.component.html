@@ -22,7 +22,6 @@
         <ng-template pTemplate="header">
             <tr>
             <th>{{ 'COMMON.NAME' | translate }}</th>
-            <th>{{ 'COMMON.User_type' | translate }}</th>
             <th>{{ 'MEMBERS.Oib' | translate }}</th>
             <th>{{ 'MEMBERS.JOIN_DATE' | translate }}</th>
             <th>{{ 'COMMON.Status' | translate }}</th>
@@ -33,12 +32,6 @@
         <ng-template pTemplate="body" let-member>
             <tr>
                 <td>{{ member.firstName }} {{ member.lastName }}</td>
-                <td>
-                    <p-tag 
-                        [value]="member.userType"
-                        [severity]="member.userType =='Personnel' ? 'success' : member.userType == 'Trainer' ? 'warning' : 'info'">
-                    </p-tag>
-                </td>
                 <td>{{ member.oib }}</td>
                 <td>{{ member.createdAt | date:'shortDate' }}</td>
                 <td>
