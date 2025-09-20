@@ -62,7 +62,20 @@
                 <label for="address">{{ 'MEMBERS.Edit_Member.Address' | translate }}:</label>
                 <input type="text" id="address" pInputText formControlName="address" class="w-full" />
             </div>
-            
+
+            <div class="field">
+                <label for="gender">{{ 'MEMBERS.Gender' | translate }}:</label>
+                <p-dropdown
+                    id="gender"
+                    [options]="genderOptions"
+                    formControlName="gender"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'MEMBERS.Select_Gender' | translate"
+                    class="w-full">
+                </p-dropdown>
+            </div>
+
             <div class="field checkbox-section-alignment">
                 <label for="isActive" class="ml-2">{{ 'MEMBERS.Edit_Member.Is_Active' | translate }}</label>
                 <p-checkbox formControlName="isActive" binary="true" inputId="isActive"></p-checkbox>

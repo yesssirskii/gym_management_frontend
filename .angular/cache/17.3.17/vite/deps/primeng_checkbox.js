@@ -2,21 +2,15 @@ import {
   CheckIcon
 } from "./chunk-X76NXUTC.js";
 import {
-  NG_VALUE_ACCESSOR,
-  NgControl
-} from "./chunk-6FTXPPWK.js";
-import {
   AutoFocus,
   AutoFocusModule
 } from "./chunk-6BCSZ5SY.js";
 import "./chunk-EJLB73PE.js";
 import "./chunk-JZQAVOZS.js";
 import {
-  ObjectUtils,
-  PrimeNGConfig,
-  PrimeTemplate,
-  SharedModule
-} from "./chunk-THG6YEWH.js";
+  NG_VALUE_ACCESSOR,
+  NgControl
+} from "./chunk-6FTXPPWK.js";
 import {
   CommonModule,
   NgClass,
@@ -24,6 +18,12 @@ import {
   NgStyle,
   NgTemplateOutlet
 } from "./chunk-RU5QBMYY.js";
+import {
+  ObjectUtils,
+  PrimeNGConfig,
+  PrimeTemplate,
+  SharedModule
+} from "./chunk-THG6YEWH.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

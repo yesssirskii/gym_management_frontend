@@ -1,6 +1,6 @@
 {
   "APP": {
-    "TITLE": "Gym Management System"
+    "TITLE": "FitHub"
   },
   "LOGIN": {
     "TITLE": "Login",
@@ -24,7 +24,7 @@
     "Language_Changed_To": "Language changed to {{language}}"
   },
   "FOOTER": {
-    "RIGHTS": "All rights reserved"
+    "RIGHTS": "All rights reserved."
   },
   "MENU": {
     "DASHBOARD": "Dashboard",
@@ -106,6 +106,8 @@
     "Medical_Notes": "Medical notes",
     "Fitness_Goals": "Fitness goals",
     "Oib": "OIB",
+    "Gender": "Gender",
+    "Select_Gender": "Select Gender",
     "Assign_Trainer": "Assign trainer",
     "Trainer_assigned": "Member already has an assigned trainer.",
     "No_Trainer_Assigned": "Member has no trainer assigned.",

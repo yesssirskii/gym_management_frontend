@@ -1,6 +1,6 @@
 {
   "APP": {
-    "TITLE": "Sustav za upravljanje teretanom"
+    "TITLE": "FitHub"
   },
   "LOGIN": {
     "TITLE": "Prijava",
@@ -24,7 +24,7 @@
     "Language_Changed_To": "Jezik promijenjen na {{language}}"
   },
   "FOOTER": {
-    "RIGHTS": "Sva prava pridržana"
+    "RIGHTS": "Sva prava pridržana."
   },
   "MENU": {
     "DASHBOARD": "Kontrolna ploča",
@@ -106,6 +106,8 @@
     "Medical_Notes": "Zdravstveni zapis",
     "Fitness_Goals": "Fitness ciljevi",
     "Oib": "OIB",
+    "Gender": "Spol",
+    "Select_Gender": "Odaberite spol",
     "Assign_Trainer": "Dodijeli trenera",
     "Trainer_assigned": "Korisnik ima dodijeljenog trenera.",
     "No_Trainer_Assigned": "Korisnik nije pridodijeljen treneru.",

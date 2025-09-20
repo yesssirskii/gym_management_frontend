@@ -63,7 +63,7 @@ export class UpdateSubscriptionDialogComponent implements OnInit, OnChanges {
 
   paymentMethods = [
     { label: 'Cash', value: 'Cash' },
-    { label: 'Credit Card', value: 'Credit Card' },
+    { label: 'Credit Card', value: 'CreditCard' },
     { label: 'MultiSport', value: 'MultiSport' },
   ];
 

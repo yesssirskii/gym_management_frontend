@@ -22,3 +22,9 @@
     gap: 0.5rem;
     margin-left: 2rem;
 }
+
+.app-logo {
+    height: 40px;       /* base size */
+    width: auto;        /* maintain aspect ratio */
+    max-width: 100%;    /* prevent overflow */
+}

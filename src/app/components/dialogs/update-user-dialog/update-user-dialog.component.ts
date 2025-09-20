@@ -93,9 +93,14 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
   ];
 
   paymentMethodOptions = [
-    { label: 'Credit card', value: 'Credit Card' },
+    { label: 'Credit Card', value: 'CreditCard' },
     { label: 'Cash', value: 'Cash' },
     { label: 'MultiSport', value: 'MultiSport' },
+  ];
+
+  genderOptions = [
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
   ];
 
   constructor(
@@ -132,6 +137,7 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
       phoneNumber: [''],
       dateOfBirth: ['', Validators.required],
       address: [''],
+      gender: ['', [Validators.required]],
       isActive: [true],
       
       // Member fields
@@ -189,7 +195,9 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         phoneNumber: this.member.phoneNumber,
         dateOfBirth: dateOfBirth,
         address: this.member.address,
+        gender: this.member.gender,
         isActive: this.member.isActive !== undefined ? this.member.isActive : true,
+
         emergencyContactName: this.member.emergencyContactName,
         emergencyContactPhone: this.member.emergencyContactPhone,
         height: this.member.height,
@@ -239,7 +247,9 @@ export class UpdateUserDialogComponent implements OnInit, OnChanges {
         PhoneNumber: formData.phoneNumber,
         DateOfBirth: formData.dateOfBirth,
         Address: formData.address,
+        Gender: formData.gender,
         IsActive: formData.isActive,
+
         EmergencyContactName: formData.emergencyContactName,
         EmergencyContactPhone: formData.emergencyContactPhone,
         Height: formData.height,

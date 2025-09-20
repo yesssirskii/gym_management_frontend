@@ -1,10 +1,10 @@
 import {
-  ChevronLeftIcon
-} from "./chunk-X7LD3GSH.js";
-import {
   Tooltip,
   TooltipModule
-} from "./chunk-4ZZHZ3XW.js";
+} from "./chunk-QGJL2ECI.js";
+import {
+  ChevronLeftIcon
+} from "./chunk-X7LD3GSH.js";
 import {
   ChevronRightIcon
 } from "./chunk-LRQKQBIC.js";
@@ -14,16 +14,11 @@ import {
 import {
   Ripple,
   RippleModule
-} from "./chunk-XV7G4YER.js";
+} from "./chunk-GE4C5X2Z.js";
 import "./chunk-EJLB73PE.js";
 import {
   DomHandler
 } from "./chunk-JZQAVOZS.js";
-import {
-  PrimeTemplate,
-  SharedModule,
-  UniqueComponentId
-} from "./chunk-THG6YEWH.js";
 import {
   CommonModule,
   NgClass,
@@ -33,6 +28,11 @@ import {
   NgTemplateOutlet,
   isPlatformBrowser
 } from "./chunk-RU5QBMYY.js";
+import {
+  PrimeTemplate,
+  SharedModule,
+  UniqueComponentId
+} from "./chunk-THG6YEWH.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

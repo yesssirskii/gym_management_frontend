@@ -88,8 +88,13 @@ export class CreateUserDialogComponent implements OnInit {
 
   paymentMethodOptions = [
     { label: 'Credit card', value: 1 },
-    { label: 'Cash', value: 1 },
+    { label: 'Cash', value: 2 },
     { label: 'MultiSport', value: 3 },
+  ];
+
+  genderOptions = [
+    { label: 'Male', value: 1 },
+    { label: 'Female', value: 2 },
   ];
 
   constructor(
@@ -119,6 +124,9 @@ export class CreateUserDialogComponent implements OnInit {
       lastName: ['', Validators.required],
       phoneNumber: [''],
       dateOfBirth: ['', Validators.required],
+      oib: ['', [Validators.required, Validators.minLength(11)]],
+      gender: ['', [Validators.required]],
+      address: [''],
       
       // Member
       emergencyContactName: [''],
