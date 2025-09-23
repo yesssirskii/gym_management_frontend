@@ -1,0 +1,43 @@
+.field {
+    margin-bottom: 1rem;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.field-group {
+    margin-bottom: 2rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.field-group h4 {
+    margin: 0 0 1rem 0;
+    color: var(--primary-color);
+}
+
+.field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.checkbox-section-alignment{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-section-alignment label {
+  margin-top: 6px;
+}

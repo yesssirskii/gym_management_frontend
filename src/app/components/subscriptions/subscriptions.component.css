@@ -1,0 +1,41 @@
+page-container {
+    padding: 1rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    margin: 0;
+}
+
+.filters-section {
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--surface-card);
+    border-radius: 6px;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.filter-item label {
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .filters-section {
+    flex-direction: column;
+    }
+}

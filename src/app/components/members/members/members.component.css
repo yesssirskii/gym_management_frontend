@@ -1,0 +1,14 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    margin: 0;
+}
+
+.page-container {
+    padding: 1rem;
+}

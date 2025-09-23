@@ -1,0 +1,130 @@
+<div class="page-container">
+    <div class="page-header">
+    <h2>{{ 'SUBSCRIPTIONS.TITLE' | translate }}</h2>
+    <div class="header-actions">
+        <p-button 
+        icon="pi pi-dollar" 
+        [label]="'SUBSCRIPTIONS.MANAGE_PRICES' | translate"
+        severity="secondary"
+        (onClick)="showPriceDialog()">
+        </p-button>
+    </div>
+    </div>
+
+    <div class="filters-section">
+        <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.FILTER_STATUS' | translate }}</label>
+            <p-dropdown 
+                [options]="statusOptions"
+                [(ngModel)] = "selectedStatus"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.ALL_STATUSES' | translate"
+                (onChange)="onStatusChange($event.value)">
+            </p-dropdown>
+        </div>
+        
+        <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.FILTER_TYPE' | translate }}</label>
+            <p-dropdown 
+                [options]="typeOptions"
+                [(ngModel)] = "selectedType"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.ALL_TYPES' | translate"
+                (onChange)="onTypeChange($event.value)">
+            </p-dropdown>
+        </div>
+
+          <div class="filter-item">
+            <label>{{ 'SUBSCRIPTIONS.Other_Options' | translate }}</label>
+            <p-button 
+                label="{{ 'SUBSCRIPTIONS.Reset_Filters' | translate }}" 
+                class="p-button-secondary" 
+                (click)="resetFilters()"
+                class="mr-2">
+            </p-button>
+        </div>
+    </div>
+
+    <p-table 
+        [value]="filteredSubscriptions" 
+        [loading]="loading"
+        [paginator]="true" 
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10,25,50]"
+        dataKey="id">
+    
+    <ng-template pTemplate="header">
+        <tr>
+        <th>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}</th>
+        <th>{{ 'COMMON.NAME' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Start_Date' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.End_Date' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Days_Remaining' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Price' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Payment_Method' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Auto_Renewal' | translate }}</th>
+        <th>{{ 'SUBSCRIPTIONS.Status' | translate }}</th>
+        <th>{{ 'COMMON.ACTIONS' | translate }}</th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-sub>
+        <tr>
+        <td>{{ sub.membershipNumber }}</td>
+        <td>{{ sub.userName }}</td>
+        <td>{{ sub.subscriptionType }}</td>
+        <td>{{ sub.startDate | date:'dd/MM/yyyy' }}</td>
+        <td>{{ sub.endDate | date:'dd/MM/yyyy' }}</td>
+        <td>
+            <p-tag 
+                [value]="sub.daysRemaining"
+                [severity]="sub.daysRemaining <= 7 ? 'danger' : (sub.daysRemaining <= 30 ? 'warning' : 'success')">
+            </p-tag>
+        </td>
+        <td>{{ sub.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td>{{ sub.paymentMethod }}</td>
+        <td>
+            <i class="pi" 
+            [ngClass]="{'pi-check-circle': sub.autoRenewal, 'pi-times-circle': !sub.autoRenewal}"
+            [style.color]="sub.autoRenewal ? 'var(--green-500)' : 'var(--red-500)'">
+            </i>
+        </td>
+        <td>
+            <p-tag 
+            [value]="sub.status"
+            [severity]="sub.status === 'Active' ? 'success' : 'danger'">
+            </p-tag>
+        </td>
+        <td>
+            <p-button 
+                icon="pi pi-pencil" 
+                [pTooltip]="'SUBSCRIPTIONS.Edit' | translate"
+                severity="warning"
+                size="small"
+                (onClick)="editSubscription(sub)"
+                class="mr-2">
+            </p-button>
+            <p-button 
+                icon="pi pi-refresh" 
+                [pTooltip]="'SUBSCRIPTIONS.RENEW' | translate"
+                severity="success"
+                size="small"
+                (onClick)="renewSubscription(sub)"
+                [disabled]="sub.status === 'Active'">
+            </p-button>
+        </td>
+        </tr>
+    </ng-template>
+    </p-table>
+</div>
+
+<app-update-subscription-dialog 
+    [(visible)]="editDialogVisible"
+    [selectedSubscription]="subscription"
+    (subscriptionUpdated)="onSubscriptionUpdated()">
+</app-update-subscription-dialog>

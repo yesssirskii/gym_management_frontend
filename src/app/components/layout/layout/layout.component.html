@@ -1,0 +1,16 @@
+<div class="layout-wrapper">
+    <app-header></app-header>
+    <div class="layout-main">
+        <app-sidebar></app-sidebar>
+        <div class="layout-content">
+            <div class="breadcrumb-container">
+            <p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

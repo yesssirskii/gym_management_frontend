@@ -1,0 +1,40 @@
+.layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-main {
+    display: flex;
+    flex: 1;
+}
+
+.layout-content {
+    flex: 1;
+    padding: 1rem;
+}
+
+.breadcrumb-container {
+    margin-bottom: 1rem;
+}
+
+app-footer {
+    margin-top: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+app-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+app-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

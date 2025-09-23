@@ -1,0 +1,87 @@
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.profile-info h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-info p {
+    margin: 0.25rem 0;
+    color: var(--text-color-secondary);
+}
+
+.field {
+    margin-bottom: 1rem;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.field-group {
+    margin-bottom: 2rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.field-group h4,
+.field-group h5 {
+    margin: 0 0 1rem 0;
+    color: var(--primary-color);
+}
+
+.action-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.password-requirements {
+    background: var(--surface-section);
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+}
+
+.password-requirements p {
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
+}
+
+.password-requirements ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.password-requirements li {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--text-color-secondary);
+}

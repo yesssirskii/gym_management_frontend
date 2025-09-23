@@ -1,0 +1,49 @@
+<div class="header">
+    <div class="header-left">
+        <img src="assets/img/logo.svg" alt="App Logo" class="app-logo">
+
+        <div class="language-selector">
+            <p-button 
+                label="EN" 
+                severity="secondary" 
+                size="small"
+                (onClick)="changeLanguage('en')"
+                [outlined]="currentLanguage !== 'en'"
+                class="language-btn">
+            </p-button>
+            
+            <p-button 
+                label="HR" 
+                severity="secondary" 
+                size="small"
+                (onClick)="changeLanguage('hr')"
+                [outlined]="currentLanguage !== 'hr'"
+                class="language-btn">
+            </p-button>
+        </div>
+    </div>
+    
+    <div class="header-right">
+        <p-button 
+            icon="pi pi-user" 
+            [label]="'HEADER.PROFILE' | translate"
+            severity="secondary"
+            (onClick)="showUserProfile()"
+            [outlined]="true"
+            class="mr-2">
+        </p-button>
+        
+        <p-button 
+            icon="pi pi-sign-out" 
+            [label]="'HEADER.LOGOUT' | translate"
+            severity="danger"
+            (onClick)="logout()"
+            [outlined]="true">
+        </p-button>
+    </div>
+</div>
+    
+<app-user-profile-dialog 
+    [(visible)]="userProfileVisible"
+    [user]="currentUser">
+</app-user-profile-dialog>

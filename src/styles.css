@@ -1,0 +1,44 @@
+@import "primeng/resources/themes/lara-dark-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+}
+
+.p-component {
+  font-size: 14px;
+}
+
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.75rem;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  padding: 0.75rem;
+  background: var(--surface-section);
+}
+
+.p-button {
+  font-size: 0.875rem;
+}
+
+.p-button.p-button-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}

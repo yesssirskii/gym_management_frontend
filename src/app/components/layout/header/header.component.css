@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.header-left h3 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.header-right, .header-left{
+    display: flex;
+    align-items: center;
+}
+
+.language-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 2rem;
+}
+
+.app-logo {
+    height: 40px;       /* base size */
+    width: auto;        /* maintain aspect ratio */
+    max-width: 100%;    /* prevent overflow */
+}

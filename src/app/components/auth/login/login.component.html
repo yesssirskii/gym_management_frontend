@@ -1,0 +1,63 @@
+<div class="login-container">
+    <div class="login-card">
+    <div class="login-header">
+        <img src="assets/img/logo.svg" alt="App Logo" class="app-logo-login">
+        <h2>{{ 'LOGIN.TITLE' | translate }}</h2>
+        <p>{{ 'LOGIN.SUBTITLE' | translate }}</p>
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+            <label for="username">{{ 'LOGIN.USERNAME' | translate }}</label>
+            <input 
+                type="text" 
+                id="username"
+                pInputText 
+                formControlName="username"
+                [placeholder]="'LOGIN.USERNAME_PLACEHOLDER' | translate"
+                class="w-full" />
+        </div>
+        
+        <div class="field">
+            <label for="password">{{ 'LOGIN.PASSWORD' | translate }}</label>
+            <p-password 
+                id="password"
+                formControlName="password"
+                [placeholder]="'LOGIN.PASSWORD_PLACEHOLDER' | translate"
+                [feedback]="false"
+                inputStyleClass="w-full"
+                styleClass="w-full">
+            </p-password>
+        </div>
+        
+        <div class="field">
+            <p-button 
+                type="submit"
+                [label]="'LOGIN.SUBMIT' | translate"
+                styleClass="w-full"
+                [loading]="loading"
+                [disabled]="loginForm.invalid">
+            </p-button>
+        </div>
+    </form>
+    
+    <div class="language-selector">
+        <p-button 
+        label="EN" 
+        severity="secondary" 
+        size="small"
+        (onClick)="changeLanguage('en')"
+        [outlined]="true">
+        </p-button>
+        <p-button 
+        label="HR" 
+        severity="secondary" 
+        size="small"
+        (onClick)="changeLanguage('hr')"
+        [outlined]="true">
+        </p-button>
+    </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

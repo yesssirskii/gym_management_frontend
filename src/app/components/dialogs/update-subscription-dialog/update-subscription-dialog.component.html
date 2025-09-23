@@ -1,0 +1,115 @@
+<p-dialog 
+    [header]="'SUBSCRIPTIONS.UPDATE_TITLE' | translate" 
+    [(visible)]="visible" 
+    [modal]="true" 
+    [style]="{width: '500px'}"
+    [closable]="true"
+    [draggable]="false"
+    (onHide)="onDialogHide()">
+    
+    <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+        <div class="member-info" *ngIf="selectedSubscription">
+            <p><strong>{{ 'COMMON.NAME' | translate }}:</strong> {{ selectedSubscription.userName }}</p>
+            <p><strong>{{ 'MEMBERS.MEMBERSHIP_NUMBER' | translate }}:</strong> {{ selectedSubscription.membershipNumber }}</p>
+        </div>
+        
+        <p-divider></p-divider>
+        
+        <div class="field-row">
+            <div class="field">
+                <label for="subscriptionType">{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}:</label>
+                <p-dropdown
+                    id="subscriptionType"
+                    [options]="subscriptionTypes"
+                    formControlName="subscriptionType"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'SUBSCRIPTIONS.Select_Type' | translate"
+                    class="w-full"
+                    (onChange)="onTypeChange()">
+                </p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="status">{{ 'SUBSCRIPTIONS.Status' | translate }}:</label>
+                <p-dropdown
+                    id="status"
+                    [options]="subscriptionStatuses"
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                    [placeholder]="'SUBSCRIPTIONS.Select_Status' | translate"
+                    class="w-full"
+                    (onChange)="onTypeChange()">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="paymentMethod">{{ 'SUBSCRIPTIONS.Payment_Method' | translate }}:</label>
+            <p-dropdown
+                id="paymentMethod"
+                [options]="paymentMethods"
+                formControlName="paymentMethod"
+                optionLabel="label"
+                optionValue="value"
+                [placeholder]="'SUBSCRIPTIONS.Select_Payment' | translate"
+                class="w-full">
+            </p-dropdown>
+        </div>
+        
+        <div class="field">
+            <label for="startDate">{{ 'SUBSCRIPTIONS.Start_Date' | translate }}:</label>
+            <p-calendar 
+                id="startDate" 
+                formControlName="startDate" 
+                styleClass="w-full"
+                dateFormat="dd/mm/yy"
+                (onSelect)="calculateEndDate()">
+            </p-calendar>
+        </div>
+        
+        <div class="field">
+            <label for="endDate">{{ 'SUBSCRIPTIONS.End_Date' | translate }}:</label>
+            <p-calendar 
+                id="endDate" 
+                formControlName="endDate" 
+                styleClass="w-full"
+                dateFormat="dd/mm/yy"
+                [disabled]="true">
+            </p-calendar>
+        </div>
+        
+        <div class="field">
+            <label for="price">{{ 'SUBSCRIPTIONS.Price' | translate }}:</label>
+            <p-inputNumber 
+                id="price" 
+                formControlName="price" 
+                mode="currency" 
+                currency="EUR" 
+                class="w-full">
+            </p-inputNumber>
+        </div>
+        
+        <div class="field checkbox-section-alignment">
+            <label for="autoRenewal" class="ml-2">{{ 'SUBSCRIPTIONS.Auto_Renewal' | translate }}</label>
+            <p-checkbox formControlName="autoRenewal" binary="true" inputId="autoRenewal"></p-checkbox>
+        </div>
+    </form>
+    
+    <ng-template pTemplate="footer">
+        <p-button 
+            [label]="'COMMON.CANCEL' | translate" 
+            icon="pi pi-times" 
+            severity="secondary"
+            (onClick)="onCancel()">
+        </p-button>
+        <p-button 
+            [label]="'COMMON.SAVE' | translate" 
+            icon="pi pi-check" 
+            [loading]="loading"
+            [disabled]="subscriptionForm.invalid"
+            (onClick)="onSubmit()">
+        </p-button>
+    </ng-template>
+</p-dialog>

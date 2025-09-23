@@ -1,0 +1,55 @@
+.sidebar {
+    width: 250px;
+    background: var(--surface-card);
+    border-right: 1px solid var(--surface-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+    align-items: center;
+}
+
+.sidebar :deep(.p-menu) {
+    border: none;
+    background: transparent;
+    height: auto;
+}
+
+.sidebar :deep(.p-menu .p-menu-list) {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar :deep(.p-menu .p-menuitem-link) {
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar :deep(.p-menu .p-menuitem-link:hover) {
+    background: var(--surface-hover);
+}
+
+.sidebar :deep(.p-menu .p-menuitem-link:focus) {
+    background: var(--surface-hover);
+    box-shadow: none;
+}
+
+.sidebar :deep(.p-menu .p-menuitem-icon) {
+    margin-right: 0.5rem;
+}
+
+.sidebar :deep(.p-menu .p-submenu-header) {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: var(--surface-section);
+}
+
+span {
+    padding-left: 10px;
+}

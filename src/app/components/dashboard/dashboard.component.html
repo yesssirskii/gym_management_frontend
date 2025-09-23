@@ -1,0 +1,108 @@
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>{{ 'DASHBOARD.TITLE' | translate }}</h2>
+        <p>{{ 'DASHBOARD.WELCOME' | translate: {name: currentUser?.firstName} }}</p>
+    </div>
+
+    <div class="stats-grid">
+    <p-card class="stat-card">
+        <div class="stat-content">
+            <i class="pi pi-users stat-icon" style="color: var(--blue-500)"></i>
+            <div class="stat-details">
+                <h3>{{ stats.totalMembers }}</h3>
+                <p>{{ 'DASHBOARD.TOTAL_MEMBERS' | translate }}</p>
+            </div>
+        </div>
+    </p-card>
+
+    <p-card class="stat-card">
+        <div class="stat-content">
+            <i class="pi pi-credit-card stat-icon" style="color: var(--green-500)"></i>
+            <div class="stat-details">
+                <h3>{{ stats.activeSubscriptions }}</h3>
+                <p>{{ 'DASHBOARD.ACTIVE_SUBSCRIPTIONS' | translate }}</p>
+            </div>
+        </div>
+    </p-card>
+
+    <p-card class="stat-card">
+        <div class="stat-content">
+            <i class="pi pi-star stat-icon" style="color: var(--yellow-500)"></i>
+            <div class="stat-details">
+                <h3>{{ stats.totalTrainers }}</h3>
+                <p>{{ 'DASHBOARD.TOTAL_TRAINERS' | translate }}</p>
+            </div>
+        </div>
+    </p-card>
+
+    <p-card class="stat-card">
+        <div class="stat-content">
+            <i class="pi pi-dollar stat-icon" style="color: var(--purple-500)"></i>
+            <div class="stat-details">
+                <h3>{{ stats.monthlyRevenue | currency:'EUR':'symbol':'1.0-0' }}</h3>
+                <p>{{ 'DASHBOARD.MONTHLY_REVENUE' | translate }}</p>
+            </div>
+        </div>
+    </p-card>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="content-section">
+            <p-card [header]="'DASHBOARD.RECENT_MEMBERS' | translate">
+                <p-table [value]="recentMembers" [rows]="5">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{ 'COMMON.NAME' | translate }}</th>
+                            <th>{{ 'MEMBERS.JOIN_DATE' | translate }}</th>
+                            <th>{{ 'COMMON.Status' | translate }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-member>
+                        <tr>
+                            <td>{{ member.firstName }} {{ member.lastName }}</td>
+                            <td>{{ member.createdAt | date:'shortDate' }}</td>
+                            <td>
+                            <p-tag 
+                                [value]="member.isActive ? ('COMMON.ACTIVE' | translate) : ('COMMON.INACTIVE' | translate)"
+                                [severity]="member.isActive ? 'success' : 'danger'">
+                            </p-tag>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+
+        <div class="content-section">
+            <p-card [header]="'DASHBOARD.Subscriptions' | translate">
+                <p-table [value]="subscriptions" [rows]="5">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{ 'COMMON.User' | translate }}</th>
+                            <th>{{ 'SUBSCRIPTIONS.End_Date' | translate }}</th>
+                            <th>{{ 'SUBSCRIPTIONS.Price' | translate }}</th>
+                            <th>{{ 'SUBSCRIPTIONS.Status' | translate }}</th>
+                            <th>{{ 'SUBSCRIPTIONS.Subscription_Type' | translate }}</th>
+                            <th>{{ 'SUBSCRIPTIONS.Days_Remaining' | translate }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-sub>
+                        <tr>
+                            <td>{{ sub.userName }}</td>
+                            <td>{{ sub.endDate | date:'shortDate' }}</td>
+                            <td>{{ sub.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+                            <td>{{ sub.status | translate }}</td>
+                            <td>{{ sub.subscriptionType | translate }}</td>
+                            <td>
+                                <p-tag 
+                                    [value]="sub.daysRemaining"
+                                    [severity]="sub.daysRemaining <= 7 ? 'danger' : 'info'">
+                                </p-tag>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+    </div>
+</div>
